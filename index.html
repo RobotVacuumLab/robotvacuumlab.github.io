@@ -51,27 +51,27 @@
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/home-og-1200x630.webp" />
 
   <!-- GA4: Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    /* Consent Mode v2 - default denied (until user chooses) */
-    gtag('consent', 'default', {
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
-      analytics_storage: 'denied'
-    });
+  // Consent Mode v2: default denied (until user chooses)
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    wait_for_update: 500
+  });
 
-    // Minimal, editorial-friendly config
-    gtag('config', 'G-56CWM7N1S7', {
-      anonymize_ip: true,
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false
-    });
-  </script>
+  // GA4 config (minimal)
+  gtag('config', 'G-56CWM7N1S7', {
+    anonymize_ip: true,
+    allow_google_signals: false,
+    allow_ad_personalization_signals: false
+  });
+</script>
 
   <!-- Consent banner logic -->
   <script defer src="/assets/js/consent.js"></script>
