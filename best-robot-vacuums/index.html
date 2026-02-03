@@ -6,7 +6,7 @@
 
   <title>Best Robot Vacuums (2026) | RobotVacuumLab</title>
   <meta name="description" content="Best robot vacuums for real homes (2026): our top picks with clear trade-offs for navigation, pickup, mopping, noise, and maintenance." />
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet=-1,max-video-preview=-1" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#ffffff" />
@@ -21,7 +21,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <!-- Preload hero (LCP) — 3 sizes (make sure these exist) -->
+  <!-- Preload hero (LCP) — 3 sizes -->
   <link
     rel="preload"
     as="image"
@@ -51,22 +51,32 @@
   <meta name="twitter:description" content="Best robot vacuums for real homes (2026): top picks with clear trade-offs for navigation, pickup, mopping, noise, and maintenance." />
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/best-robot-vacuums-og-1200x630.webp" />
 
-  <!-- GA4: Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
+  <!-- GA4 + Consent Mode v2 (correct order) -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    function gtag(){ dataLayer.push(arguments); }
 
-    /* Consent Mode v2 - default denied (until user chooses) */
+    // Default denied until user choice (Consent Mode v2)
+    // MUST run before gtag.js + before gtag('config')
     gtag('consent', 'default', {
       ad_storage: 'denied',
       ad_user_data: 'denied',
       ad_personalization: 'denied',
-      analytics_storage: 'denied'
+      analytics_storage: 'denied',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied',
+      security_storage: 'granted',
+      wait_for_update: 800
     });
 
-    // Minimal, editorial-friendly config
+    gtag('js', new Date());
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
+  <script>
+    // GA4 config (respects consent)
     gtag('config', 'G-56CWM7N1S7', {
       anonymize_ip: true,
       allow_google_signals: false,
@@ -84,7 +94,7 @@
     "@type":"Organization",
     "name":"RobotVacuumLab",
     "url":"https://robotvacuumlab.github.io/",
-    "logo":"https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg"
+    "logo":"https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2"
   }
   </script>
 
@@ -99,6 +109,7 @@
     ],
     "datePublished":"2026-02-02",
     "dateModified":"2026-02-03",
+    "inLanguage":"en",
     "author":{
       "@type":"Organization",
       "name":"RobotVacuumLab Editorial Team"
@@ -112,7 +123,7 @@
       "name":"RobotVacuumLab",
       "logo":{
         "@type":"ImageObject",
-        "url":"https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg"
+        "url":"https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2"
       }
     }
   }
@@ -126,36 +137,11 @@
     "itemListOrder":"https://schema.org/ItemListOrderAscending",
     "numberOfItems":5,
     "itemListElement":[
-      {
-        "@type":"ListItem",
-        "position":1,
-        "name":"Roborock Qrevo Curv S5X",
-        "url":"https://robotvacuumlab.github.io/reviews/roborock-qrevo-curv-s5x/"
-      },
-      {
-        "@type":"ListItem",
-        "position":2,
-        "name":"Roborock QV 35A",
-        "url":"https://robotvacuumlab.github.io/reviews/roborock-qv-35a/"
-      },
-      {
-        "@type":"ListItem",
-        "position":3,
-        "name":"Dreame Ultra",
-        "url":"https://robotvacuumlab.github.io/reviews/dreame-ultra/"
-      },
-      {
-        "@type":"ListItem",
-        "position":4,
-        "name":"Roomba Combo AutoWash",
-        "url":"https://robotvacuumlab.github.io/reviews/roomba-combo-autowash/"
-      },
-      {
-        "@type":"ListItem",
-        "position":5,
-        "name":"Eufy BoostIQ 11S MAX",
-        "url":"https://robotvacuumlab.github.io/reviews/eufy-11s-max/"
-      }
+      { "@type":"ListItem", "position":1, "name":"Roborock Qrevo Curv S5X", "url":"https://robotvacuumlab.github.io/reviews/roborock-qrevo-curv-s5x/" },
+      { "@type":"ListItem", "position":2, "name":"Roborock QV 35A", "url":"https://robotvacuumlab.github.io/reviews/roborock-qv-35a/" },
+      { "@type":"ListItem", "position":3, "name":"Dreame Ultra", "url":"https://robotvacuumlab.github.io/reviews/dreame-ultra/" },
+      { "@type":"ListItem", "position":4, "name":"Roomba Combo AutoWash", "url":"https://robotvacuumlab.github.io/reviews/roomba-combo-autowash/" },
+      { "@type":"ListItem", "position":5, "name":"Eufy BoostIQ 11S MAX", "url":"https://robotvacuumlab.github.io/reviews/eufy-11s-max/" }
     ]
   }
   </script>
@@ -171,8 +157,8 @@
           <img
             src="/assets/images/brand/logo-mark-white.svg?v=2"
             alt=""
-            width="48"
-            height="48"
+            width="44"
+            height="44"
             decoding="async"
             loading="eager"
           />
@@ -378,12 +364,7 @@
             </p>
             <p class="small muted">
               <a class="btn" href="/reviews/roborock-qrevo-curv-s5x/">Read full review</a>
-              <a
-                class="btn btn-secondary"
-                href="https://www.amazon.ca/dp/B0DNDVRRXV?tag=kitchengearla-20"
-                target="_blank"
-                rel="nofollow sponsored noopener"
-              >Check price on Amazon</a>
+              <a class="btn btn-secondary" href="https://www.amazon.ca/dp/B0DNDVRRXV?tag=kitchengearla-20" target="_blank" rel="nofollow sponsored noopener">Check price on Amazon</a>
             </p>
           </section>
 
@@ -420,12 +401,7 @@
             </p>
             <p class="small muted">
               <a class="btn" href="/reviews/roborock-qv-35a/">Read full review</a>
-              <a
-                class="btn btn-secondary"
-                href="https://www.amazon.ca/dp/B0DS5WV7V6?tag=kitchengearla-20"
-                target="_blank"
-                rel="nofollow sponsored noopener"
-              >Check price on Amazon</a>
+              <a class="btn btn-secondary" href="https://www.amazon.ca/dp/B0DS5WV7V6?tag=kitchengearla-20" target="_blank" rel="nofollow sponsored noopener">Check price on Amazon</a>
             </p>
           </section>
 
@@ -442,12 +418,7 @@
             </p>
             <p class="small muted">
               <a class="btn" href="/reviews/dreame-ultra/">Read full review</a>
-              <a
-                class="btn btn-secondary"
-                href="https://www.amazon.ca/dp/B0FF9SF9K7?tag=kitchengearla-20"
-                target="_blank"
-                rel="nofollow sponsored noopener"
-              >Check price on Amazon</a>
+              <a class="btn btn-secondary" href="https://www.amazon.ca/dp/B0FF9SF9K7?tag=kitchengearla-20" target="_blank" rel="nofollow sponsored noopener">Check price on Amazon</a>
             </p>
           </section>
 
@@ -464,12 +435,7 @@
             </p>
             <p class="small muted">
               <a class="btn" href="/reviews/roomba-combo-autowash/">Read full review</a>
-              <a
-                class="btn btn-secondary"
-                href="https://www.amazon.ca/dp/B0DWG1YNJR?tag=kitchengearla-20"
-                target="_blank"
-                rel="nofollow sponsored noopener"
-              >Check price on Amazon</a>
+              <a class="btn btn-secondary" href="https://www.amazon.ca/dp/B0DWG1YNJR?tag=kitchengearla-20" target="_blank" rel="nofollow sponsored noopener">Check price on Amazon</a>
             </p>
           </section>
 
@@ -486,12 +452,7 @@
             </p>
             <p class="small muted">
               <a class="btn" href="/reviews/eufy-11s-max/">Read full review</a>
-              <a
-                class="btn btn-secondary"
-                href="https://www.amazon.ca/dp/B07R295MLS?tag=kitchengearla-20"
-                target="_blank"
-                rel="nofollow sponsored noopener"
-              >Check price on Amazon</a>
+              <a class="btn btn-secondary" href="https://www.amazon.ca/dp/B07R295MLS?tag=kitchengearla-20" target="_blank" rel="nofollow sponsored noopener">Check price on Amazon</a>
             </p>
           </section>
 
@@ -650,24 +611,22 @@
     </div>
   </footer>
 
-  <!-- Cookie banner (no inline CSS; style it in styles.css) -->
-  <section class="cookie-banner note" id="cookieBanner" hidden aria-label="Cookie notice">
-    <div class="container">
-      <div class="cookie-banner__inner">
-        <div class="cookie-banner__text">
-          <strong>Cookies</strong>
-          <span class="muted">
-            We use analytics cookies to understand site usage. You can accept or reject.
-            Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
-          </span>
-        </div>
-        <div class="cookie-banner__actions">
-          <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
-          <button class="btn" type="button" data-consent-accept>Accept</button>
-        </div>
+  <!-- Cookie banner (single instance; consent.js controls [hidden] + .is-open) -->
+  <div class="cookie-banner" id="cookieBanner" hidden>
+    <div class="cookie-banner__inner container">
+      <div class="cookie-banner__text">
+        <strong>Privacy choices</strong>
+        <span class="muted">
+          We use analytics only if you accept. Affiliate partners may set cookies when you click outbound links.
+          Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
+        </span>
+      </div>
+      <div class="cookie-banner__actions">
+        <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
+        <button class="btn" type="button" data-consent-accept>Accept</button>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- Minimal JS: mobile menu -->
   <script>
