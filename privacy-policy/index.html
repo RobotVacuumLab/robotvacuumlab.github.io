@@ -51,22 +51,28 @@
   <meta name="twitter:description" content="What data we collect, how we use it, cookies, third-party links, and how to contact us." />
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/privacy-policy-og-1200x630.webp" />
 
-  <!-- GA4 + Consent Mode v2 (default denied) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
+  <!-- GA4 + Consent Mode v2 (standard, correct order) -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    function gtag(){ dataLayer.push(arguments); }
 
-    // Consent Mode v2 default: denied (no cookies until user chooses)
+    // Default denied until user choice
     gtag('consent', 'default', {
       ad_storage: 'denied',
       ad_user_data: 'denied',
       ad_personalization: 'denied',
-      analytics_storage: 'denied'
+      analytics_storage: 'denied',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied',
+      security_storage: 'granted',
+      wait_for_update: 800
     });
 
-    // Minimal, editorial-friendly config
+    gtag('js', new Date());
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
+  <script>
     gtag('config', 'G-56CWM7N1S7', {
       anonymize_ip: true,
       allow_google_signals: false,
@@ -74,8 +80,8 @@
     });
   </script>
 
-  <!-- Consent banner logic (your script) -->
-  <script defer src="/assets/js/consent.js?v=1"></script>
+  <!-- Consent banner logic -->
+  <script defer src="/assets/js/consent.js"></script>
 
   <!-- JSON-LD (Organization + Article) -->
   <script type="application/ld+json">
@@ -87,6 +93,7 @@
     "logo": "https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2"
   }
   </script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -289,22 +296,24 @@
     </div>
   </footer>
 
-  <!-- Cookie banner (HTML) -->
-  <div class="cookie-banner" id="cookieBanner" hidden>
-    <div class="cookie-banner__inner container">
-      <div class="cookie-banner__text">
-        <strong>Privacy choices</strong>
-        <p class="small muted">
-          We use analytics only if you accept. Affiliate partners may set cookies when you click outbound links.
-          Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
-        </p>
-      </div>
-      <div class="cookie-banner__actions">
-        <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
-        <button class="btn" type="button" data-consent-accept>Accept</button>
+  <!-- Cookie banner -->
+  <section class="cookie-banner" id="cookieBanner" hidden aria-label="Cookie notice">
+    <div class="container">
+      <div class="cookie-banner__inner">
+        <div class="cookie-banner__text">
+          <strong>Cookies</strong>
+          <span class="muted">
+            We use analytics cookies to understand site usage. You can accept or reject.
+            Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
+          </span>
+        </div>
+        <div class="cookie-banner__actions">
+          <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
+          <button class="btn" type="button" data-consent-accept>Accept</button>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- Minimal JS: mobile menu -->
   <script>
