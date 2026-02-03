@@ -1,174 +1,221 @@
-/* RobotVacuumLab - Consent banner + Google Consent Mode v2 (UPDATED)
-   - Default: denied (no storage until user chooses)
-   - Optional wait_for_update to prevent early pings
-   - Stores choice in localStorage (with safe fallback)
-   - Updates gtag consent state
-   - Works with CSS: #cookieBanner + .is-open animation
+/* RobotVacuumLab — Consent banner controller (GA4 + Google Consent Mode v2)
+   Requirements:
+   - Default consent denied MUST be set in <head> before gtag('config')
+   - This script: stores user choice + updates consent + shows/hides banner
+   - Storage: localStorage -> cookie fallback -> memory fallback
+   - Banner: #cookieBanner + .is-open animation (styles.css)
 */
 
 (function () {
-  const STORAGE_KEY = "rvl_consent_v2"; // bump version to refresh old choices if needed
-  const DEFAULT_STATE = "denied"; // "denied" | "granted"
+  'use strict';
 
-  // In-memory fallback if localStorage is blocked
-  let memStore = null;
+  var STORAGE_KEY = 'rvl_consent_v2';
+  var COOKIE_NAME = 'rvl_consent';
+  var COOKIE_DAYS = 180;
+
+  // CSS transition token is 160ms in your CSS; add a small cushion
+  var ANIM_MS = 180;
+
+  // in-memory fallback (last resort)
+  var memStore = null;
 
   function safeJsonParse(value) {
-    try { return JSON.parse(value); } catch { return null; }
+    try { return JSON.parse(value); } catch (e) { return null; }
   }
 
   function canUseStorage() {
     try {
-      const k = "__rvl_test__";
-      localStorage.setItem(k, "1");
+      var k = '__rvl_test__';
+      localStorage.setItem(k, '1');
       localStorage.removeItem(k);
       return true;
-    } catch {
+    } catch (e) {
       return false;
     }
   }
 
-  const hasStorage = canUseStorage();
+  var hasStorage = canUseStorage();
+
+  function setCookie(name, value, days) {
+    try {
+      var maxAge = days * 24 * 60 * 60;
+      document.cookie =
+        name + '=' + encodeURIComponent(value) +
+        '; Max-Age=' + maxAge +
+        '; Path=/' +
+        '; SameSite=Lax';
+    } catch (e) {}
+  }
+
+  function getCookie(name) {
+    try {
+      var match = document.cookie.match(
+        new RegExp('(?:^|; )' + name.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') + '=([^;]*)')
+      );
+      return match ? decodeURIComponent(match[1]) : null;
+    } catch (e) {
+      return null;
+    }
+  }
 
   function setStored(payload) {
+    var raw = '';
+    try { raw = JSON.stringify(payload); } catch (e) { raw = ''; }
+
     if (hasStorage) {
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(payload)); return; } catch {}
+      try { localStorage.setItem(STORAGE_KEY, raw); } catch (e) {}
+    } else {
+      memStore = payload;
     }
-    memStore = payload;
+
+    // Always keep a cookie fallback too
+    setCookie(COOKIE_NAME, raw, COOKIE_DAYS);
   }
 
   function getStored() {
     if (hasStorage) {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      return safeJsonParse(raw);
+      var raw = localStorage.getItem(STORAGE_KEY);
+      var parsed = safeJsonParse(raw);
+      if (parsed) return parsed;
     }
+
+    var c = getCookie(COOKIE_NAME);
+    var parsedC = safeJsonParse(c);
+    if (parsedC) return parsedC;
+
     return memStore;
   }
 
-  function gtagReady() {
-    return typeof window.gtag === "function";
+  function normalizeChoice(choice) {
+    if (choice === 'accepted' || choice === 'rejected') return choice;
+    if (choice === 'granted') return 'accepted';
+    if (choice === 'denied') return 'rejected';
+    return null;
   }
 
-  // IMPORTANT: Set default denied as early as possible (Consent Mode v2)
-  function setDefaultConsent() {
-    if (!gtagReady()) return;
-    window.gtag("consent", "default", {
-      ad_storage: DEFAULT_STATE,
-      analytics_storage: DEFAULT_STATE,
-      ad_user_data: DEFAULT_STATE,
-      ad_personalization: DEFAULT_STATE,
-      // helps prevent early hits before user choice
-      wait_for_update: 500
-    });
+  function safeGtag() {
+    // If your head snippet is missing for some reason, create a minimal queue
+    if (typeof window.gtag === 'function') return window.gtag;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    return window.gtag;
   }
 
-  function applyConsent(state) {
-    // state: "granted" | "denied"
-    if (!gtagReady()) return;
+  // Editorial site recommendation:
+  // - analytics follows user choice
+  // - ads stays denied unless you truly run ads
+  function applyConsent(choice) {
+    var gtag = safeGtag();
 
-    window.gtag("consent", "update", {
-      ad_storage: state,
-      analytics_storage: state,
-      ad_user_data: state,
-      ad_personalization: state
+    if (choice === 'accepted') {
+      gtag('consent', 'update', {
+        analytics_storage: 'granted',
+        functionality_storage: 'granted',
+        personalization_storage: 'granted',
+        security_storage: 'granted',
+
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied'
+      });
+      return;
+    }
+
+    // rejected / default
+    gtag('consent', 'update', {
+      analytics_storage: 'denied',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied',
+      security_storage: 'granted',
+
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
     });
   }
 
   function setChoice(choice) {
-    // choice: "accepted" | "rejected"
-    const payload = { choice, ts: Date.now(), v: 2 };
+    var payload = { choice: choice, ts: Date.now(), v: 2 };
     setStored(payload);
-    applyConsent(choice === "accepted" ? "granted" : "denied");
+    applyConsent(choice);
   }
 
   function getChoice() {
-    const data = getStored();
-    return data && (data.choice === "accepted" || data.choice === "rejected") ? data.choice : null;
+    var data = getStored();
+    return data && data.choice ? normalizeChoice(data.choice) : null;
   }
 
   function getBannerEl() {
-    return document.getElementById("cookieBanner");
+    return document.getElementById('cookieBanner');
   }
 
   function showBanner() {
-    const el = getBannerEl();
+    var el = getBannerEl();
     if (!el) return;
+
     el.hidden = false;
-    // trigger animation class
-    requestAnimationFrame(() => el.classList.add("is-open"));
+    requestAnimationFrame(function () {
+      el.classList.add('is-open');
+    });
   }
 
   function hideBanner() {
-    const el = getBannerEl();
+    var el = getBannerEl();
     if (!el) return;
 
-    // animate out if possible
-    el.classList.remove("is-open");
-    // after transition, hide
-    const done = () => {
+    el.classList.remove('is-open');
+    window.setTimeout(function () {
       el.hidden = true;
-      el.removeEventListener("transitionend", done);
-    };
-    el.addEventListener("transitionend", done);
-    // safety fallback (if transitionend doesn't fire)
-    setTimeout(() => { if (!el.hidden) el.hidden = true; }, 250);
+    }, ANIM_MS);
   }
 
-  // Try to set default consent ASAP.
-  // If gtag isn't ready yet, retry a few times quickly.
-  (function earlyDefault() {
-    let tries = 0;
-    const maxTries = 20; // ~2s total
-    const tick = () => {
-      tries++;
-      if (gtagReady()) {
-        setDefaultConsent();
-      } else if (tries < maxTries) {
-        setTimeout(tick, 100);
-      }
-    };
-    tick();
-  })();
+  // Handle button clicks (works even if buttons have inner spans)
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t || !t.closest) return;
 
-  // Wire up buttons (use closest so clicks on inner spans work)
-  document.addEventListener("click", function (e) {
-    const btnAccept = e.target && e.target.closest && e.target.closest("[data-consent-accept]");
-    const btnReject = e.target && e.target.closest && e.target.closest("[data-consent-reject]");
-    const btnClose  = e.target && e.target.closest && e.target.closest("[data-consent-close]");
+    var accept = t.closest('[data-consent-accept]');
+    var reject = t.closest('[data-consent-reject]');
+    var close  = t.closest('[data-consent-close]');
 
-    if (btnAccept) {
-      setChoice("accepted");
+    if (accept) {
+      setChoice('accepted');
       hideBanner();
       return;
     }
-    if (btnReject) {
-      setChoice("rejected");
+
+    if (reject) {
+      setChoice('rejected');
       hideBanner();
       return;
     }
-    // optional: close without saving a choice (keeps default denied)
-    if (btnClose) {
+
+    // Optional close: keep denied, do not store a choice
+    if (close) {
+      applyConsent('rejected');
       hideBanner();
     }
   });
 
-  // On DOM ready: apply stored choice, or show banner
-  document.addEventListener("DOMContentLoaded", function () {
-    const choice = getChoice();
+  function boot() {
+    var choice = getChoice();
 
-    if (choice === "accepted") {
-      applyConsent("granted");
+    if (choice === 'accepted') {
+      applyConsent('accepted');
       hideBanner();
       return;
     }
 
-    // If rejected OR no choice, ensure denied (default)
-    applyConsent("denied");
+    // rejected or no choice => denied
+    applyConsent('rejected');
 
-    if (choice === "rejected") {
-      hideBanner();
-    } else {
-      showBanner();
-    }
-  });
+    if (choice === 'rejected') hideBanner();
+    else showBanner();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
 })();
