@@ -57,7 +57,7 @@
     "@type": "Organization",
     "name": "RobotVacuumLab",
     "url": "https://robotvacuumlab.github.io/",
-    "logo": "https://robotvacuumlab.github.io/assets/images/brand/logo-mark-1024.png"
+    "logo": "https://robotvacuumlab.github.io/assets/images/robotvacuumlab-footer-lockup.svg"
   }
   </script>
   <script type="application/ld+json">
@@ -69,6 +69,28 @@
     "inLanguage": "en"
   }
   </script>
+
+  <!-- Small critical tweaks (logo visibility + footer lockup sizing) -->
+  <style>
+    /* Make the mark readable on dark headers without needing a separate white file yet */
+    .site-header .brand-mark img{
+      filter: brightness(0) invert(1) contrast(1.15)
+              drop-shadow(0 1px 1px rgba(0,0,0,.6));
+    }
+    /* If your header is translucent, this helps readability */
+    .site-header{
+      background: rgba(11,18,32,.92);
+      backdrop-filter: blur(10px);
+    }
+    /* Footer lockup sizing */
+    .site-footer .footer-logo{
+      display:block;
+      height:44px;
+      width:auto;
+      margin-bottom:10px;
+      opacity:.95;
+    }
+  </style>
 </head>
 
 <body>
@@ -291,7 +313,19 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="stack-sm">
-        <strong>RobotVacuumLab</strong>
+        <!-- Footer lockup (icon + text) -->
+        <a href="/" class="footer-brand" aria-label="RobotVacuumLab home">
+          <img
+            src="/assets/images/robotvacuumlab-footer-lockup.svg?v=2"
+            alt="RobotVacuumLab"
+            class="footer-logo"
+            width="260"
+            height="48"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+
         <p class="footer-note">
           Independent editorial buying guides for robot vacuums. Informational only.
           Some links may be affiliate links. We may earn commissions from qualifying purchases.
