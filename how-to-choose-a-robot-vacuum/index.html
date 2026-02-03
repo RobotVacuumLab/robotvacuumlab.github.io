@@ -21,7 +21,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <!-- Preload hero (LCP) — your 3 sizes -->
+  <!-- Preload hero (LCP) — 3 sizes -->
   <link
     rel="preload"
     as="image"
@@ -51,6 +51,33 @@
   <meta name="twitter:description" content="A simple, buyer-first framework to choose the right robot vacuum: what matters most, what to ignore, and how to match features to real homes." />
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/how-to-choose-a-robot-vacuum-og-1200x630.webp" />
 
+  <!-- GA4 + Consent Mode v2 (recommended) -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    // Default denied until user choice (Consent Mode v2)
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      analytics_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+
+    gtag('js', new Date());
+    gtag('config', 'G-56CWM7N1S7', {
+      anonymize_ip: true,
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false
+    });
+  </script>
+
+  <!-- If you use your consent banner JS, load it here (no inline CSS needed) -->
+  <!-- <script defer src="/assets/js/consent.js"></script> -->
+
   <!-- JSON-LD (Organization + Article) -->
   <script type="application/ld+json">
   {
@@ -58,39 +85,39 @@
     "@type":"Organization",
     "name":"RobotVacuumLab",
     "url":"https://robotvacuumlab.github.io/",
-    "logo":"https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg"
+    "logo":"https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2"
   }
   </script>
+
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"Article",
-    "headline":"How to Choose a Robot Vacuum",
+    "headline":"How to Choose a Robot Vacuum (Without Regret)",
     "description":"A simple, buyer-first framework to choose the right robot vacuum: what matters most, what to ignore, and how to match features to real homes.",
-    "image":["https://robotvacuumlab.github.io/assets/images/og/how-to-choose-a-robot-vacuum-og-1200x630.webp"],
-    "mainEntityOfPage":{"@type":"WebPage","@id":"https://robotvacuumlab.github.io/how-to-choose-a-robot-vacuum/"},
+    "image":[
+      "https://robotvacuumlab.github.io/assets/images/og/how-to-choose-a-robot-vacuum-og-1200x630.webp"
+    ],
+    "datePublished":"2026-02-02",
+    "dateModified":"2026-02-03",
+    "author":{
+      "@type":"Organization",
+      "name":"RobotVacuumLab Editorial Team"
+    },
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://robotvacuumlab.github.io/how-to-choose-a-robot-vacuum/"
+    },
     "publisher":{
       "@type":"Organization",
       "name":"RobotVacuumLab",
-      "logo":{"@type":"ImageObject","url":"https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg"}
+      "logo":{
+        "@type":"ImageObject",
+        "url":"https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2"
+      }
     }
   }
   </script>
-
-  <!-- Same safe header/footer tweaks as home -->
-  <style>
-    .site-header{
-      background: rgba(11,18,32,.92);
-      backdrop-filter: blur(10px);
-    }
-    .site-footer .footer-logo{
-      display:block;
-      height:44px;
-      width:auto;
-      margin-bottom:10px;
-      opacity:.95;
-    }
-  </style>
 </head>
 
 <body>
@@ -107,7 +134,6 @@
             height="44"
             decoding="async"
             loading="eager"
-            style="width:44px;height:44px;object-fit:contain;"
           />
         </span>
         <span>
@@ -180,7 +206,7 @@
               <a class="btn btn-secondary" href="/how-we-test/">How we test</a>
             </div>
 
-            <p class="last-updated">Last updated: <span class="mono">2026-02-02</span></p>
+            <p class="last-updated">Last updated: <span class="mono">2026-02-03</span></p>
 
             <div class="kpi" aria-label="Key decision principles">
               <span class="item">Navigation first</span>
@@ -208,6 +234,7 @@
                 <p>Prioritize mapping reliability, edge pickup, and a brush that doesn’t scatter debris.</p>
               </div>
             </section>
+
             <section class="card">
               <div class="card-body">
                 <span class="badge">Pets</span>
@@ -215,6 +242,7 @@
                 <p>Look for anti-tangle brush design, easy filter access, and strong carpet pickup.</p>
               </div>
             </section>
+
             <section class="card">
               <div class="card-body">
                 <span class="badge">Mixed floors</span>
@@ -279,6 +307,7 @@
                 <li>Parts/consumables are easy to find</li>
               </ul>
             </section>
+
             <section class="cons">
               <h3>Red flags</h3>
               <ul>
