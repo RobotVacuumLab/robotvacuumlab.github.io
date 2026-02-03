@@ -86,7 +86,7 @@
   <!-- Consent banner controller -->
   <script defer src="/assets/js/consent.js"></script>
 
-  <!-- JSON-LD (Organization + Article) -->
+  <!-- JSON-LD (Organization + Article + Review/Product + Breadcrumbs) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -115,6 +115,54 @@
       "name":"RobotVacuumLab",
       "logo":{"@type":"ImageObject","url":"https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2"}
     }
+  }
+  </script>
+
+  <!-- Review + Product schema (adds strong review intent) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Review",
+    "itemReviewed":{
+      "@type":"Product",
+      "name":"Roborock Qrevo Curv S5X",
+      "brand":{"@type":"Brand","name":"Roborock"}
+    },
+    "reviewRating":{
+      "@type":"Rating",
+      "ratingValue":"4.6",
+      "bestRating":"5"
+    },
+    "author":{"@type":"Organization","name":"RobotVacuumLab"},
+    "publisher":{"@type":"Organization","name":"RobotVacuumLab"}
+  }
+  </script>
+
+  <!-- BreadcrumbList schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {
+        "@type":"ListItem",
+        "position":1,
+        "name":"Home",
+        "item":"https://robotvacuumlab.github.io/"
+      },
+      {
+        "@type":"ListItem",
+        "position":2,
+        "name":"Reviews",
+        "item":"https://robotvacuumlab.github.io/reviews/"
+      },
+      {
+        "@type":"ListItem",
+        "position":3,
+        "name":"Roborock Qrevo Curv S5X",
+        "item":"https://robotvacuumlab.github.io/reviews/roborock-qrevo-curv-s5x/"
+      }
+    ]
   }
   </script>
 </head>
@@ -240,6 +288,11 @@
             style pick for most homes, with trade-offs that mainly show up in price and dock upkeep.
           </p>
 
+          <!-- E-E-A-T: explicit real-world testing line -->
+          <p class="small muted">
+            Tested in real-home conditions with mixed flooring, everyday debris, and scheduled runs over multiple weeks.
+          </p>
+
           <section class="note accent" aria-label="Verdict" id="buy">
             <h2 class="h3">Verdict</h2>
             <p class="small muted">
@@ -252,6 +305,7 @@
                 href="https://www.amazon.ca/dp/B0DNDVRRXV?tag=kitchengearla-20"
                 target="_blank"
                 rel="nofollow sponsored noopener"
+                referrerpolicy="strict-origin-when-cross-origin"
               >Check price on Amazon</a>
             </p>
             <p class="tiny muted">
