@@ -70,13 +70,8 @@
   }
   </script>
 
-  <!-- Small critical tweaks (logo visibility + footer lockup sizing) -->
+  <!-- Small critical tweaks (header background + footer lockup sizing) -->
   <style>
-    /* Make the mark readable on dark headers without needing a separate white file yet */
-    .site-header .brand-mark img{
-      filter: brightness(0) invert(1) contrast(1.15)
-              drop-shadow(0 1px 1px rgba(0,0,0,.6));
-    }
     /* If your header is translucent, this helps readability */
     .site-header{
       background: rgba(11,18,32,.92);
@@ -90,6 +85,13 @@
       margin-bottom:10px;
       opacity:.95;
     }
+    /* Make sure the brand mark can size nicely */
+    .brand-mark img{
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      display: block;
+    }
   </style>
 </head>
 
@@ -101,13 +103,12 @@
       <a class="brand" href="/" aria-label="RobotVacuumLab home">
         <span class="brand-mark" aria-hidden="true">
           <img
-            src="/assets/images/brand/logo-mark-1024.png"
+            src="/assets/images/brand/logo-mark-white.svg?v=2"
             alt=""
-            width="34"
-            height="34"
+            width="48"
+            height="48"
             decoding="async"
             loading="eager"
-            style="width:34px;height:34px;object-fit:contain;"
           />
         </span>
         <span>
