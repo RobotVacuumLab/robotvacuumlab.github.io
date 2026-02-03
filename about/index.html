@@ -4,32 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- GA4: Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    /* Consent Mode v2 - default denied (until user chooses) */
-    gtag('consent', 'default', {
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
-      analytics_storage: 'denied'
-    });
-
-    // Minimal, editorial-friendly config
-    gtag('config', 'G-56CWM7N1S7', {
-      anonymize_ip: true,
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false
-    });
-  </script>
-
-  <!-- Consent banner logic -->
-  <script defer src="/assets/js/consent.js"></script>
-
   <title>About RobotVacuumLab | Editorial Testing for Real Homes</title>
   <meta name="description" content="RobotVacuumLab is an independent editorial site focused on calm, test-driven robot vacuum buying guides, with transparent methodology and clear trade-offs." />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
@@ -77,26 +51,68 @@
   <meta name="twitter:description" content="Independent editorial robot vacuum testing and buying guides with transparent methodology and clear trade-offs." />
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/about-og-1200x630.webp" />
 
+  <!-- GA4 + Consent Mode v2 (correct order) -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+
+    // Default denied until user choice (Consent Mode v2)
+    // MUST run before gtag.js + before gtag('config')
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied',
+      security_storage: 'granted',
+      wait_for_update: 800
+    });
+
+    gtag('js', new Date());
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
+  <script>
+    // GA4 config (respects consent)
+    gtag('config', 'G-56CWM7N1S7', {
+      anonymize_ip: true,
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false
+    });
+  </script>
+
+  <!-- Consent banner logic -->
+  <script defer src="/assets/js/consent.js"></script>
+
   <!-- JSON-LD (Organization + AboutPage) -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "RobotVacuumLab",
-    "url": "https://robotvacuumlab.github.io/",
-    "logo": "https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2"
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"RobotVacuumLab",
+    "url":"https://robotvacuumlab.github.io/",
+    "logo":"https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2"
   }
   </script>
+
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "AboutPage",
-    "name": "About RobotVacuumLab",
-    "url": "https://robotvacuumlab.github.io/about/",
-    "isPartOf": {
-      "@type": "WebSite",
-      "name": "RobotVacuumLab",
-      "url": "https://robotvacuumlab.github.io/"
+    "@context":"https://schema.org",
+    "@type":"AboutPage",
+    "name":"About RobotVacuumLab",
+    "inLanguage":"en",
+    "url":"https://robotvacuumlab.github.io/about/",
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://robotvacuumlab.github.io/about/"
+    },
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"RobotVacuumLab",
+      "url":"https://robotvacuumlab.github.io/"
     }
   }
   </script>
@@ -112,8 +128,8 @@
           <img
             src="/assets/images/brand/logo-mark-white.svg?v=2"
             alt=""
-            width="40"
-            height="40"
+            width="44"
+            height="44"
             decoding="async"
             loading="eager"
           />
@@ -190,7 +206,7 @@
               <a class="btn btn-ghost" href="/how-to-choose-a-robot-vacuum/">How to choose</a>
             </div>
 
-            <p class="last-updated">Last updated: <span class="mono">2026-02-02</span></p>
+            <p class="last-updated">Last updated: <span class="mono">2026-02-03</span></p>
           </div>
         </div>
       </div>
@@ -294,24 +310,22 @@
     </div>
   </footer>
 
-  <!-- Cookie banner (no inline CSS; style it in styles.css) -->
-  <section class="cookie-banner note" id="cookieBanner" hidden aria-label="Cookie notice">
-    <div class="container">
-      <div class="cookie-banner__inner">
-        <div class="cookie-banner__text">
-          <strong>Cookies</strong>
-          <span class="muted">
-            We use analytics cookies to understand site usage. You can accept or reject.
-            Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
-          </span>
-        </div>
-        <div class="cookie-banner__actions">
-          <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
-          <button class="btn" type="button" data-consent-accept>Accept</button>
-        </div>
+  <!-- Cookie banner (single instance; consent.js controls [hidden] + .is-open) -->
+  <div class="cookie-banner" id="cookieBanner" hidden>
+    <div class="cookie-banner__inner container">
+      <div class="cookie-banner__text">
+        <strong>Privacy choices</strong>
+        <span class="muted">
+          We use analytics only if you accept. Affiliate partners may set cookies when you click outbound links.
+          Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
+        </span>
+      </div>
+      <div class="cookie-banner__actions">
+        <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
+        <button class="btn" type="button" data-consent-accept>Accept</button>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- Minimal JS: mobile menu -->
   <script>
