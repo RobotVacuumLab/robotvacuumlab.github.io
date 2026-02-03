@@ -50,6 +50,32 @@
   <meta name="twitter:description" content="Editorial robot vacuum testing and buying guides. Clear recommendations, honest trade-offs, and a transparent methodology for real homes." />
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/home-og-1200x630.webp" />
 
+  <!-- GA4: Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    /* Consent Mode v2 - default denied (until user chooses) */
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+
+    // Minimal, editorial-friendly config
+    gtag('config', 'G-56CWM7N1S7', {
+      anonymize_ip: true,
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false
+    });
+  </script>
+
+  <!-- Consent banner logic -->
+  <script defer src="/assets/js/consent.js"></script>
+
   <!-- JSON-LD (Organization + Website) -->
   <script type="application/ld+json">
   {
@@ -69,30 +95,6 @@
     "inLanguage": "en"
   }
   </script>
-
-  <!-- Small critical tweaks (header background + footer lockup sizing) -->
-  <style>
-    /* If your header is translucent, this helps readability */
-    .site-header{
-      background: rgba(11,18,32,.92);
-      backdrop-filter: blur(10px);
-    }
-    /* Footer lockup sizing */
-    .site-footer .footer-logo{
-      display:block;
-      height:44px;
-      width:auto;
-      margin-bottom:10px;
-      opacity:.95;
-    }
-    /* Make sure the brand mark can size nicely */
-    .brand-mark img{
-      width: 36px;
-      height: 36px;
-      object-fit: contain;
-      display: block;
-    }
-  </style>
 </head>
 
 <body>
@@ -314,7 +316,6 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="stack-sm">
-        <!-- Footer lockup (icon + text) -->
         <a href="/" class="footer-brand" aria-label="RobotVacuumLab home">
           <img
             src="/assets/images/robotvacuumlab-footer-lockup.svg?v=2"
@@ -342,6 +343,25 @@
       </nav>
     </div>
   </footer>
+
+  <!-- Cookie banner (no inline CSS; style it in styles.css) -->
+  <section class="cookie-banner note" id="cookieBanner" hidden aria-label="Cookie notice">
+    <div class="container">
+      <div class="cookie-banner__inner">
+        <div class="cookie-banner__text">
+          <strong>Cookies</strong>
+          <span class="muted">
+            We use analytics cookies to understand site usage. You can accept or reject.
+            Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
+          </span>
+        </div>
+        <div class="cookie-banner__actions">
+          <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
+          <button class="btn" type="button" data-consent-accept>Accept</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Minimal JS: mobile menu -->
   <script>
