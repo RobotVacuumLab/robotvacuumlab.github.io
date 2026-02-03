@@ -38,6 +38,21 @@
   <meta name="twitter:description" content="How RobotVacuumLab earns money and how we maintain editorial independence." />
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/disclosure-og-1200x630.webp" />
 
+  <!-- GA4: Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    // Minimal, editorial-friendly config
+    gtag('config', 'G-56CWM7N1S7', {
+      anonymize_ip: true,
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false
+    });
+  </script>
+
   <!-- JSON-LD -->
   <script type="application/ld+json">
   {
@@ -48,12 +63,6 @@
     "logo": "https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg"
   }
   </script>
-
-  <style>
-    .site-header{ background: rgba(11,18,32,.92); backdrop-filter: blur(10px); }
-    .brand-mark{ width:44px; height:44px; }
-    .brand-mark img, .brand-mark svg{ width:28px; height:28px; display:block; }
-  </style>
 </head>
 
 <body>
