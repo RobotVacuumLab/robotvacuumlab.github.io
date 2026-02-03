@@ -45,6 +45,14 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
+    /* Consent Mode v2 - default denied (until user chooses) */
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+
     // Minimal, editorial-friendly config
     gtag('config', 'G-56CWM7N1S7', {
       anonymize_ip: true,
@@ -52,6 +60,9 @@
       allow_ad_personalization_signals: false
     });
   </script>
+
+  <!-- Consent banner logic -->
+  <script defer src="/assets/js/consent.js"></script>
 
   <!-- JSON-LD -->
   <script type="application/ld+json">
@@ -211,6 +222,25 @@
       </nav>
     </div>
   </footer>
+
+  <!-- Cookie banner (no inline CSS; style it in styles.css) -->
+  <section class="cookie-banner note" id="cookieBanner" hidden aria-label="Cookie notice">
+    <div class="container">
+      <div class="cookie-banner__inner">
+        <div class="cookie-banner__text">
+          <strong>Cookies</strong>
+          <span class="muted">
+            We use analytics cookies to understand site usage. You can accept or reject.
+            Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
+          </span>
+        </div>
+        <div class="cookie-banner__actions">
+          <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
+          <button class="btn" type="button" data-consent-accept>Accept</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <script>
     (function () {
