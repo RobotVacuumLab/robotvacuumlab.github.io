@@ -53,13 +53,11 @@
 
   <!-- GA4 + Consent Mode v2 (correct order) -->
   <link rel="preconnect" href="https://www.googletagmanager.com" />
-
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
 
-    // Default denied until user choice (Consent Mode v2)
-    // Important: MUST run before gtag.js + before gtag('config')
+    // Default denied until user choice
     gtag('consent', 'default', {
       ad_storage: 'denied',
       ad_user_data: 'denied',
@@ -73,10 +71,8 @@
 
     gtag('js', new Date());
   </script>
-
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
   <script>
-    // GA4 config (will respect consent state)
     gtag('config', 'G-56CWM7N1S7', {
       anonymize_ip: true,
       allow_google_signals: false,
@@ -84,7 +80,7 @@
     });
   </script>
 
-  <!-- Consent banner controller -->
+  <!-- Consent banner logic -->
   <script defer src="/assets/js/consent.js"></script>
 
   <!-- JSON-LD (Organization + Article) -->
@@ -132,30 +128,6 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Cookie Banner (hidden by default; shown by consent.js if no choice) -->
-  <div id="cookieBanner" class="cookie-banner" hidden>
-    <div class="cookie-banner__inner" role="dialog" aria-modal="true" aria-labelledby="cookieTitle">
-      <div class="cookie-banner__content">
-        <strong id="cookieTitle">Cookies & measurement</strong>
-        <p>
-          We use analytics (GA4) to understand site usage. You can accept or refuse.
-        </p>
-        <p class="cookie-banner__links">
-          <a href="/privacy-policy/">Privacy Policy</a>
-          <span aria-hidden="true">•</span>
-          <a href="/disclosure/">Disclosure</a>
-        </p>
-      </div>
-
-      <div class="cookie-banner__actions">
-        <button type="button" class="btn btn-secondary" data-consent-reject>Reject</button>
-        <button type="button" class="btn" data-consent-accept>Accept</button>
-        <!-- optional -->
-        <!-- <button type="button" class="btn btn-ghost" data-consent-close aria-label="Close">✕</button> -->
-      </div>
-    </div>
-  </div>
-
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="/" aria-label="RobotVacuumLab home">
@@ -163,8 +135,8 @@
           <img
             src="/assets/images/brand/logo-mark-white.svg?v=2"
             alt=""
-            width="44"
-            height="44"
+            width="48"
+            height="48"
             decoding="async"
             loading="eager"
           />
@@ -436,6 +408,25 @@
       </nav>
     </div>
   </footer>
+
+  <!-- Cookie banner -->
+  <section class="cookie-banner" id="cookieBanner" hidden aria-label="Cookie notice">
+    <div class="container">
+      <div class="cookie-banner__inner">
+        <div class="cookie-banner__text">
+          <strong>Cookies</strong>
+          <span class="muted">
+            We use analytics cookies to understand site usage. You can accept or reject.
+            Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
+          </span>
+        </div>
+        <div class="cookie-banner__actions">
+          <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
+          <button class="btn" type="button" data-consent-accept>Accept</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Minimal JS: mobile menu -->
   <script>
