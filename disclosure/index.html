@@ -14,12 +14,25 @@
   <link rel="canonical" href="https://robotvacuumlab.github.io/disclosure/" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
 
-  <!-- Favicons -->
+  <!-- Favicons (root) -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Preload hero (LCP) — 3 sizes -->
+  <link
+    rel="preload"
+    as="image"
+    href="/assets/images/hero/disclosure-hero-1600x840.webp"
+    imagesrcset="
+      /assets/images/hero/disclosure-hero-1200x675.webp 1200w,
+      /assets/images/hero/disclosure-hero-1600x840.webp 1600w,
+      /assets/images/hero/disclosure-hero-2400x1260.webp 2400w
+    "
+    imagesizes="(max-width: 768px) 100vw, 1200px"
+  />
 
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
@@ -38,22 +51,29 @@
   <meta name="twitter:description" content="How RobotVacuumLab earns money and how we maintain editorial independence." />
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/disclosure-og-1200x630.webp" />
 
-  <!-- GA4: Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
+  <!-- GA4 + Consent Mode v2 (correct order) -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    function gtag(){ dataLayer.push(arguments); }
 
-    /* Consent Mode v2 - default denied (until user chooses) */
+    // Default denied until user choice (Consent Mode v2)
     gtag('consent', 'default', {
       ad_storage: 'denied',
       ad_user_data: 'denied',
       ad_personalization: 'denied',
-      analytics_storage: 'denied'
+      analytics_storage: 'denied',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied',
+      security_storage: 'granted',
+      wait_for_update: 800
     });
 
-    // Minimal, editorial-friendly config
+    gtag('js', new Date());
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
+  <script>
+    // GA4 config (respects consent)
     gtag('config', 'G-56CWM7N1S7', {
       anonymize_ip: true,
       allow_google_signals: false,
@@ -64,14 +84,44 @@
   <!-- Consent banner logic -->
   <script defer src="/assets/js/consent.js"></script>
 
-  <!-- JSON-LD -->
+  <!-- JSON-LD (Organization + Article) -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "RobotVacuumLab",
-    "url": "https://robotvacuumlab.github.io/",
-    "logo": "https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg"
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"RobotVacuumLab",
+    "url":"https://robotvacuumlab.github.io/",
+    "logo":"https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Disclosure",
+    "description":"Affiliate and editorial disclosure for RobotVacuumLab. How we make money, how recommendations are made, and our commitment to transparency.",
+    "image":[
+      "https://robotvacuumlab.github.io/assets/images/og/disclosure-og-1200x630.webp"
+    ],
+    "datePublished":"2026-02-03",
+    "dateModified":"2026-02-03",
+    "author":{
+      "@type":"Organization",
+      "name":"RobotVacuumLab Editorial Team"
+    },
+    "mainEntityOfPage":{
+      "@type":"WebPage",
+      "@id":"https://robotvacuumlab.github.io/disclosure/"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"RobotVacuumLab",
+      "logo":{
+        "@type":"ImageObject",
+        "url":"https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2"
+      }
+    }
   }
   </script>
 </head>
@@ -86,8 +136,8 @@
           <img
             src="/assets/images/brand/logo-mark-white.svg?v=2"
             alt=""
-            width="28"
-            height="28"
+            width="48"
+            height="48"
             loading="eager"
             decoding="async"
           />
@@ -131,16 +181,40 @@
       </div>
     </nav>
 
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-media">
+            <img
+              src="/assets/images/hero/disclosure-hero-1600x840.webp"
+              srcset="
+                /assets/images/hero/disclosure-hero-1200x675.webp 1200w,
+                /assets/images/hero/disclosure-hero-1600x840.webp 1600w,
+                /assets/images/hero/disclosure-hero-2400x1260.webp 2400w
+              "
+              sizes="(max-width: 768px) 100vw, 1200px"
+              alt="Clean editorial workspace representing transparency and testing"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+
+          <div class="hero-body">
+            <div class="kicker">Disclosure • Transparency</div>
+            <h1 class="h1">Disclosure</h1>
+            <p class="lede">
+              Transparency matters. This page explains how we make money and how we keep recommendations independent.
+            </p>
+
+            <p class="last-updated">Last updated: <span class="mono">2026-02-03</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section">
       <div class="container">
         <article class="article">
-          <h1>Disclosure</h1>
-
-          <p class="muted">
-            Transparency matters. This page explains how RobotVacuumLab makes money and how we keep our editorial
-            recommendations independent.
-          </p>
-
           <h2>Affiliate relationships</h2>
           <p>
             Some links on RobotVacuumLab are affiliate links. If you click one of these links and make a purchase,
@@ -166,8 +240,7 @@
           </p>
 
           <p>
-            You can learn more about our process on the
-            <a href="/how-we-test/">How We Test</a> page.
+            You can learn more about our process on the <a href="/how-we-test/">How We Test</a> page.
           </p>
 
           <h2>Pricing and availability</h2>
@@ -185,8 +258,6 @@
               and should not be considered professional advice.
             </p>
           </section>
-
-          <p class="last-updated">Last updated: <span class="mono">2026-02-03</span></p>
         </article>
       </div>
     </section>
@@ -223,8 +294,8 @@
     </div>
   </footer>
 
-  <!-- Cookie banner (no inline CSS; style it in styles.css) -->
-  <section class="cookie-banner note" id="cookieBanner" hidden aria-label="Cookie notice">
+  <!-- Cookie banner -->
+  <section class="cookie-banner" id="cookieBanner" hidden aria-label="Cookie notice">
     <div class="container">
       <div class="cookie-banner__inner">
         <div class="cookie-banner__text">
@@ -242,11 +313,13 @@
     </div>
   </section>
 
+  <!-- Minimal JS: mobile menu -->
   <script>
     (function () {
       const btn = document.querySelector('.menu-btn');
       const nav = document.getElementById('mobileNav');
       if (!btn || !nav) return;
+
       btn.addEventListener('click', function () {
         const isOpen = nav.classList.toggle('open');
         btn.setAttribute('aria-expanded', String(isOpen));
