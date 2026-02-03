@@ -51,6 +51,32 @@
   <meta name="twitter:description" content="What data we collect, how we use it, cookies, third-party links, and how to contact us." />
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/privacy-policy-og-1200x630.webp" />
 
+  <!-- GA4 + Consent Mode v2 (default denied) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    // Consent Mode v2 default: denied (no cookies until user chooses)
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+
+    // Minimal, editorial-friendly config
+    gtag('config', 'G-56CWM7N1S7', {
+      anonymize_ip: true,
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false
+    });
+  </script>
+
+  <!-- Consent banner logic (your script) -->
+  <script defer src="/assets/js/consent.js?v=1"></script>
+
   <!-- JSON-LD (Organization + Article) -->
   <script type="application/ld+json">
   {
@@ -58,7 +84,7 @@
     "@type": "Organization",
     "name": "RobotVacuumLab",
     "url": "https://robotvacuumlab.github.io/",
-    "logo": "https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg"
+    "logo": "https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2"
   }
   </script>
   <script type="application/ld+json">
@@ -68,25 +94,15 @@
     "headline": "Privacy Policy",
     "description": "RobotVacuumLab privacy policy: what data we collect, how we use it, cookies, third-party links, and how to contact us.",
     "image": ["https://robotvacuumlab.github.io/assets/images/og/privacy-policy-og-1200x630.webp"],
+    "dateModified": "2026-02-03",
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://robotvacuumlab.github.io/privacy-policy/" },
     "publisher": {
       "@type": "Organization",
       "name": "RobotVacuumLab",
-      "logo": { "@type": "ImageObject", "url": "https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg" }
+      "logo": { "@type": "ImageObject", "url": "https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2" }
     }
   }
   </script>
-
-  <!-- Safe header readability + logo sizing -->
-  <style>
-    .site-header{ background: rgba(11,18,32,.92); backdrop-filter: blur(10px); }
-    .brand-mark{ width: 44px; height: 44px; }
-    .brand-mark img{ width: 28px; height: 28px; object-fit: contain; display:block; }
-    .brand-mark svg{ width: 28px; height: 28px; display:block; }
-    .site-footer .footer-logo{
-      display:block; height:44px; width:auto; margin-bottom:10px; opacity:.95;
-    }
-  </style>
 </head>
 
 <body>
@@ -99,8 +115,8 @@
           <img
             src="/assets/images/brand/logo-mark-white.svg?v=2"
             alt=""
-            width="28"
-            height="28"
+            width="48"
+            height="48"
             decoding="async"
             loading="eager"
           />
@@ -273,6 +289,24 @@
     </div>
   </footer>
 
+  <!-- Cookie banner (HTML) -->
+  <div class="cookie-banner" id="cookieBanner" hidden>
+    <div class="cookie-banner__inner container">
+      <div class="cookie-banner__text">
+        <strong>Privacy choices</strong>
+        <p class="small muted">
+          We use analytics only if you accept. Affiliate partners may set cookies when you click outbound links.
+          Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
+        </p>
+      </div>
+      <div class="cookie-banner__actions">
+        <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
+        <button class="btn" type="button" data-consent-accept>Accept</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Minimal JS: mobile menu -->
   <script>
     (function () {
       const btn = document.querySelector('.menu-btn');
