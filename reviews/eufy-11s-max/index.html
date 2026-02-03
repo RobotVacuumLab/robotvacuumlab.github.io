@@ -44,6 +44,7 @@
   <meta property="og:image" content="https://robotvacuumlab.github.io/assets/images/og/eufy-11s-max-og-1200x630.webp" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="A sleek budget robot vacuum in a clean home testing setup." />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -59,7 +60,6 @@
     function gtag(){ dataLayer.push(arguments); }
 
     // Default denied until user choice (Consent Mode v2)
-    // MUST run before gtag.js + before gtag('config')
     gtag('consent', 'default', {
       ad_storage: 'denied',
       ad_user_data: 'denied',
@@ -113,7 +113,10 @@
     "publisher":{
       "@type":"Organization",
       "name":"RobotVacuumLab",
-      "logo":{"@type":"ImageObject","url":"https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2"}
+      "logo":{
+        "@type":"ImageObject",
+        "url":"https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2"
+      }
     }
   }
   </script>
@@ -174,7 +177,7 @@
       <a href="/best-robot-vacuums/">Best Robot Vacuums</a>
       <a href="/how-we-test/">How We Test</a>
       <a href="/how-to-choose-a-robot-vacuum/">How to Choose</a>
-      <a href="/reviews/">Reviews</a>
+      <a href="/reviews/" aria-current="page">Reviews</a>
       <a href="/about/">About</a>
       <a href="/disclosure/">Disclosure</a>
       <a href="/privacy-policy/">Privacy Policy</a>
@@ -209,6 +212,7 @@
               alt="Budget robot vacuum in a clean home testing setup, focused on simple daily upkeep"
               loading="eager"
               decoding="async"
+              fetchpriority="high"
             />
           </div>
 
@@ -240,7 +244,6 @@
             minimal app complexity and you’re okay with basic navigation (no advanced room mapping).
           </p>
 
-          <!-- Verdict / CTA -->
           <section class="note accent" id="buy" aria-label="Verdict and where to buy">
             <h2 class="h3">Verdict</h2>
             <p class="small muted">
@@ -367,7 +370,6 @@
     </div>
   </footer>
 
-  <!-- Minimal JS: mobile menu -->
   <script>
     (function () {
       const btn = document.querySelector('.menu-btn');
