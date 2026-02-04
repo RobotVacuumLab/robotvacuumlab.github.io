@@ -790,3 +790,6 @@ main{
   font-size: var(--text-sm);
   color: var(--muted);
 }
+
+/* Safety: never show any cookie banner */
+.cookie-banner{ display:none !important; }
