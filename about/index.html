@@ -51,41 +51,20 @@
   <meta name="twitter:description" content="Independent editorial robot vacuum testing and buying guides with transparent methodology and clear trade-offs." />
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/about-og-1200x630.webp" />
 
-  <!-- GA4 + Consent Mode v2 (correct order) -->
+  <!-- GA4 (no consent banner, no consent mode) -->
   <link rel="preconnect" href="https://www.googletagmanager.com" />
-
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
-
-    // Default denied until user choice (Consent Mode v2)
-    // MUST run before gtag.js + before gtag('config')
-    gtag('consent', 'default', {
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
-      analytics_storage: 'denied',
-      functionality_storage: 'denied',
-      personalization_storage: 'denied',
-      security_storage: 'granted',
-      wait_for_update: 800
-    });
-
     gtag('js', new Date());
-  </script>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
-  <script>
-    // GA4 config (respects consent)
     gtag('config', 'G-56CWM7N1S7', {
       anonymize_ip: true,
       allow_google_signals: false,
       allow_ad_personalization_signals: false
     });
   </script>
-
-  <!-- Consent banner logic -->
-  <script defer src="/assets/js/consent.js"></script>
 
   <!-- JSON-LD (Organization + AboutPage) -->
   <script type="application/ld+json">
@@ -309,23 +288,6 @@
       </nav>
     </div>
   </footer>
-
-  <!-- Cookie banner (single instance; consent.js controls [hidden] + .is-open) -->
-  <div class="cookie-banner" id="cookieBanner" hidden>
-    <div class="cookie-banner__inner container">
-      <div class="cookie-banner__text">
-        <strong>Privacy choices</strong>
-        <span class="muted">
-          We use analytics only if you accept. Affiliate partners may set cookies when you click outbound links.
-          Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
-        </span>
-      </div>
-      <div class="cookie-banner__actions">
-        <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
-        <button class="btn" type="button" data-consent-accept>Accept</button>
-      </div>
-    </div>
-  </div>
 
   <!-- Minimal JS: mobile menu -->
   <script>
