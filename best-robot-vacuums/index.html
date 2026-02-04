@@ -51,41 +51,17 @@
   <meta name="twitter:description" content="Best robot vacuums for real homes (2026): top picks with clear trade-offs for navigation, pickup, mopping, noise, and maintenance." />
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/best-robot-vacuums-og-1200x630.webp" />
 
-  <!-- GA4 + Consent Mode v2 (correct order) -->
-  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <!-- Google Analytics 4 (no consent mode) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-
-    // Default denied until user choice (Consent Mode v2)
-    // MUST run before gtag.js + before gtag('config')
-    gtag('consent', 'default', {
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
-      analytics_storage: 'denied',
-      functionality_storage: 'denied',
-      personalization_storage: 'denied',
-      security_storage: 'granted',
-      wait_for_update: 800
-    });
-
-    gtag('js', new Date());
-  </script>
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
-  <script>
-    // GA4 config (respects consent)
-    gtag('config', 'G-56CWM7N1S7', {
-      anonymize_ip: true,
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false
-    });
-  </script>
-
-  <!-- Consent banner logic -->
-  <script defer src="/assets/js/consent.js"></script>
+  gtag('config', 'G-56CWM7N1S7', {
+    anonymize_ip: true
+  });
+</script>
 
   <!-- JSON-LD (Organization + Article + ItemList) -->
   <script type="application/ld+json">
