@@ -889,39 +889,3 @@ main{
   font-size: var(--text-sm);
   color: var(--muted);
 }
-
-/* =========================================================
-   Consent banner — hardening patch (recommended)
-   - Avoid .note conflicts if banner accidentally includes it
-   - Ensure [hidden] always wins
-   - Slight UX/accessibility tweaks
-   ========================================================= */
-
-/* Make sure hidden always hides, even if other rules collide */
-.cookie-banner[hidden]{
-  display: none !important;
-}
-
-/* If you kept class="cookie-banner note", neutralize note styles */
-.cookie-banner.note{
-  border: 0;
-  background: transparent;
-  padding: 0;
-  border-radius: 0;
-}
-
-/* Keep banner animation predictable */
-.cookie-banner{
-  will-change: transform, opacity;
-}
-
-/* Better tap targets on very small screens */
-@media (max-width: 360px){
-  .cookie-banner__actions{
-    width: 100%;
-  }
-  .cookie-banner__actions .btn{
-    width: 100%;
-    justify-content: center;
-  }
-}
