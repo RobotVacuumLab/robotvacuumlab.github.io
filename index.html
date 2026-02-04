@@ -50,14 +50,14 @@
   <meta name="twitter:description" content="Editorial robot vacuum testing and buying guides. Clear recommendations, honest trade-offs, and a transparent methodology for real homes." />
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/home-og-1200x630.webp" />
 
-  <!-- GA4 + Consent Mode v2 (correct order) -->
-  <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <!-- GA4 + Consent Mode v2 (robust + testable) -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
 
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
 
-    /* Consent Mode v2: default denied (until user chooses) */
+    // Consent Mode v2: default denied until user chooses
     gtag('consent', 'default', {
       ad_storage: 'denied',
       ad_user_data: 'denied',
@@ -69,21 +69,26 @@
       wait_for_update: 800
     });
 
+    // Helpful flags
+    gtag('set', 'url_passthrough', true);
+    gtag('set', 'ads_data_redaction', true);
+
     gtag('js', new Date());
   </script>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
 
   <script>
-    /* GA4 config (respects consent) */
+    // Configure GA4 but do NOT auto-send page_view before consent
     gtag('config', 'G-56CWM7N1S7', {
       anonymize_ip: true,
       allow_google_signals: false,
-      allow_ad_personalization_signals: false
+      allow_ad_personalization_signals: false,
+      send_page_view: false
     });
   </script>
 
-  <!-- Consent banner logic -->
+  <!-- Consent banner logic (must update consent + then send page_view) -->
   <script defer src="/assets/js/consent.js"></script>
 
   <!-- JSON-LD (Organization + Website) -->
