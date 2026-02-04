@@ -765,7 +765,7 @@ main{
 
 /* ---------- Print ---------- */
 @media print{
-  .site-header, .nav, .mobile-nav, .menu-btn, .hero-actions, .footer-nav, .cookie-banner { display: none !important; }
+  .site-header, .nav, .mobile-nav, .menu-btn, .hero-actions, .footer-nav { display: none !important; }
   body{ background: #fff; color: #000; }
   a{ text-decoration: underline; }
 }
@@ -791,5 +791,4 @@ main{
   color: var(--muted);
 }
 
-/* Safety: never show any cookie banner */
 .cookie-banner{ display:none !important; }
