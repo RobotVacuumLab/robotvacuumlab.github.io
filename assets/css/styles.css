@@ -1,6 +1,10 @@
 /* =========================================================
-   RobotVacuumLab — Editorial Tech Lab CSS (UPDATED)
+   RobotVacuumLab — Editorial Tech Lab CSS (FINAL / AUDIT-READY)
    Goals: clean, trustworthy, fast, accessible, mobile-first
+   Notes:
+   - Adds: .btn-price (explicit class for table price CTAs)
+   - Keeps: strong defaults + dark mode + reduced motion
+   - Improves: cards equal height on >=48rem, FAQ spacing, table sticky header
    ========================================================= */
 
 /* ---------- Design Tokens ---------- */
@@ -10,15 +14,15 @@
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   /* Type scale */
-  --text-xs: 0.8125rem;  /* 13px */
-  --text-sm: 0.9375rem;  /* 15px */
-  --text-base: 1.0625rem;/* 17px */
-  --text-md: 1.125rem;   /* 18px */
-  --text-lg: 1.25rem;    /* 20px */
-  --text-xl: 1.5rem;     /* 24px */
-  --text-2xl: 1.875rem;  /* 30px */
-  --text-3xl: 2.25rem;   /* 36px */
-  --text-4xl: 2.75rem;   /* 44px */
+  --text-xs: 0.8125rem;   /* 13px */
+  --text-sm: 0.9375rem;   /* 15px */
+  --text-base: 1.0625rem; /* 17px */
+  --text-md: 1.125rem;    /* 18px */
+  --text-lg: 1.25rem;     /* 20px */
+  --text-xl: 1.5rem;      /* 24px */
+  --text-2xl: 1.875rem;   /* 30px */
+  --text-3xl: 2.25rem;    /* 36px */
+  --text-4xl: 2.75rem;    /* 44px */
 
   --lh-tight: 1.15;
   --lh-normal: 1.55;
@@ -432,7 +436,7 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
   color: #fff;
   font-weight: 800;
   text-decoration: none;
-  transition: transform var(--t), background var(--t), border-color var(--t);
+  transition: transform var(--t), background var(--t), border-color var(--t), filter var(--t);
 }
 .btn:hover{
   background: var(--accent-2);
@@ -456,6 +460,71 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
   background: var(--surface-2);
   color: var(--text);
   text-decoration: none;
+}
+
+/* Explicit price CTA class (recommended for audit clarity) */
+.btn-price{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .65rem .9rem;
+  border-radius: .95rem;
+  font-weight: 900;
+  text-decoration: none;
+  white-space: nowrap;
+
+  color: #fff;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--border));
+  box-shadow:
+    0 10px 26px rgba(14,163,127,.18),
+    0 0 0 3px rgba(14,163,127,.10);
+  transition: transform var(--t), filter var(--t), box-shadow var(--t), background var(--t);
+  position: relative;
+  isolation: isolate;
+}
+.btn-price:hover{
+  text-decoration: none;
+  transform: translateY(-1px);
+  filter: brightness(1.06) saturate(1.05);
+  box-shadow:
+    0 14px 34px rgba(14,163,127,.25),
+    0 0 0 4px rgba(14,163,127,.14),
+    0 0 28px rgba(14,163,127,.22);
+}
+.btn-price:active{
+  transform: translateY(0);
+  filter: brightness(1.02);
+}
+.btn-price:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 4px rgba(14,163,127,.22),
+    0 0 0 7px rgba(14,163,127,.12),
+    0 16px 36px rgba(14,163,127,.22);
+}
+
+/* Glow layer */
+.btn-price::before{
+  content:"";
+  position: absolute;
+  inset: -8px;
+  border-radius: inherit;
+  background: radial-gradient(closest-side, rgba(14,163,127,.38), rgba(14,163,127,0) 70%);
+  filter: blur(10px);
+  opacity: .65;
+  z-index: -1;
+  animation: ctaGlow 2.4s ease-in-out infinite;
+}
+
+@keyframes ctaGlow{
+  0%,100%{ transform: scale(.98); opacity: .55; }
+  50%{ transform: scale(1.03); opacity: .85; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .btn-price::before{ animation: none !important; }
 }
 
 /* ---------- Main content ---------- */
@@ -482,6 +551,7 @@ main{
 .section-title .hint{
   color: var(--muted);
   font-size: var(--text-sm);
+  max-width: 52ch; /* nicer wrapping on larger screens */
 }
 
 /* ---------- Cards ---------- */
@@ -552,6 +622,18 @@ main{
   color: var(--muted);
 }
 
+/* Equal-height cards & pinned meta row (desktop+) */
+@media (min-width: 48rem){
+  .card .card-body{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .card .meta{
+    margin-top: auto;
+  }
+}
+
 /* ---------- Tables ---------- */
 .table-wrap{
   overflow: auto;
@@ -582,77 +664,35 @@ main{
   text-transform: uppercase;
   color: var(--muted);
   background: var(--surface-2);
+  position: sticky; /* UX boost on scroll */
+  top: 0;
+  z-index: 1;
 }
 
 .table tr:last-child td{ border-bottom: 0; }
 
-/* ---------- Table CTA buttons (Price column) ---------- */
-.table td:last-child a{
+/* Optional: if any price link doesn't have .btn-price, make it still look fine */
+.table td:last-child a:not(.btn-price){
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: .5rem;
-  padding: .65rem .9rem;
-  border-radius: .95rem;
-  font-weight: 900;
+  padding: .55rem .75rem;
+  border-radius: .85rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+  background: var(--accent-soft);
+  color: var(--text);
+  font-weight: 800;
   text-decoration: none;
   white-space: nowrap;
-
-  color: #fff;
-  background: linear-gradient(180deg, var(--accent), var(--accent-2));
-  border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--border));
-  box-shadow:
-    0 10px 26px rgba(14,163,127,.18),
-    0 0 0 3px rgba(14,163,127,.10);
-  transition: transform var(--t), filter var(--t), box-shadow var(--t), background var(--t);
-  position: relative;
-  isolation: isolate;
+  transition: transform var(--t), background var(--t), border-color var(--t);
 }
-
-.table td:last-child a:hover{
+.table td:last-child a:not(.btn-price):hover{
+  background: color-mix(in srgb, var(--accent-soft) 55%, var(--surface));
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
   text-decoration: none;
-  transform: translateY(-1px);
-  filter: brightness(1.06) saturate(1.05);
-  box-shadow:
-    0 14px 34px rgba(14,163,127,.25),
-    0 0 0 4px rgba(14,163,127,.14),
-    0 0 28px rgba(14,163,127,.22);
 }
-
-.table td:last-child a:active{
-  transform: translateY(0);
-  filter: brightness(1.02);
-}
-
-.table td:last-child a:focus-visible{
-  outline: none;
-  box-shadow:
-    0 0 0 4px rgba(14,163,127,.22),
-    0 0 0 7px rgba(14,163,127,.12),
-    0 16px 36px rgba(14,163,127,.22);
-}
-
-/* Glow layer */
-.table td:last-child a::before{
-  content:"";
-  position: absolute;
-  inset: -8px;
-  border-radius: inherit;
-  background: radial-gradient(closest-side, rgba(14,163,127,.38), rgba(14,163,127,0) 70%);
-  filter: blur(10px);
-  opacity: .65;
-  z-index: -1;
-  animation: ctaGlow 2.4s ease-in-out infinite;
-}
-
-@keyframes ctaGlow{
-  0%,100%{ transform: scale(.98); opacity: .55; }
-  50%{ transform: scale(1.03); opacity: .85; }
-}
-
-@media (prefers-reduced-motion: reduce){
-  .table td:last-child a::before{ animation: none !important; }
-}
+.table td:last-child a:not(.btn-price):active{ transform: translateY(1px); }
 
 /* ---------- Callouts / Notes ---------- */
 .note{
@@ -750,11 +790,16 @@ main{
   color: color-mix(in srgb, var(--accent) 70%, var(--text));
 }
 
+.faq details[open] summary{
+  background: color-mix(in srgb, var(--accent-soft) 55%, transparent);
+}
+
 .faq .answer{
   padding: 0 1rem 1rem;
   color: var(--muted);
   line-height: var(--lh-loose);
 }
+.faq .answer p{ margin: .6rem 0 0; }
 
 /* ---------- Article typography ---------- */
 .article{
@@ -859,4 +904,5 @@ main{
   color: var(--muted);
 }
 
+/* You said you’re hiding it for now (keep if intentional) */
 .cookie-banner{ display:none !important; }
