@@ -17,6 +17,10 @@
 
   const GA_EVENT_TIMEOUT_MS = 180; // short delay when navigating same-tab
 
+  // If you REALLY want noreferrer on target=_blank links, set true.
+  // For affiliate links (Amazon), it's safer to keep referrer behavior intact -> false.
+  const ADD_NOREFFERER_TO_BLANK = false;
+
   /* ---------- Tiny helpers ---------- */
   const log = (...args) => { if (DEBUG) console.log("[RVL]", ...args); };
 
@@ -41,10 +45,22 @@
     return false;
   }
 
+  /* ---------- LocalStorage safe wrappers ---------- */
+  function lsGet(key) {
+    try { return window.localStorage.getItem(key); }
+    catch { return null; }
+  }
+
+  function lsSet(key, value) {
+    try { window.localStorage.setItem(key, value); return true; }
+    catch { return false; }
+  }
+
   /* ---------- Consent model ---------- */
   function readConsent() {
-    const raw = localStorage.getItem(CONSENT_KEY);
+    const raw = lsGet(CONSENT_KEY);
     if (!raw) return null;
+
     const data = safeJSONParse(raw);
     if (!data || typeof data !== "object") return null;
 
@@ -60,21 +76,34 @@
 
   function writeConsent(status) {
     const payload = { status, savedAt: nowISO() }; // status: "accepted" | "rejected"
-    localStorage.setItem(CONSENT_KEY, JSON.stringify(payload));
+    lsSet(CONSENT_KEY, JSON.stringify(payload));
     return payload;
   }
 
   function applyConsentToGA(status) {
-    // "analytics only if accept"
-    const update = status === "accepted"
-      ? { analytics_storage: "granted", ad_storage: "denied" }
-      : { analytics_storage: "denied",  ad_storage: "denied" };
+    // Keep it aligned with the default consent object in <head>.
+    // Analytics only if accept. Ads always denied.
+    const accepted = status === "accepted";
+
+    const update = {
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+
+      analytics_storage: accepted ? "granted" : "denied",
+
+      // Keep these denied unless you explicitly want them.
+      functionality_storage: "denied",
+      personalization_storage: "denied",
+
+      security_storage: "granted"
+    };
 
     const ok = gtagSafe("consent", "update", update);
     log("GA consent update:", update, "gtag ok:", ok);
 
-    // Optional internal event when consent changes (will be ignored if denied)
-    if (ok) {
+    // Optional internal event when consent changes (ignored if analytics denied)
+    if (ok && accepted) {
       gtagSafe("event", "consent_update", {
         consent_status: status,
         non_interaction: true
@@ -112,10 +141,9 @@
       banner.hidden = false;
 
       // Focus a primary action for keyboard/screen readers
-      // Privacy-first: you can choose reject first; here we focus Accept by default.
+      // Privacy-first: many sites focus Reject. If you prefer that, swap target order below.
       const target = btnAccept || btnReject || dialog;
       if (target && typeof target.focus === "function") {
-        // Ensure dialog can be focused if needed
         if (target === dialog && !dialog.hasAttribute("tabindex")) dialog.setAttribute("tabindex", "-1");
         target.focus();
       }
@@ -123,10 +151,7 @@
 
     const hide = () => {
       banner.hidden = true;
-      // Restore focus
-      if (lastFocus && typeof lastFocus.focus === "function") {
-        lastFocus.focus();
-      }
+      if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
       lastFocus = null;
     };
 
@@ -162,14 +187,12 @@
 
     const openClass = "open";
 
-    // Ensure closed state is truly hidden (not tabbable)
     const ensureClosedState = () => {
       nav.classList.remove(openClass);
       nav.hidden = true;
       btn.setAttribute("aria-expanded", "false");
     };
 
-    // Start closed (defensive)
     ensureClosedState();
 
     let lastFocus = null;
@@ -181,14 +204,12 @@
       nav.classList.add(openClass);
       btn.setAttribute("aria-expanded", "true");
 
-      // Focus first link
       const firstLink = qs("a", nav);
       firstLink?.focus?.();
 
       document.addEventListener("keydown", onKeyDown);
       document.addEventListener("click", onDocClick, { capture: true });
 
-      // Close on resize to desktop (prevents stuck open)
       bindMQ();
     };
 
@@ -220,7 +241,6 @@
       close();
     }
 
-    // Resize guard
     let mq = null;
     let mqBound = false;
     function bindMQ() {
@@ -228,14 +248,10 @@
       mq = window.matchMedia?.("(min-width: 48rem)");
       if (!mq) return;
 
-      const onMQ = () => {
-        if (mq.matches) close();
-      };
+      const onMQ = () => { if (mq.matches) close(); };
 
       mq.addEventListener?.("change", onMQ);
-      // Run once
       onMQ();
-
       mqBound = true;
     }
 
@@ -253,7 +269,7 @@
   }
 
   function hardenExternalLinks() {
-    // Add noopener/noreferrer to target=_blank without removing existing rel values
+    // Add noopener (and optionally noreferrer) to target=_blank without nuking your existing rel tokens.
     const links = qsa('a[target="_blank"]');
     links.forEach((a) => {
       const relRaw = (a.getAttribute("rel") || "").trim();
@@ -261,9 +277,8 @@
       const set = new Set(parts);
 
       set.add("noopener");
-      set.add("noreferrer");
+      if (ADD_NOREFFERER_TO_BLANK) set.add("noreferrer");
 
-      // Keep whatever you already set: nofollow/sponsored etc.
       a.setAttribute("rel", Array.from(set).join(" "));
     });
   }
@@ -271,14 +286,12 @@
   function trackEvent(name, params, callback) {
     if (!canTrackAnalytics()) return false;
 
-    // Use event_callback to avoid delaying longer than needed
     const payload = Object.assign({}, params, {
       event_callback: typeof callback === "function" ? callback : undefined,
       event_timeout: GA_EVENT_TIMEOUT_MS
     });
 
-    const ok = gtagSafe("event", name, payload);
-    return ok;
+    return gtagSafe("event", name, payload);
   }
 
   function initClickTracking() {
@@ -297,7 +310,7 @@
 
       if (!isAffiliate && !isExternal) return;
 
-      // If consent not accepted, do not track and do not interfere with navigation.
+      // If consent not accepted, do not track and do not interfere.
       if (!canTrackAnalytics()) return;
 
       const opensNewTab = (a.getAttribute("target") || "").toLowerCase() === "_blank";
@@ -322,13 +335,11 @@
         ? Object.assign({}, common, { affiliate_partner: partner, affiliate_label: label })
         : Object.assign({}, common, { outbound_label: label });
 
-      // If it opens a new tab (or user uses modifier keys), just fire event and do nothing else.
       if (opensNewTab || modifier) {
         trackEvent(eventName, params);
         return;
       }
 
-      // Same-tab external: delay very briefly to allow event delivery
       e.preventDefault();
 
       let navigated = false;
@@ -339,10 +350,8 @@
       };
 
       const ok = trackEvent(eventName, params, go);
-      // If GA blocked mid-flight, fail open quickly
       if (!ok) go();
 
-      // Hard timeout fallback
       window.setTimeout(go, GA_EVENT_TIMEOUT_MS);
     }, { capture: true });
   }
@@ -359,13 +368,9 @@
       const hadTabIndex = el.hasAttribute("tabindex");
       if (!hadTabIndex) el.setAttribute("tabindex", "-1");
 
-      try {
-        el.focus({ preventScroll: true });
-      } catch {
-        el.focus?.();
-      }
+      try { el.focus({ preventScroll: true }); }
+      catch { el.focus?.(); }
 
-      // Scroll behavior
       const behavior = isReducedMotion() ? "auto" : "smooth";
       el.scrollIntoView({ block: "start", behavior });
 
