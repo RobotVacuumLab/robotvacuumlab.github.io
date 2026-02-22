@@ -91,7 +91,7 @@
   }
   </script>
 
-  <!-- JSON-LD: WebSite (helps sitelinks/search box signals) -->
+  <!-- JSON-LD: WebSite -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -163,15 +163,63 @@
   }
   </script>
 
-  <!-- Optional: FAQPage schema (ONLY enable if you add a real FAQ section)
+  <!-- JSON-LD: FAQPage (matches the on-page FAQ section below) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"FAQPage",
-    "mainEntity":[]
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Are robot vacuums worth it for Canadian homes?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"For most homes, yes if you value convenience. The biggest win is consistent upkeep, especially with pets, kids, or high-traffic floors. The best results come from reliable navigation, decent pickup, and low-hassle maintenance (bins, filters, brushes)."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What matters more: suction power or navigation?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Navigation usually matters more day-to-day. A robot that maps reliably and doesn’t get lost will clean more total area. Suction helps on carpets, but consistent coverage and obstacle handling often determine whether it actually finishes the job."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Do I need a self-emptying dock?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"If you have pets, carpet, or you run daily, a dock is a major quality-of-life upgrade. It reduces how often you touch dust and debris and helps the robot stay consistent. For small apartments with light mess, a dock is optional."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"How often do I need to maintain a robot vacuum?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Expect quick weekly basics: emptying (or changing bags), clearing hair from the brush, and wiping sensors. Filters usually need periodic cleaning/replacement. Maintenance is why low-hassle designs score higher in our picks."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Can robot vacuums handle rugs, thresholds, and winter grit?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Better models handle rug edges and typical thresholds more reliably, but thick shag and tall transitions can still be tricky. Winter grit and salt dust are common in Canada, so frequent runs and regular brush/filter checks make a noticeable difference."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Why do prices change so often on Amazon?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Robot vacuums fluctuate with promos, inventory, and bundles. That’s why we use Check price buttons instead of hard-coding prices, so you always see the current deal at click time."
+        }
+      }
+    ]
   }
   </script>
-  -->
 </head>
 
 <body>
@@ -519,6 +567,25 @@
       </div>
     </section>
 
+    <!-- How we tested (on-page snippet + link to full methodology) -->
+    <section class="section" id="how-we-tested">
+      <div class="container">
+        <div class="section-title">
+          <h2>How we tested</h2>
+          <span class="hint">Methodology-first, Canada-focused</span>
+        </div>
+
+        <section class="note accent">
+          <p class="small muted" style="margin:0;">
+            Our picks prioritize what actually changes ownership experience in Canadian homes: navigation reliability, pickup on mixed floors,
+            mopping usefulness, noise, and day-to-day maintenance. We evaluate real-world trade-offs (pet hair tangles, thresholds, rug edges,
+            dustbin habits, dock upkeep) and favor models that stay dependable over time. For the full scoring framework and what we measure,
+            see <a href="/how-we-test/">How We Test</a>.
+          </p>
+        </section>
+      </div>
+    </section>
+
     <section class="section" id="comparison">
       <div class="container">
         <div class="section-title">
@@ -696,6 +763,66 @@
             clutter levels, and your tolerance for maintenance.
           </p>
         </section>
+      </div>
+    </section>
+
+    <!-- Real FAQ (matches FAQ schema in head) -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-title">
+          <h2>FAQ</h2>
+          <span class="hint">Quick answers, no fluff</span>
+        </div>
+
+        <div class="faq" aria-label="Frequently asked questions">
+          <details>
+            <summary>Are robot vacuums worth it for Canadian homes?</summary>
+            <div class="answer">
+              For most homes, yes if you value convenience. The biggest win is consistent upkeep, especially with pets, kids, or high-traffic floors.
+              The best results come from reliable navigation, decent pickup, and low-hassle maintenance (bins, filters, brushes).
+            </div>
+          </details>
+
+          <details>
+            <summary>What matters more: suction power or navigation?</summary>
+            <div class="answer">
+              Navigation usually matters more day-to-day. A robot that maps reliably and doesn’t get lost will clean more total area.
+              Suction helps on carpets, but consistent coverage and obstacle handling often determine whether it actually finishes the job.
+            </div>
+          </details>
+
+          <details>
+            <summary>Do I need a self-emptying dock?</summary>
+            <div class="answer">
+              If you have pets, carpet, or you run daily, a dock is a major quality-of-life upgrade. It reduces how often you touch dust and debris,
+              and helps the robot stay consistent. For small apartments with light mess, a dock is optional.
+            </div>
+          </details>
+
+          <details>
+            <summary>How often do I need to maintain a robot vacuum?</summary>
+            <div class="answer">
+              Expect quick weekly basics: emptying (or changing bags), clearing hair from the brush, and wiping sensors.
+              Filters usually need periodic cleaning/replacement. Maintenance is why low-hassle designs score higher in our picks.
+            </div>
+          </details>
+
+          <details>
+            <summary>Can robot vacuums handle rugs, thresholds, and winter grit?</summary>
+            <div class="answer">
+              Better models handle rug edges and typical thresholds more reliably, but thick shag and tall transitions can still be tricky.
+              Winter grit and salt dust are common in Canada, so frequent runs and regular brush/filter checks make a noticeable difference.
+            </div>
+          </details>
+
+          <details>
+            <summary>Why do prices change so often on Amazon?</summary>
+            <div class="answer">
+              Robot vacuums fluctuate with promos, inventory, and bundles. That’s why we use “Check price” buttons instead of hard-coding prices,
+              so you always see the current deal at click time.
+            </div>
+          </details>
+        </div>
       </div>
     </section>
 
