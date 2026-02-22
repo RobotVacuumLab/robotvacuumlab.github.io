@@ -906,3 +906,133 @@ main{
 
 /* You said you’re hiding it for now (keep if intentional) */
 .cookie-banner{ display:none !important; }
+
+/* =========================================================
+   RobotVacuumLab — CTA BOOST PATCH (paste at end)
+   Goal: make "Check price" impossible to miss (without spam)
+   Applies to:
+   - .btn-price (table)
+   - card meta links (often plain links)
+   - any Amazon outbound links with data-affiliate="amazon"
+   ========================================================= */
+
+/* 1) Make ALL Amazon outbound links look like buttons in “meta/tag” areas */
+.meta a[data-affiliate="amazon"],
+.meta a[href*="amazon.ca/dp/"],
+.meta a[href*="amazon.ca/gp/"]{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+
+  padding: .55rem .75rem;
+  border-radius: .9rem;
+  font-weight: 900;
+  white-space: nowrap;
+  text-decoration: none;
+
+  color: #fff;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border));
+  box-shadow:
+    0 10px 22px rgba(14,163,127,.18),
+    0 0 0 3px rgba(14,163,127,.10);
+  transition: transform var(--t), filter var(--t), box-shadow var(--t);
+}
+
+.meta a[data-affiliate="amazon"]:hover,
+.meta a[href*="amazon.ca/dp/"]:hover,
+.meta a[href*="amazon.ca/gp/"]:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.06) saturate(1.06);
+  box-shadow:
+    0 14px 34px rgba(14,163,127,.24),
+    0 0 0 4px rgba(14,163,127,.14),
+    0 0 22px rgba(14,163,127,.16);
+}
+
+.meta a[data-affiliate="amazon"]:active,
+.meta a[href*="amazon.ca/dp/"]:active,
+.meta a[href*="amazon.ca/gp/"]:active{
+  transform: translateY(0);
+  filter: brightness(1.02);
+}
+
+/* Keep underlines off for these CTAs (your global hover underline would otherwise apply) */
+.meta a[data-affiliate="amazon"]:hover,
+.meta a[href*="amazon.ca/dp/"]:hover,
+.meta a[href*="amazon.ca/gp/"]:hover{
+  text-decoration: none;
+}
+
+/* 2) Upgrade .btn-price even more (table CTA) with subtle shimmer */
+.btn-price{
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  position: relative;
+  overflow: hidden; /* required for shimmer */
+}
+
+/* Shimmer highlight */
+.btn-price::after{
+  content:"";
+  position: absolute;
+  top: -30%;
+  left: -60%;
+  width: 55%;
+  height: 160%;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.18) 45%,
+    rgba(255,255,255,0) 100%
+  );
+  transform: skewX(-18deg);
+  opacity: .55;
+  filter: blur(.2px);
+  animation: rvlShimmer 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes rvlShimmer{
+  0%{ transform: translateX(0) skewX(-18deg); opacity: .0; }
+  20%{ opacity: .45; }
+  55%{ opacity: .35; }
+  100%{ transform: translateX(260%) skewX(-18deg); opacity: 0; }
+}
+
+/* 3) Make HERO Amazon CTA feel “primary” even if it's btn-secondary */
+.hero-top-pick .btn.btn-secondary[href*="amazon.ca"]{
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  color: #fff;
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  box-shadow:
+    0 12px 28px rgba(14,163,127,.20),
+    0 0 0 3px rgba(14,163,127,.10);
+}
+.hero-top-pick .btn.btn-secondary[href*="amazon.ca"]:hover{
+  background: linear-gradient(180deg, var(--accent-2), var(--accent));
+  filter: brightness(1.06) saturate(1.06);
+  transform: translateY(-1px);
+}
+.hero-top-pick .btn.btn-secondary[href*="amazon.ca"]:active{
+  transform: translateY(0);
+}
+
+/* 4) Dark mode: slightly stronger glow for visibility */
+@media (prefers-color-scheme: dark){
+  .btn-price,
+  .meta a[data-affiliate="amazon"],
+  .meta a[href*="amazon.ca/dp/"],
+  .meta a[href*="amazon.ca/gp/"],
+  .hero-top-pick .btn.btn-secondary[href*="amazon.ca"]{
+    box-shadow:
+      0 16px 36px rgba(0,0,0,.35),
+      0 0 0 4px rgba(33,214,166,.12),
+      0 0 28px rgba(33,214,166,.14);
+  }
+}
+
+/* 5) Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .btn-price::after{ animation: none !important; }
+}
