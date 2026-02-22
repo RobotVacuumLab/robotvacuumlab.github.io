@@ -16,8 +16,9 @@
   <!-- Canonical -->
   <link rel="canonical" href="https://robotvacuumlab.github.io/reviews/roborock-qrevo-curv-s5x/" />
 
-  <!-- Hreflang (keep only what exists) -->
+  <!-- Hreflang -->
   <link rel="alternate" href="https://robotvacuumlab.github.io/reviews/roborock-qrevo-curv-s5x/" hreflang="en-CA" />
+  <link rel="alternate" href="https://robotvacuumlab.github.io/reviews/roborock-qrevo-curv-s5x/" hreflang="x-default" />
 
   <!-- Styles -->
   <link rel="stylesheet" href="/assets/css/styles.css" />
@@ -62,13 +63,6 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Roborock Qrevo Curv S5X robot vacuum and dock in a modern home testing setup (RobotVacuumLab review)" />
 
-  <!-- OPTIONAL fallback for share reliability (create this file or remove these lines)
-  <meta property="og:image" content="https://robotvacuumlab.github.io/assets/images/og/roborock-qrevo-curv-s5x-review-canada-2026-og-1200x630.jpg" />
-  <meta property="og:image:type" content="image/jpeg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  -->
-
   <!-- Article metadata -->
   <meta property="article:published_time" content="2026-02-03" />
   <meta property="article:modified_time" content="2026-02-22" />
@@ -106,7 +100,6 @@
       allow_ad_personalization_signals: false
     });
   </script>
-  <script defer src="/assets/js/consent.js"></script>
 
   <!-- JSON-LD: Organization -->
   <script type="application/ld+json">
@@ -152,7 +145,7 @@
   }
   </script>
 
-  <!-- JSON-LD: Product + Review (more complete, no invented price/stock) -->
+  <!-- JSON-LD: Product + Review -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -182,7 +175,7 @@
   }
   </script>
 
-  <!-- JSON-LD: FAQPage (matches visible FAQ content) -->
+  <!-- JSON-LD: FAQPage -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -296,7 +289,6 @@
       </button>
     </div>
 
-    <!-- IMPORTANT: hidden by default so links are not tabbable -->
     <div class="container mobile-nav" id="mobileNav" hidden>
       <a href="/best-robot-vacuums/">Best Robot Vacuums</a>
       <a href="/how-we-test/">How We Test</a>
@@ -589,46 +581,7 @@
     </div>
   </footer>
 
-  <!-- Minimal JS: mobile menu (a11y: hidden + escape + focus) -->
-  <script>
-    (function () {
-      const btn = document.querySelector('.menu-btn');
-      const nav = document.getElementById('mobileNav');
-      if (!btn || !nav) return;
-
-      function openNav() {
-        nav.hidden = false;
-        nav.classList.add('open');
-        btn.setAttribute('aria-expanded', 'true');
-        const firstLink = nav.querySelector('a');
-        if (firstLink) firstLink.focus();
-        document.addEventListener('keydown', onKeyDown);
-        document.addEventListener('click', onDocClick, { capture: true });
-      }
-
-      function closeNav() {
-        nav.classList.remove('open');
-        nav.hidden = true;
-        btn.setAttribute('aria-expanded', 'false');
-        document.removeEventListener('keydown', onKeyDown);
-        document.removeEventListener('click', onDocClick, { capture: true });
-      }
-
-      function onKeyDown(e) {
-        if (e.key === 'Escape') closeNav();
-      }
-
-      function onDocClick(e) {
-        const clickInside = nav.contains(e.target) || btn.contains(e.target);
-        if (!clickInside) closeNav();
-      }
-
-      btn.addEventListener('click', function () {
-        const isOpen = btn.getAttribute('aria-expanded') === 'true';
-        if (isOpen) closeNav();
-        else openNav();
-      });
-    })();
-  </script>
+  <!-- One JS to rule them all -->
+  <script defer src="/assets/js/site.js"></script>
 </body>
 </html>
