@@ -31,14 +31,13 @@
   <link rel="manifest" href="/site.webmanifest" />
 
   <!-- Perf hints -->
-  <link rel="dns-prefetch" href="//www.googletagmanager.com" />
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
 
-  <!-- Preload LCP hero -->
+  <!-- Preload LCP hero (prefer 1200 for mobile LCP; srcset still covers all) -->
   <link
     rel="preload"
     as="image"
-    href="/assets/images/hero/roborock-qrevo-curv-s5x-review-canada-2026-hero-1600x900.webp"
+    href="/assets/images/hero/roborock-qrevo-curv-s5x-review-canada-2026-hero-1200x675.webp"
     imagesrcset="
       /assets/images/hero/roborock-qrevo-curv-s5x-review-canada-2026-hero-1200x675.webp 1200w,
       /assets/images/hero/roborock-qrevo-curv-s5x-review-canada-2026-hero-1600x900.webp 1600w,
@@ -79,6 +78,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
 
+    // Default: privacy-first (deny analytics until user accepts)
     gtag('consent', 'default', {
       ad_storage: 'denied',
       ad_user_data: 'denied',
