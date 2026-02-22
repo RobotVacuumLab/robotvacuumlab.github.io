@@ -1,10 +1,12 @@
 /* =========================================================
-   RobotVacuumLab — Editorial Tech Lab CSS (FINAL / AUDIT-READY)
+   RobotVacuumLab — Editorial Tech Lab CSS (UPDATED / AUDIT-READY)
    Goals: clean, trustworthy, fast, accessible, mobile-first
-   Notes:
-   - Adds: .btn-price (explicit class for table price CTAs)
-   - Keeps: strong defaults + dark mode + reduced motion
-   - Improves: cards equal height on >=48rem, FAQ spacing, table sticky header
+   Updates in this version:
+   - FIX: cookie banner is no longer forced hidden (removes display:none !important)
+   - ADD: cookie banner styling (premium, accessible, non-intrusive)
+   - FIX: mobile-nav uses [hidden] consistently (no “double hiding” bugs)
+   - ADD: .h3 helper class (you use class="h3" in HTML)
+   - KEEP: CTA glow + shimmer patch + dark mode + reduced motion
    ========================================================= */
 
 /* ---------- Design Tokens ---------- */
@@ -72,6 +74,11 @@
 
   /* Hairline gradient */
   --hairline: linear-gradient(90deg, rgba(14,163,127,.35), rgba(14,163,127,0));
+
+  /* Cookie banner tokens */
+  --banner-bg: color-mix(in srgb, var(--bg) 88%, transparent);
+  --banner-border: color-mix(in srgb, var(--accent) 14%, var(--border));
+  --banner-shadow: 0 18px 44px rgba(12,18,32,.12);
 }
 
 /* Auto dark-mode (matches your <meta color-scheme="light dark">) */
@@ -95,6 +102,10 @@
     --focus: 0 0 0 3px rgba(33,214,166,.22);
 
     --hairline: linear-gradient(90deg, rgba(33,214,166,.35), rgba(33,214,166,0));
+
+    --banner-bg: color-mix(in srgb, var(--surface) 86%, transparent);
+    --banner-border: rgba(255,255,255,.12);
+    --banner-shadow: 0 18px 50px rgba(0,0,0,.55);
   }
 }
 
@@ -316,11 +327,13 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
   .menu-btn{ display: none; }
 }
 
+/* UPDATED: mobile nav uses [hidden] as the source of truth */
 .mobile-nav{
-  display: none;
+  display: block;
   padding: 0.75rem 0 1rem;
 }
-.mobile-nav.open{ display: block; }
+.mobile-nav[hidden]{ display: none; }
+
 .mobile-nav a{
   display: block;
   padding: 0.75rem 0.85rem;
@@ -406,6 +419,14 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
   letter-spacing: -0.03em;
   line-height: var(--lh-tight);
   font-size: clamp(1.75rem, 3.3vw, 2.75rem);
+}
+
+/* ADDED: you use class="h3" in HTML */
+.h3{
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.15rem, 1.9vw, 1.35rem);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
 }
 
 .lede{
@@ -878,7 +899,7 @@ main{
 
 /* ---------- Print ---------- */
 @media print{
-  .site-header, .nav, .mobile-nav, .menu-btn, .hero-actions, .footer-nav { display: none !important; }
+  .site-header, .nav, .mobile-nav, .menu-btn, .hero-actions, .footer-nav, .cookie-banner { display: none !important; }
   body{ background: #fff; color: #000; }
   a{ text-decoration: underline; }
 }
@@ -904,11 +925,84 @@ main{
   color: var(--muted);
 }
 
-/* You said you’re hiding it for now (keep if intentional) */
-.cookie-banner{ display:none !important; }
+/* =========================================================
+   Cookie Banner (premium + accessible)
+   - Uses [hidden] attribute: JS toggles banner.hidden
+   - Fixed bottom, non-intrusive, max-width aligned to container
+   ========================================================= */
+.cookie-banner{
+  position: fixed;
+  inset: auto 0 0 0; /* bottom */
+  z-index: 9998;
+  padding: 0.9rem var(--gutter) 1rem;
+  background: transparent;
+  pointer-events: none; /* only inner captures clicks */
+}
+.cookie-banner[hidden]{ display: none; }
+
+.cookie-banner__inner{
+  pointer-events: auto;
+  border: 1px solid var(--banner-border);
+  background: var(--banner-bg);
+  backdrop-filter: blur(12px);
+  border-radius: 1.1rem;
+  box-shadow: var(--banner-shadow);
+  padding: 0.9rem;
+  display: grid;
+  gap: 0.85rem;
+}
+
+@media (min-width: 48rem){
+  .cookie-banner__inner{
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 1rem 1.05rem;
+    gap: 1rem;
+  }
+}
+
+.cookie-banner__text strong{
+  display: inline-block;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
+}
+
+.cookie-banner__text p{
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.cookie-banner__text a{
+  color: color-mix(in srgb, var(--accent) 80%, var(--text));
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+.cookie-banner__text a:hover{
+  color: var(--text);
+}
+
+.cookie-banner__actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: flex-start;
+}
+
+@media (min-width: 48rem){
+  .cookie-banner__actions{ justify-content: flex-end; }
+}
+
+/* Buttons inside banner: keep your system, just tighten spacing a bit */
+.cookie-banner__actions .btn{
+  padding: 0.65rem 0.9rem;
+  border-radius: 0.9rem;
+}
 
 /* =========================================================
-   RobotVacuumLab — CTA BOOST PATCH (paste at end)
+   RobotVacuumLab — CTA BOOST PATCH (kept)
    Goal: make "Check price" impossible to miss (without spam)
    Applies to:
    - .btn-price (table)
