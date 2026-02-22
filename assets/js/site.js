@@ -1,23 +1,21 @@
 /* =========================================
-   /assets/js/site.js — RobotVacuumLab (ULTRA COMPLETE)
-   - Mobile menu (accessible)
-   - Cookie consent banner (analytics opt-in)
+   /assets/js/site.js — RobotVacuumLab (AUDIT-PROOF)
+   - Mobile menu (accessible + hidden when closed)
+   - Cookie consent banner (analytics opt-in only)
    - GA4 consent updates (default denied in <head>)
-   - Affiliate/outbound click tracking (data-affiliate / data-affiliate-label)
-   - Small UX helpers (hash focus, external rel hardening)
+   - Affiliate/outbound click tracking (respects consent)
+   - UX helpers (hash focus, external rel hardening)
    ========================================= */
 
 (() => {
   "use strict";
 
   /* ---------- Config ---------- */
-  const CONSENT_KEY = "rvl_consent_v1"; // localStorage key
-  const CONSENT_TTL_DAYS = 180;         // re-ask after X days
+  const CONSENT_KEY = "rvl_consent_v1";
+  const CONSENT_TTL_DAYS = 180;
   const DEBUG = false;
 
-  // GA4 measurement ID is already in your HTML gtag script.
-  // We do NOT duplicate it here to avoid mismatches.
-  const GA_EVENT_TIMEOUT_MS = 160; // only used when we need to delay navigation
+  const GA_EVENT_TIMEOUT_MS = 180; // short delay when navigating same-tab
 
   /* ---------- Tiny helpers ---------- */
   const log = (...args) => { if (DEBUG) console.log("[RVL]", ...args); };
@@ -25,17 +23,17 @@
   const qs  = (sel, root = document) => root.querySelector(sel);
   const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  const safeJSONParse = (s) => {
-    try { return JSON.parse(s); } catch { return null; }
-  };
-
+  const safeJSONParse = (s) => { try { return JSON.parse(s); } catch { return null; } };
   const nowISO = () => new Date().toISOString();
 
   const daysBetween = (a, b) => Math.round((b - a) / (1000 * 60 * 60 * 24));
 
+  function isReducedMotion() {
+    return window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches === true;
+  }
+
   /* ---------- gtag safe wrapper ---------- */
   function gtagSafe(...args) {
-    // gtag is created in <head>, but this keeps JS resilient if blocked.
     if (typeof window.gtag === "function") {
       window.gtag(...args);
       return true;
@@ -50,7 +48,6 @@
     const data = safeJSONParse(raw);
     if (!data || typeof data !== "object") return null;
 
-    // TTL check
     if (data.savedAt) {
       const saved = new Date(data.savedAt).getTime();
       if (!Number.isNaN(saved)) {
@@ -62,25 +59,21 @@
   }
 
   function writeConsent(status) {
-    // status: "accepted" | "rejected"
-    const payload = { status, savedAt: nowISO() };
+    const payload = { status, savedAt: nowISO() }; // status: "accepted" | "rejected"
     localStorage.setItem(CONSENT_KEY, JSON.stringify(payload));
     return payload;
   }
 
   function applyConsentToGA(status) {
-    // You said: "analytics only if you accept"
-    // So:
-    // - Reject: analytics_storage denied, ad_storage denied
-    // - Accept: analytics_storage granted, ad_storage denied (keeps ads off)
+    // "analytics only if accept"
     const update = status === "accepted"
       ? { analytics_storage: "granted", ad_storage: "denied" }
-      : { analytics_storage: "denied",  ad_storage: "denied"  };
+      : { analytics_storage: "denied",  ad_storage: "denied" };
 
     const ok = gtagSafe("consent", "update", update);
-    log("Consent update sent to GA:", update, "gtag ok:", ok);
+    log("GA consent update:", update, "gtag ok:", ok);
 
-    // Optional: send a lightweight event when consent changes (only if gtag exists)
+    // Optional internal event when consent changes (will be ignored if denied)
     if (ok) {
       gtagSafe("event", "consent_update", {
         consent_status: status,
@@ -89,29 +82,53 @@
     }
   }
 
+  function canTrackAnalytics() {
+    const c = readConsent();
+    return c?.status === "accepted" && typeof window.gtag === "function";
+  }
+
   /* ---------- Cookie banner ---------- */
   function initCookieBanner() {
     const banner = qs("#cookieBanner");
     if (!banner) return;
 
+    const dialog = qs(".cookie-banner__inner", banner) || banner;
     const btnAccept = qs("[data-consent-accept]", banner);
     const btnReject = qs("[data-consent-reject]", banner);
 
     const existing = readConsent();
 
-    // If user already decided recently, keep hidden and apply again (defensive)
+    // If already decided recently, keep hidden and apply again (defensive)
     if (existing?.status === "accepted" || existing?.status === "rejected") {
       applyConsentToGA(existing.status);
       banner.hidden = true;
       return;
     }
 
-    // Show banner
-    banner.hidden = false;
+    let lastFocus = null;
 
-    // Trap: keep it simple (no heavy focus trap); but we set initial focus on keyboard open.
-    const show = () => { banner.hidden = false; };
-    const hide = () => { banner.hidden = true; };
+    const show = () => {
+      lastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      banner.hidden = false;
+
+      // Focus a primary action for keyboard/screen readers
+      // Privacy-first: you can choose reject first; here we focus Accept by default.
+      const target = btnAccept || btnReject || dialog;
+      if (target && typeof target.focus === "function") {
+        // Ensure dialog can be focused if needed
+        if (target === dialog && !dialog.hasAttribute("tabindex")) dialog.setAttribute("tabindex", "-1");
+        target.focus();
+      }
+    };
+
+    const hide = () => {
+      banner.hidden = true;
+      // Restore focus
+      if (lastFocus && typeof lastFocus.focus === "function") {
+        lastFocus.focus();
+      }
+      lastFocus = null;
+    };
 
     const onAccept = () => {
       const saved = writeConsent("accepted");
@@ -128,7 +145,7 @@
     btnAccept?.addEventListener("click", onAccept);
     btnReject?.addEventListener("click", onReject);
 
-    // If user presses Escape, treat as reject (privacy-first)
+    // Escape => reject (privacy-first)
     document.addEventListener("keydown", (e) => {
       if (banner.hidden) return;
       if (e.key === "Escape") onReject();
@@ -137,61 +154,95 @@
     show();
   }
 
-  /* ---------- Mobile menu ---------- */
+  /* ---------- Mobile menu (accessible) ---------- */
   function initMobileMenu() {
     const btn = qs(".menu-btn");
     const nav = qs("#mobileNav");
     if (!btn || !nav) return;
 
     const openClass = "open";
-    const setExpanded = (v) => btn.setAttribute("aria-expanded", String(v));
+
+    // Ensure closed state is truly hidden (not tabbable)
+    const ensureClosedState = () => {
+      nav.classList.remove(openClass);
+      nav.hidden = true;
+      btn.setAttribute("aria-expanded", "false");
+    };
+
+    // Start closed (defensive)
+    ensureClosedState();
+
+    let lastFocus = null;
 
     const open = () => {
-      nav.classList.add(openClass);
-      setExpanded(true);
+      lastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
 
-      // Focus first link for keyboard users
+      nav.hidden = false;
+      nav.classList.add(openClass);
+      btn.setAttribute("aria-expanded", "true");
+
+      // Focus first link
       const firstLink = qs("a", nav);
       firstLink?.focus?.();
+
+      document.addEventListener("keydown", onKeyDown);
+      document.addEventListener("click", onDocClick, { capture: true });
+
+      // Close on resize to desktop (prevents stuck open)
+      bindMQ();
     };
 
     const close = () => {
       nav.classList.remove(openClass);
-      setExpanded(false);
+      nav.hidden = true;
+      btn.setAttribute("aria-expanded", "false");
+
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("click", onDocClick, { capture: true });
+
+      if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+      lastFocus = null;
     };
 
     const toggle = () => {
-      const isOpen = nav.classList.contains(openClass);
+      const isOpen = btn.getAttribute("aria-expanded") === "true";
       isOpen ? close() : open();
     };
 
-    btn.addEventListener("click", toggle);
+    function onKeyDown(e) {
+      if (e.key === "Escape") close();
+    }
 
-    // Close on Escape
-    document.addEventListener("keydown", (e) => {
-      if (e.key !== "Escape") return;
-      if (!nav.classList.contains(openClass)) return;
-      close();
-      btn.focus();
-    });
-
-    // Close when clicking outside
-    document.addEventListener("click", (e) => {
-      if (!nav.classList.contains(openClass)) return;
+    function onDocClick(e) {
       const target = e.target;
       if (!(target instanceof Element)) return;
       if (nav.contains(target) || btn.contains(target)) return;
       close();
-    });
+    }
 
-    // Close on resize to desktop (prevents stuck open)
-    const mq = window.matchMedia("(min-width: 48rem)");
-    const onMQ = () => { if (mq.matches) close(); };
-    mq.addEventListener?.("change", onMQ);
-    onMQ();
+    // Resize guard
+    let mq = null;
+    let mqBound = false;
+    function bindMQ() {
+      if (mqBound) return;
+      mq = window.matchMedia?.("(min-width: 48rem)");
+      if (!mq) return;
+
+      const onMQ = () => {
+        if (mq.matches) close();
+      };
+
+      mq.addEventListener?.("change", onMQ);
+      // Run once
+      onMQ();
+
+      mqBound = true;
+    }
+
+    btn.addEventListener("click", toggle);
   }
 
-  /* ---------- Affiliate + outbound tracking ---------- */
+  /* ---------- Affiliate + outbound tracking (respects consent) ---------- */
   function isExternalURL(url) {
     try {
       const u = new URL(url, window.location.href);
@@ -202,47 +253,31 @@
   }
 
   function hardenExternalLinks() {
-    // Ensure external links that open new tabs have rel="noopener"
+    // Add noopener/noreferrer to target=_blank without removing existing rel values
     const links = qsa('a[target="_blank"]');
     links.forEach((a) => {
-      const rel = (a.getAttribute("rel") || "").split(/\s+/).filter(Boolean);
-      const relSet = new Set(rel);
-      relSet.add("noopener");
-      relSet.add("noreferrer"); // optional but good for privacy
-      a.setAttribute("rel", Array.from(relSet).join(" "));
+      const relRaw = (a.getAttribute("rel") || "").trim();
+      const parts = relRaw ? relRaw.split(/\s+/) : [];
+      const set = new Set(parts);
+
+      set.add("noopener");
+      set.add("noreferrer");
+
+      // Keep whatever you already set: nofollow/sponsored etc.
+      a.setAttribute("rel", Array.from(set).join(" "));
     });
   }
 
-  function trackAffiliateClick(anchor) {
-    const partner = anchor.getAttribute("data-affiliate") || "unknown";
-    const label = anchor.getAttribute("data-affiliate-label") || anchor.textContent?.trim() || "affiliate_link";
-    const href = anchor.getAttribute("href") || "";
+  function trackEvent(name, params, callback) {
+    if (!canTrackAnalytics()) return false;
 
-    // Fire GA event if possible
-    const ok = gtagSafe("event", "affiliate_click", {
-      affiliate_partner: partner,
-      affiliate_label: label,
-      link_url: href,
-      page_path: window.location.pathname,
-      outbound: true
+    // Use event_callback to avoid delaying longer than needed
+    const payload = Object.assign({}, params, {
+      event_callback: typeof callback === "function" ? callback : undefined,
+      event_timeout: GA_EVENT_TIMEOUT_MS
     });
 
-    log("affiliate_click", { partner, label, href, ok });
-    return ok;
-  }
-
-  function trackOutboundClick(anchor) {
-    const href = anchor.getAttribute("href") || "";
-    const label = anchor.getAttribute("data-outbound-label") || anchor.textContent?.trim() || "outbound_link";
-
-    const ok = gtagSafe("event", "outbound_click", {
-      outbound_label: label,
-      link_url: href,
-      page_path: window.location.pathname,
-      outbound: true
-    });
-
-    log("outbound_click", { label, href, ok });
+    const ok = gtagSafe("event", name, payload);
     return ok;
   }
 
@@ -260,52 +295,79 @@
       const isAffiliate = a.hasAttribute("data-affiliate");
       const isExternal = isExternalURL(href);
 
-      // Only delay navigation if same-tab external and we want event to send.
-      // Many of your affiliate links are target=_blank already, so no delay needed.
+      if (!isAffiliate && !isExternal) return;
+
+      // If consent not accepted, do not track and do not interfere with navigation.
+      if (!canTrackAnalytics()) return;
+
       const opensNewTab = (a.getAttribute("target") || "").toLowerCase() === "_blank";
-
-      let sent = false;
-      if (isAffiliate) {
-        sent = trackAffiliateClick(a);
-      } else if (isExternal) {
-        sent = trackOutboundClick(a);
-      } else {
-        return; // internal link: no tracking here
-      }
-
-      // Delay ONLY if:
-      // - event was sent
-      // - it does NOT open in new tab
-      // - user didn't use modifier keys to open new tab anyway
       const modifier = e.metaKey || e.ctrlKey || e.shiftKey || e.altKey;
-      if (sent && !opensNewTab && !modifier) {
-        e.preventDefault();
-        const dest = a.href;
 
-        // Very short delay; if GA is blocked, we still navigate immediately.
-        window.setTimeout(() => {
-          window.location.href = dest;
-        }, GA_EVENT_TIMEOUT_MS);
+      const dest = a.href;
+      const partner = a.getAttribute("data-affiliate") || "unknown";
+      const label =
+        a.getAttribute("data-affiliate-label") ||
+        a.getAttribute("data-outbound-label") ||
+        a.textContent?.trim() ||
+        "link";
+
+      const common = {
+        link_url: dest,
+        page_path: window.location.pathname,
+        outbound: true
+      };
+
+      const eventName = isAffiliate ? "affiliate_click" : "outbound_click";
+      const params = isAffiliate
+        ? Object.assign({}, common, { affiliate_partner: partner, affiliate_label: label })
+        : Object.assign({}, common, { outbound_label: label });
+
+      // If it opens a new tab (or user uses modifier keys), just fire event and do nothing else.
+      if (opensNewTab || modifier) {
+        trackEvent(eventName, params);
+        return;
       }
+
+      // Same-tab external: delay very briefly to allow event delivery
+      e.preventDefault();
+
+      let navigated = false;
+      const go = () => {
+        if (navigated) return;
+        navigated = true;
+        window.location.href = dest;
+      };
+
+      const ok = trackEvent(eventName, params, go);
+      // If GA blocked mid-flight, fail open quickly
+      if (!ok) go();
+
+      // Hard timeout fallback
+      window.setTimeout(go, GA_EVENT_TIMEOUT_MS);
     }, { capture: true });
   }
 
-  /* ---------- Hash focus helper (accessibility) ---------- */
+  /* ---------- Hash focus helper ---------- */
   function initHashFocus() {
-    // If user jumps to an anchor, focus the target for screen readers.
     function focusFromHash() {
       const id = decodeURIComponent(window.location.hash || "").replace("#", "");
       if (!id) return;
+
       const el = document.getElementById(id);
       if (!el) return;
 
-      // Make focusable temporarily
       const hadTabIndex = el.hasAttribute("tabindex");
       if (!hadTabIndex) el.setAttribute("tabindex", "-1");
-      el.focus({ preventScroll: true });
 
-      // Let browser scroll normally after focus
-      el.scrollIntoView({ block: "start", behavior: "smooth" });
+      try {
+        el.focus({ preventScroll: true });
+      } catch {
+        el.focus?.();
+      }
+
+      // Scroll behavior
+      const behavior = isReducedMotion() ? "auto" : "smooth";
+      el.scrollIntoView({ block: "start", behavior });
 
       if (!hadTabIndex) {
         window.setTimeout(() => el.removeAttribute("tabindex"), 600);
@@ -313,13 +375,11 @@
     }
 
     window.addEventListener("hashchange", focusFromHash);
-    // Run once on load (if URL already has hash)
     window.setTimeout(focusFromHash, 0);
   }
 
   /* ---------- Footer year helper (optional) ---------- */
   function initFooterYear() {
-    // If you ever switch to <span data-year></span>, this auto-fills it.
     const yearEls = qsa("[data-year]");
     if (!yearEls.length) return;
     const y = String(new Date().getFullYear());
