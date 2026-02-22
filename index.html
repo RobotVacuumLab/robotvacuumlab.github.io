@@ -1,17 +1,27 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-CA">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- Primary SEO -->
   <title>RobotVacuumLab: Best Robot Vacuums & Testing Methodology</title>
   <meta name="description" content="Editorial robot vacuum testing and buying guides. Clear recommendations, honest trade-offs, and a transparent methodology for real homes." />
+  <meta name="author" content="RobotVacuumLab Editorial Team" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet=-1,max-video-preview=-1" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#ffffff" />
+  <meta name="format-detection" content="telephone=no" />
 
+  <!-- Canonical -->
   <link rel="canonical" href="https://robotvacuumlab.github.io/" />
+
+  <!-- Hreflang -->
+  <link rel="alternate" href="https://robotvacuumlab.github.io/" hreflang="en-CA" />
+  <link rel="alternate" href="https://robotvacuumlab.github.io/" hreflang="x-default" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="/assets/css/styles.css" />
 
   <!-- Favicons (root) -->
@@ -21,7 +31,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <!-- Preload hero (LCP) -->
+  <!-- Perf hints -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+
+  <!-- Preload hero (LCP) - DO NOT CHANGE IMAGES -->
   <link
     rel="preload"
     as="image"
@@ -36,55 +49,102 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="RobotVacuumLab" />
-  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale" content="en_CA" />
   <meta property="og:title" content="RobotVacuumLab: Best Robot Vacuums & Testing Methodology" />
   <meta property="og:description" content="Editorial robot vacuum testing and buying guides. Clear recommendations, honest trade-offs, and a transparent methodology for real homes." />
   <meta property="og:url" content="https://robotvacuumlab.github.io/" />
+
+  <!-- OG image (DO NOT CHANGE) -->
   <meta property="og:image" content="https://robotvacuumlab.github.io/assets/images/og/home-og-1200x630.webp" />
+  <meta property="og:image:secure_url" content="https://robotvacuumlab.github.io/assets/images/og/home-og-1200x630.webp" />
+  <meta property="og:image:type" content="image/webp" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="RobotVacuumLab: editorial robot vacuum testing and buying guides" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="RobotVacuumLab: Best Robot Vacuums & Testing Methodology" />
   <meta name="twitter:description" content="Editorial robot vacuum testing and buying guides. Clear recommendations, honest trade-offs, and a transparent methodology for real homes." />
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/home-og-1200x630.webp" />
+  <meta name="twitter:image:alt" content="RobotVacuumLab: editorial robot vacuum testing and buying guides" />
 
-    <!-- Google Analytics 4 (no consent mode) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- GA4 + Consent Mode v2 (aligned with your review pages) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
 
-  gtag('config', 'G-56CWM7N1S7', {
-    anonymize_ip: true
-  });
-</script>
+    // Default: privacy-first (deny analytics until user accepts)
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied',
+      security_storage: 'granted',
+      wait_for_update: 800
+    });
+
+    gtag('js', new Date());
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
+  <script>
+    gtag('config', 'G-56CWM7N1S7', {
+      anonymize_ip: true,
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false
+    });
+  </script>
 
   <!-- JSON-LD (Organization + Website) -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "RobotVacuumLab",
-    "url": "https://robotvacuumlab.github.io/",
-    "logo": "https://robotvacuumlab.github.io/assets/images/robotvacuumlab-footer-lockup.svg?v=2"
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"RobotVacuumLab",
+    "url":"https://robotvacuumlab.github.io/",
+    "logo":"https://robotvacuumlab.github.io/assets/images/robotvacuumlab-footer-lockup.svg?v=2"
   }
   </script>
+
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "RobotVacuumLab",
-    "url": "https://robotvacuumlab.github.io/",
-    "inLanguage": "en"
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"RobotVacuumLab",
+    "url":"https://robotvacuumlab.github.io/",
+    "inLanguage":"en-CA"
   }
   </script>
 </head>
 
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Cookie Banner (site-wide, controlled by /assets/js/site.js) -->
+  <div id="cookieBanner" class="cookie-banner" hidden>
+    <div
+      class="cookie-banner__inner container"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cookieTitle"
+      aria-describedby="cookieDesc"
+      tabindex="-1"
+    >
+      <div class="cookie-banner__text">
+        <strong id="cookieTitle">Privacy choices</strong>
+        <p id="cookieDesc" class="small muted">
+          We use analytics only if you accept. Affiliate partners may set cookies when you click outbound links.
+          Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
+        </p>
+      </div>
+      <div class="cookie-banner__actions">
+        <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
+        <button class="btn" type="button" data-consent-accept>Accept</button>
+      </div>
+    </div>
+  </div>
 
   <header class="site-header">
     <div class="container header-inner">
@@ -117,10 +177,12 @@
       </button>
     </div>
 
-    <div class="container mobile-nav" id="mobileNav">
+    <!-- IMPORTANT: keep hidden by default -->
+    <div class="container mobile-nav" id="mobileNav" hidden>
       <a href="/best-robot-vacuums/">Best Robot Vacuums</a>
       <a href="/how-we-test/">How We Test</a>
       <a href="/how-to-choose-a-robot-vacuum/">How to Choose</a>
+      <a href="/reviews/">Reviews</a>
       <a href="/about/">About</a>
       <a href="/disclosure/">Disclosure</a>
       <a href="/privacy-policy/">Privacy Policy</a>
@@ -142,6 +204,9 @@
               alt="Editorial comparison scene of robot vacuums in a modern home testing environment"
               loading="eager"
               decoding="async"
+              fetchpriority="high"
+              width="1600"
+              height="840"
             />
           </div>
 
@@ -159,7 +224,7 @@
               <a class="btn btn-ghost" href="/how-to-choose-a-robot-vacuum/">How to Choose</a>
             </div>
 
-            <p class="last-updated">Last updated: <span class="mono">2026-02-02</span></p>
+            <p class="last-updated">Last updated: <span class="mono">2026-02-22</span></p>
 
             <div class="kpi" aria-label="Editorial standards">
               <span class="item">No hype, clear trade-offs</span>
@@ -175,7 +240,7 @@
       <div class="container">
         <div class="section-title">
           <h2>Start here</h2>
-          <span class="hint">Phase 1 foundation pages</span>
+          <span class="hint">Foundation pages</span>
         </div>
 
         <div class="grid cols-3">
@@ -324,43 +389,14 @@
       <nav class="footer-nav" aria-label="Footer">
         <a href="/about/">About</a>
         <a href="/how-we-test/">How We Test</a>
+        <a href="/best-robot-vacuums/">Best Robot Vacuums</a>
         <a href="/disclosure/">Disclosure</a>
         <a href="/privacy-policy/">Privacy Policy</a>
       </nav>
     </div>
   </footer>
 
-  <!-- Cookie banner -->
-  <section class="cookie-banner" id="cookieBanner" hidden aria-label="Cookie notice">
-    <div class="container">
-      <div class="cookie-banner__inner">
-        <div class="cookie-banner__text">
-          <strong>Cookies</strong>
-          <span class="muted">
-            We use analytics cookies to understand site usage. You can accept or reject.
-            Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
-          </span>
-        </div>
-        <div class="cookie-banner__actions">
-          <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
-          <button class="btn" type="button" data-consent-accept>Accept</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Minimal JS: mobile menu -->
-  <script>
-    (function () {
-      const btn = document.querySelector('.menu-btn');
-      const nav = document.getElementById('mobileNav');
-      if (!btn || !nav) return;
-
-      btn.addEventListener('click', function () {
-        const isOpen = nav.classList.toggle('open');
-        btn.setAttribute('aria-expanded', String(isOpen));
-      });
-    })();
-  </script>
+  <!-- One JS to rule them all -->
+  <script defer src="/assets/js/site.js"></script>
 </body>
 </html>
