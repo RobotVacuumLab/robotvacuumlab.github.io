@@ -4,6 +4,7 @@
    Updates in this version:
    - FIX: video no longer cut on mobile (ratio moved to .yt-responsive only)
    - IMPROVE: cookie banner opacity/contrast (premium glass, readable)
+   - ADD: overflow protection so text never spills outside cards/tags/buttons
    - KEEP: cookie banner uses [hidden], mobile-nav [hidden], CTA glow/shimmer,
            dark mode, reduced motion
    ========================================================= */
@@ -80,7 +81,7 @@
   --banner-shadow: 0 18px 44px rgba(12,18,32,.12);
 }
 
-/* Auto dark-mode (matches your <meta color-scheme="light dark">) */
+/* Auto dark-mode */
 @media (prefers-color-scheme: dark){
   :root{
     --bg: #0b0f17;
@@ -115,6 +116,7 @@
 
 html{ -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
+/* NEW: global overflow safety */
 body{
   margin: 0;
   font-family: var(--font-sans);
@@ -122,6 +124,13 @@ body{
   line-height: var(--lh-normal);
   color: var(--text);
   background: var(--bg);
+  overflow-x: hidden;
+}
+
+/* NEW: prevent long URLs/words from breaking layout */
+p, h1, h2, h3, h4, li, a, span, strong{
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 img, picture, video, canvas, svg{
@@ -143,9 +152,7 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
   border-radius: 0.5rem;
 }
 
-::selection{
-  background: rgba(14,163,127,.18);
-}
+::selection{ background: rgba(14,163,127,.18); }
 
 /* Reduce motion */
 @media (prefers-reduced-motion: reduce){
@@ -178,6 +185,9 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
   .grid.cols-3{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .grid.cols-4{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
+
+/* NEW: helper to allow children to shrink in flex/grid without overflow */
+.min0{ min-width: 0; }
 
 .muted{ color: var(--muted); }
 .small{ font-size: var(--text-sm); }
@@ -218,7 +228,6 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
-
 @supports not (color: color-mix(in srgb, #000 50%, #fff)){
   .site-header{ background: var(--bg); }
 }
@@ -231,11 +240,21 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
   gap: 1rem;
 }
 
+/* NEW: prevent brand overflow on tight widths */
 .brand{
   display: flex;
   align-items: center;
   gap: 0.85rem;
   min-width: 0;
+}
+.brand > span{ min-width: 0; }
+.brand-title,
+.brand-sub{
+  display: block;
+  max-width: 32ch;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .brand-mark{
@@ -290,6 +309,10 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
   text-decoration: none;
   transition: background var(--t), color var(--t), border-color var(--t);
   border: 1px solid transparent;
+  max-width: 22ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .nav a:hover{
   background: var(--surface-2);
@@ -326,7 +349,7 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
   .menu-btn{ display: none; }
 }
 
-/* UPDATED: mobile nav uses [hidden] as the source of truth */
+/* Mobile nav uses [hidden] */
 .mobile-nav{
   display: block;
   padding: 0.75rem 0 1rem;
@@ -365,6 +388,10 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
 .breadcrumbs a{
   color: var(--muted);
   text-decoration: none;
+  max-width: 44ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .breadcrumbs a:hover{ color: var(--text); text-decoration: underline; }
 .breadcrumbs .sep{ color: var(--muted-2); }
@@ -394,6 +421,7 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
 
 .hero-body{
   padding: clamp(1rem, 2.6vw, 1.5rem);
+  min-width: 0; /* NEW */
 }
 
 .kicker{
@@ -418,14 +446,15 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
   letter-spacing: -0.03em;
   line-height: var(--lh-tight);
   font-size: clamp(1.75rem, 3.3vw, 2.75rem);
+  text-wrap: balance;
 }
 
-/* ADDED: you use class="h3" in HTML */
 .h3{
   margin: 0 0 0.4rem;
   font-size: clamp(1.15rem, 1.9vw, 1.35rem);
   letter-spacing: -0.02em;
   line-height: 1.25;
+  text-wrap: balance;
 }
 
 .lede{
@@ -457,11 +486,13 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
   font-weight: 800;
   text-decoration: none;
   transition: transform var(--t), background var(--t), border-color var(--t), filter var(--t);
+  max-width: 100%;
+  min-width: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
-.btn:hover{
-  background: var(--accent-2);
-  text-decoration: none;
-}
+.btn:hover{ background: var(--accent-2); text-decoration: none; }
 .btn:active{ transform: translateY(1px); }
 
 .btn-secondary{
@@ -482,7 +513,7 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
   text-decoration: none;
 }
 
-/* Explicit price CTA class (recommended for audit clarity) */
+/* Explicit price CTA class */
 .btn-price{
   display: inline-flex;
   align-items: center;
@@ -493,6 +524,10 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
   font-weight: 900;
   text-decoration: none;
   white-space: nowrap;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   color: #fff;
   background: linear-gradient(180deg, var(--accent), var(--accent-2));
@@ -513,10 +548,7 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
     0 0 0 4px rgba(14,163,127,.14),
     0 0 28px rgba(14,163,127,.22);
 }
-.btn-price:active{
-  transform: translateY(0);
-  filter: brightness(1.02);
-}
+.btn-price:active{ transform: translateY(0); filter: brightness(1.02); }
 .btn-price:focus-visible{
   outline: none;
   box-shadow:
@@ -537,24 +569,18 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
   z-index: -1;
   animation: ctaGlow 2.4s ease-in-out infinite;
 }
-
 @keyframes ctaGlow{
   0%,100%{ transform: scale(.98); opacity: .55; }
   50%{ transform: scale(1.03); opacity: .85; }
 }
-
 @media (prefers-reduced-motion: reduce){
   .btn-price::before{ animation: none !important; }
 }
 
 /* ---------- Main content ---------- */
-main{
-  padding: 1.25rem 0 3rem;
-}
+main{ padding: 1.25rem 0 3rem; }
 
-.section{
-  margin-top: 2rem;
-}
+.section{ margin-top: 2rem; }
 
 .section-title{
   display: flex;
@@ -562,16 +588,19 @@ main{
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 0.9rem;
+  min-width: 0; /* NEW */
 }
 .section-title h2{
   margin: 0;
   font-size: clamp(1.25rem, 2.2vw, 1.6rem);
   letter-spacing: -0.02em;
+  min-width: 0;
+  text-wrap: balance;
 }
 .section-title .hint{
   color: var(--muted);
   font-size: var(--text-sm);
-  max-width: 52ch; /* nicer wrapping on larger screens */
+  max-width: 52ch;
 }
 
 /* ---------- Cards ---------- */
@@ -581,6 +610,7 @@ main{
   border-radius: var(--radius-md);
   overflow: hidden;
   transition: transform var(--t), background var(--t), border-color var(--t);
+  min-width: 0; /* NEW */
 }
 .card:hover{
   background: var(--bg);
@@ -589,23 +619,40 @@ main{
 }
 .card .card-body{
   padding: 1rem;
+  min-width: 0; /* NEW */
 }
+
+/* NEW: prevent long titles/links from breaking the card */
 .card h3{
   margin: 0 0 0.35rem;
   font-size: 1.1rem;
   letter-spacing: -0.01em;
+  min-width: 0;
+  line-height: 1.25;
+  text-wrap: balance;
 }
+.card h3 a{
+  display: inline-block;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* NEW: keep paragraphs inside */
 .card p{
   margin: 0.25rem 0 0;
   color: var(--muted);
   font-size: var(--text-sm);
   line-height: 1.6;
+  max-width: 65ch;
 }
+
+/* Meta row */
 .card .meta{
   margin-top: 0.75rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  min-width: 0;
 }
 
 /* “Top pick” / highlight card */
@@ -625,12 +672,15 @@ main{
   border: 1px solid var(--border);
   background: var(--surface-2);
   color: var(--muted);
+  max-width: 100%;
 }
 .badge.accent{
   background: var(--accent-soft);
   border-color: color-mix(in srgb, var(--accent) 25%, var(--border));
   color: color-mix(in srgb, var(--accent) 70%, var(--text));
 }
+
+/* Tags: no overflow, nice wrapping */
 .tag{
   display: inline-flex;
   align-items: center;
@@ -640,6 +690,17 @@ main{
   border: 1px solid var(--border);
   background: var(--bg);
   color: var(--muted);
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* NEW: links inside tags should not expand forever */
+.tag a{
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* Equal-height cards & pinned meta row (desktop+) */
@@ -649,9 +710,7 @@ main{
     display: flex;
     flex-direction: column;
   }
-  .card .meta{
-    margin-top: auto;
-  }
+  .card .meta{ margin-top: auto; }
 }
 
 /* ---------- Tables ---------- */
@@ -676,7 +735,6 @@ main{
   border-bottom: 1px solid var(--border);
   vertical-align: top;
 }
-
 .table th{
   text-align: left;
   font-size: var(--text-xs);
@@ -684,14 +742,13 @@ main{
   text-transform: uppercase;
   color: var(--muted);
   background: var(--surface-2);
-  position: sticky; /* UX boost on scroll */
+  position: sticky;
   top: 0;
   z-index: 1;
 }
-
 .table tr:last-child td{ border-bottom: 0; }
 
-/* Optional: if any price link doesn't have .btn-price, make it still look fine */
+/* Optional: if any price link doesn't have .btn-price */
 .table td:last-child a:not(.btn-price){
   display: inline-flex;
   align-items: center;
@@ -705,6 +762,9 @@ main{
   font-weight: 800;
   text-decoration: none;
   white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
   transition: transform var(--t), background var(--t), border-color var(--t);
 }
 .table td:last-child a:not(.btn-price):hover{
@@ -720,6 +780,7 @@ main{
   background: var(--surface);
   border-radius: var(--radius-md);
   padding: 1rem;
+  min-width: 0;
 }
 .note.accent{
   border-color: color-mix(in srgb, var(--accent) 22%, var(--border));
@@ -729,17 +790,11 @@ main{
   border-color: color-mix(in srgb, var(--warn) 28%, var(--border));
   background: linear-gradient(180deg, var(--warn-soft), var(--surface));
 }
-.note h3{
-  margin: 0 0 0.4rem;
-  font-size: 1.05rem;
-}
+.note h3{ margin: 0 0 0.4rem; font-size: 1.05rem; text-wrap: balance; }
 .note p{ margin: 0.25rem 0 0; color: var(--muted); }
 
 /* ---------- Pros / Cons ---------- */
-.pros-cons{
-  display: grid;
-  gap: 1rem;
-}
+.pros-cons{ display: grid; gap: 1rem; }
 @media (min-width: 48rem){
   .pros-cons{ grid-template-columns: 1fr 1fr; }
 }
@@ -748,6 +803,7 @@ main{
   background: var(--surface);
   border-radius: var(--radius-md);
   padding: 1rem;
+  min-width: 0;
 }
 .pros{
   border-color: color-mix(in srgb, var(--ok) 25%, var(--border));
@@ -757,15 +813,8 @@ main{
   border-color: color-mix(in srgb, var(--bad) 22%, var(--border));
   background: linear-gradient(180deg, var(--bad-soft), var(--surface));
 }
-.pros h3, .cons h3{
-  margin: 0 0 0.5rem;
-  font-size: 1.05rem;
-}
-.pros ul, .cons ul{
-  margin: 0;
-  padding-left: 1.1rem;
-  color: var(--muted);
-}
+.pros h3, .cons h3{ margin: 0 0 0.5rem; font-size: 1.05rem; text-wrap: balance; }
+.pros ul, .cons ul{ margin: 0; padding-left: 1.1rem; color: var(--muted); }
 .pros li + li, .cons li + li{ margin-top: 0.35rem; }
 
 /* ---------- FAQ (details/summary) ---------- */
@@ -774,10 +823,9 @@ main{
   border-radius: var(--radius-md);
   overflow: hidden;
   background: var(--bg);
+  min-width: 0;
 }
-.faq details{
-  border-top: 1px solid var(--border);
-}
+.faq details{ border-top: 1px solid var(--border); }
 .faq details:first-child{ border-top: 0; }
 
 .faq summary{
@@ -789,6 +837,7 @@ main{
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  min-width: 0;
 }
 .faq summary::-webkit-details-marker{ display: none; }
 
@@ -803,41 +852,35 @@ main{
   background: var(--surface-2);
   color: var(--muted);
   transition: transform var(--t), background var(--t), color var(--t);
+  flex: 0 0 auto;
 }
 .faq details[open] summary::after{
   content: "−";
   background: var(--accent-soft);
   color: color-mix(in srgb, var(--accent) 70%, var(--text));
 }
-
 .faq details[open] summary{
   background: color-mix(in srgb, var(--accent-soft) 55%, transparent);
 }
-
 .faq .answer{
   padding: 0 1rem 1rem;
   color: var(--muted);
   line-height: var(--lh-loose);
 }
-.faq .answer p{ margin: .6rem 0 0; }
 
 /* ---------- Article typography ---------- */
-.article{
-  max-width: 75ch;
-}
+.article{ max-width: 75ch; }
 .article h1{ margin: 0.5rem 0 0; }
 .article h2, .article h3{
   margin-top: 1.6rem;
   margin-bottom: 0.6rem;
   letter-spacing: -0.02em;
   line-height: 1.25;
+  text-wrap: balance;
 }
 .article p{ margin: 0.85rem 0; color: var(--text); }
 .article p.muted{ color: var(--muted); }
-.article ul, .article ol{
-  margin: 0.85rem 0;
-  padding-left: 1.25rem;
-}
+.article ul, .article ol{ margin: 0.85rem 0; padding-left: 1.25rem; }
 .article li + li{ margin-top: 0.4rem; }
 .article blockquote{
   margin: 1rem 0;
@@ -854,7 +897,6 @@ main{
   padding: 2rem 0;
   background: var(--surface);
 }
-
 .footer-logo{
   display: block;
   height: 44px;
@@ -862,10 +904,10 @@ main{
   margin-bottom: 0.75rem;
   opacity: .95;
 }
-
 .footer-inner{
   display: grid;
   gap: 1rem;
+  min-width: 0;
 }
 @media (min-width: 48rem){
   .footer-inner{
@@ -877,6 +919,7 @@ main{
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  min-width: 0;
 }
 .footer-nav a{
   padding: 0.45rem 0.65rem;
@@ -885,16 +928,13 @@ main{
   background: var(--bg);
   color: var(--muted);
   text-decoration: none;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-.footer-nav a:hover{
-  background: var(--surface-2);
-  color: var(--text);
-}
-.footer-note{
-  color: var(--muted);
-  font-size: var(--text-sm);
-  line-height: 1.6;
-}
+.footer-nav a:hover{ background: var(--surface-2); color: var(--text); }
+.footer-note{ color: var(--muted); font-size: var(--text-sm); line-height: 1.6; }
 
 /* ---------- Print ---------- */
 @media print{
@@ -914,6 +954,7 @@ main{
   gap: 0.75rem;
   flex-wrap: wrap;
   margin-top: 0.85rem;
+  min-width: 0;
 }
 .kpi .item{
   padding: 0.55rem 0.75rem;
@@ -922,42 +963,43 @@ main{
   border-radius: 0.9rem;
   font-size: var(--text-sm);
   color: var(--muted);
+  max-width: 100%;
 }
 
 /* =========================================================
    Cookie Banner (premium + accessible)
-   - Uses [hidden] attribute: JS toggles banner.hidden
-   - Fixed bottom, non-intrusive, max-width aligned to container
-   - UPDATED: stronger opacity in both modes (so it doesn't blend in)
+   - Uses [hidden] attribute
+   - UPDATED: stronger opacity in both modes
    ========================================================= */
 .cookie-banner{
   position: fixed;
-  inset: auto 0 0 0; /* bottom */
+  inset: auto 0 0 0;
   z-index: 9998;
   padding: 0.9rem var(--gutter) 1rem;
   background: transparent;
-  pointer-events: none; /* only inner captures clicks */
+  pointer-events: none;
 }
 .cookie-banner[hidden]{ display: none; }
 
 .cookie-banner__inner{
   pointer-events: auto;
   border: 1px solid var(--banner-border);
-  background: rgba(255,255,255,.92); /* UPDATED: real opacity (light) */
+  background: rgba(255,255,255,.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 1.1rem;
   box-shadow:
     var(--banner-shadow),
-    0 0 0 4px rgba(14,163,127,.08); /* subtle pop */
+    0 0 0 4px rgba(14,163,127,.08);
   padding: 0.9rem;
   display: grid;
   gap: 0.85rem;
+  min-width: 0;
 }
 
 @media (prefers-color-scheme: dark){
   .cookie-banner__inner{
-    background: rgba(12,18,32,.88); /* UPDATED: real opacity (dark) */
+    background: rgba(12,18,32,.88);
     border-color: rgba(255,255,255,.14);
     box-shadow:
       var(--banner-shadow),
@@ -974,18 +1016,14 @@ main{
   }
 }
 
+.cookie-banner__text{ min-width: 0; }
 .cookie-banner__text strong{
   display: inline-block;
   font-weight: 900;
   letter-spacing: -0.02em;
   margin-bottom: 0.25rem;
 }
-
-.cookie-banner__text p{
-  margin: 0.25rem 0 0;
-  color: var(--muted);
-  line-height: 1.55;
-}
+.cookie-banner__text p{ margin: 0.25rem 0 0; color: var(--muted); line-height: 1.55; }
 
 .cookie-banner__text a{
   color: color-mix(in srgb, var(--accent) 80%, var(--text));
@@ -993,22 +1031,18 @@ main{
   text-underline-offset: 3px;
   text-decoration-thickness: 2px;
 }
-.cookie-banner__text a:hover{
-  color: var(--text);
-}
+.cookie-banner__text a:hover{ color: var(--text); }
 
 .cookie-banner__actions{
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
   justify-content: flex-start;
+  min-width: 0;
 }
-
 @media (min-width: 48rem){
   .cookie-banner__actions{ justify-content: flex-end; }
 }
-
-/* Buttons inside banner: keep your system, just tighten spacing a bit */
 .cookie-banner__actions .btn{
   padding: 0.65rem 0.9rem;
   border-radius: 0.9rem;
@@ -1016,12 +1050,10 @@ main{
 
 /* =========================================================
    Video embed (responsive + safe)
-   UPDATED: stop clipping on mobile by removing aspect-ratio
-            from the whole .video-embed note and applying it
-            ONLY to the iframe wrapper (.yt-responsive).
+   UPDATED: ratio ONLY on .yt-responsive
    ========================================================= */
 .note.video-embed{
-  overflow: visible;   /* UPDATED: don't clip text */
+  overflow: visible;
   box-shadow: var(--shadow-sm);
 }
 
@@ -1051,21 +1083,37 @@ main{
   background: var(--surface);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
+  min-width: 0;
 }
-
-/* If any old rule gave it aspect-ratio, neutralize it */
 .video-embed{ aspect-ratio: auto; }
 
 /* =========================================================
-   RobotVacuumLab — CTA BOOST PATCH (kept)
-   Goal: make "Check price" impossible to miss (without spam)
-   Applies to:
-   - .btn-price (table)
-   - card meta links (often plain links)
-   - any Amazon outbound links with data-affiliate="amazon"
+   OPTIONAL: Desktop split layout for video block
+   If you wrap your video note with .video-card and use
+   .video-card__text + .video-embed (recommended),
+   this makes it bigger on PC automatically.
    ========================================================= */
+.video-card{
+  display: grid;
+  gap: 0.85rem;
+  min-width: 0;
+}
+.video-card__text{ min-width: 0; }
 
-/* 1) Make ALL Amazon outbound links look like buttons in “meta/tag” areas */
+@media (min-width: 64rem){
+  .video-card{
+    grid-template-columns: 1fr 1.25fr;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+@media (min-width: 80rem){
+  .video-card{ grid-template-columns: 1fr 1.35fr; }
+}
+
+/* =========================================================
+   RobotVacuumLab — CTA BOOST PATCH (kept)
+   ========================================================= */
 .meta a[data-affiliate="amazon"],
 .meta a[href*="amazon.ca/dp/"],
 .meta a[href*="amazon.ca/gp/"]{
@@ -1087,6 +1135,11 @@ main{
     0 10px 22px rgba(14,163,127,.18),
     0 0 0 3px rgba(14,163,127,.10);
   transition: transform var(--t), filter var(--t), box-shadow var(--t);
+
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .meta a[data-affiliate="amazon"]:hover,
@@ -1098,6 +1151,7 @@ main{
     0 14px 34px rgba(14,163,127,.24),
     0 0 0 4px rgba(14,163,127,.14),
     0 0 22px rgba(14,163,127,.16);
+  text-decoration: none;
 }
 
 .meta a[data-affiliate="amazon"]:active,
@@ -1107,21 +1161,12 @@ main{
   filter: brightness(1.02);
 }
 
-/* Keep underlines off for these CTAs (your global hover underline would otherwise apply) */
-.meta a[data-affiliate="amazon"]:hover,
-.meta a[href*="amazon.ca/dp/"]:hover,
-.meta a[href*="amazon.ca/gp/"]:hover{
-  text-decoration: none;
-}
-
-/* 2) Upgrade .btn-price even more (table CTA) with subtle shimmer */
+/* Shimmer highlight (table CTA) */
 .btn-price{
   background: linear-gradient(180deg, var(--accent), var(--accent-2));
   position: relative;
-  overflow: hidden; /* required for shimmer */
+  overflow: hidden;
 }
-
-/* Shimmer highlight */
 .btn-price::after{
   content:"";
   position: absolute;
@@ -1141,7 +1186,6 @@ main{
   animation: rvlShimmer 2.8s ease-in-out infinite;
   pointer-events: none;
 }
-
 @keyframes rvlShimmer{
   0%{ transform: translateX(0) skewX(-18deg); opacity: .0; }
   20%{ opacity: .45; }
@@ -1149,7 +1193,7 @@ main{
   100%{ transform: translateX(260%) skewX(-18deg); opacity: 0; }
 }
 
-/* 3) Make HERO Amazon CTA feel “primary” even if it's btn-secondary */
+/* HERO Amazon CTA stronger */
 .hero-top-pick .btn.btn-secondary[href*="amazon.ca"]{
   background: linear-gradient(180deg, var(--accent), var(--accent-2));
   color: #fff;
@@ -1167,7 +1211,7 @@ main{
   transform: translateY(0);
 }
 
-/* 4) Dark mode: slightly stronger glow for visibility */
+/* Dark mode: stronger glow */
 @media (prefers-color-scheme: dark){
   .btn-price,
   .meta a[data-affiliate="amazon"],
@@ -1181,7 +1225,7 @@ main{
   }
 }
 
-/* 5) Respect reduced motion */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce){
   .btn-price::after{ animation: none !important; }
 }
