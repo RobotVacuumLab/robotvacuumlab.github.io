@@ -1320,3 +1320,162 @@ main{ padding: 1.25rem 0 3rem; }
     border-radius: .95rem;
   }
 }
+
+/* =========================================================
+   RVL — TABLE UPGRADE (FINAL OVERRIDE)
+   Paste at END of styles.css
+   - sticky “Pick” col (mobile)
+   - scroll hint fade
+   - consistent thumb + pick layout
+   - safer stacking/z-index
+   ========================================================= */
+
+/* 1) Table hint spacing */
+.table-hint{
+  margin: .35rem 0 .65rem;
+}
+
+/* 2) Wrapper: scroll intent + fade hints */
+.table-wrap{
+  position: relative; /* required for ::before/::after fade */
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+/* Fade overlays (only if data-scroll-hint=true) */
+.table-wrap[data-scroll-hint="true"]::before,
+.table-wrap[data-scroll-hint="true"]::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  width: 22px;
+  pointer-events:none;
+  z-index: 3;
+}
+.table-wrap[data-scroll-hint="true"]::before{
+  left:0;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--bg) 92%, transparent),
+    transparent
+  );
+}
+.table-wrap[data-scroll-hint="true"]::after{
+  right:0;
+  background: linear-gradient(
+    270deg,
+    color-mix(in srgb, var(--bg) 92%, transparent),
+    transparent
+  );
+}
+
+/* 3) Table ergonomics */
+.table{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* Keep header sticky and readable */
+.table th{
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  backdrop-filter: blur(8px);
+}
+
+/* 4) Pick cell layout (works with the HTML I gave you: .pick-wrap + .table-thumb) */
+.table-thumb{
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 10px;
+  display: inline-block;
+  flex: 0 0 auto;
+}
+
+.pick-wrap{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.pick-text{
+  min-width: 0;
+}
+
+/* 5) Mobile: increase min-width + sticky first column */
+@media (max-width: 768px){
+  /* force enough width so columns don’t become unreadable */
+  .table{ min-width: 820px; }
+
+  /* Sticky first column */
+  .table th:first-child,
+  .table td:first-child{
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: color-mix(in srgb, var(--bg) 95%, transparent);
+    box-shadow: 10px 0 18px rgba(0,0,0,.06);
+  }
+
+  /* Header cell above the sticky column */
+  .table thead th:first-child{
+    z-index: 4;
+    background: var(--surface-2);
+  }
+
+  /* Give the Pick column breathing room */
+  .table td:first-child{
+    min-width: 220px;
+  }
+
+  /* Make non-CTA links finger-friendly */
+  .table td a:not(.btn-price){
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: .55rem .7rem;
+    border-radius: .85rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .table td a:not(.btn-price):hover{
+    background: var(--surface-2);
+  }
+
+  /* CTA sizing consistency */
+  .table .btn-price{
+    padding: .6rem .85rem;
+    border-radius: .95rem;
+  }
+}
+
+/* 6) Dark mode: stronger sticky shadow + fades */
+@media (prefers-color-scheme: dark){
+  .table th:first-child,
+  .table td:first-child{
+    box-shadow: 10px 0 22px rgba(0,0,0,.45);
+  }
+
+  .table-wrap[data-scroll-hint="true"]::before{
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--bg) 88%, transparent),
+      transparent
+    );
+  }
+  .table-wrap[data-scroll-hint="true"]::after{
+    background: linear-gradient(
+      270deg,
+      color-mix(in srgb, var(--bg) 88%, transparent),
+      transparent
+    );
+  }
+}
