@@ -1,27 +1,39 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-CA">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-  <title>Privacy Policy | RobotVacuumLab</title>
-  <meta name="description" content="RobotVacuumLab privacy policy: what data we collect, how we use it, cookies, third-party links, and how to contact us." />
+  <!-- Primary SEO -->
+  <title>Privacy Policy (Canada) | RobotVacuumLab</title>
+  <meta name="description" content="RobotVacuumLab privacy policy: what data we collect, how we use it, cookies, third-party links, affiliate links, and how to contact us." />
+  <meta name="author" content="RobotVacuumLab Editorial Team" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#ffffff" />
+  <meta name="format-detection" content="telephone=no" />
 
+  <!-- Canonical -->
   <link rel="canonical" href="https://robotvacuumlab.github.io/privacy-policy/" />
+
+  <!-- Hreflang -->
+  <link rel="alternate" href="https://robotvacuumlab.github.io/privacy-policy/" hreflang="en-CA" />
+  <link rel="alternate" href="https://robotvacuumlab.github.io/privacy-policy/" hreflang="x-default" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="/assets/css/styles.css" />
 
-  <!-- Favicons (root) -->
+  <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="icon" href="/assets/images/brand/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/images/brand/apple-touch-icon.png" />
 
-  <!-- Preload hero (LCP) — 3 sizes -->
+  <!-- Perf hints -->
+  <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+
+  <!-- Preload hero (LCP) -->
   <link
     rel="preload"
     as="image"
@@ -32,82 +44,86 @@
       /assets/images/hero/privacy-policy-hero-2400x1260.webp 2400w
     "
     imagesizes="(max-width: 768px) 100vw, 1200px"
+    fetchpriority="high"
   />
 
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="RobotVacuumLab" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="Privacy Policy | RobotVacuumLab" />
-  <meta property="og:description" content="What data we collect, how we use it, cookies, third-party links, and how to contact us." />
+  <meta property="og:locale" content="en_CA" />
+  <meta property="og:title" content="Privacy Policy (Canada) | RobotVacuumLab" />
+  <meta property="og:description" content="What data we collect, how we use it, cookies, third-party links, affiliate links, and how to contact us." />
   <meta property="og:url" content="https://robotvacuumlab.github.io/privacy-policy/" />
   <meta property="og:image" content="https://robotvacuumlab.github.io/assets/images/og/privacy-policy-og-1200x630.webp" />
+  <meta property="og:image:secure_url" content="https://robotvacuumlab.github.io/assets/images/og/privacy-policy-og-1200x630.webp" />
+  <meta property="og:image:type" content="image/webp" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="RobotVacuumLab privacy policy" />
+  <meta property="article:modified_time" content="2026-02-22" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Privacy Policy | RobotVacuumLab" />
-  <meta name="twitter:description" content="What data we collect, how we use it, cookies, third-party links, and how to contact us." />
+  <meta name="twitter:title" content="Privacy Policy (Canada) | RobotVacuumLab" />
+  <meta name="twitter:description" content="What data we collect, how we use it, cookies, third-party links, affiliate links, and how to contact us." />
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/privacy-policy-og-1200x630.webp" />
+  <meta name="twitter:image:alt" content="RobotVacuumLab privacy policy" />
 
-  <!-- GA4 + Consent Mode v2 (standard, correct order) -->
-  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <!-- GA4 (consent default denied; site.js updates on Accept/Reject) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
 
-    // Default denied until user choice
     gtag('consent', 'default', {
       ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
       analytics_storage: 'denied',
-      functionality_storage: 'denied',
-      personalization_storage: 'denied',
-      security_storage: 'granted',
-      wait_for_update: 800
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
     });
 
     gtag('js', new Date());
-  </script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
-  <script>
-    gtag('config', 'G-56CWM7N1S7', {
-      anonymize_ip: true,
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false
-    });
+    gtag('config', 'G-56CWM7N1S7', { anonymize_ip: true });
   </script>
 
-  <!-- Consent banner logic -->
-  <script defer src="/assets/js/consent.js"></script>
-
-  <!-- JSON-LD (Organization + Article) -->
+  <!-- JSON-LD: Organization -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "RobotVacuumLab",
-    "url": "https://robotvacuumlab.github.io/",
-    "logo": "https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2"
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"RobotVacuumLab",
+    "url":"https://robotvacuumlab.github.io/",
+    "logo":"https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2"
   }
   </script>
 
+  <!-- JSON-LD: WebPage (PrivacyPolicy is a WebPage subtype) -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Privacy Policy",
-    "description": "RobotVacuumLab privacy policy: what data we collect, how we use it, cookies, third-party links, and how to contact us.",
-    "image": ["https://robotvacuumlab.github.io/assets/images/og/privacy-policy-og-1200x630.webp"],
-    "dateModified": "2026-02-03",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://robotvacuumlab.github.io/privacy-policy/" },
-    "publisher": {
-      "@type": "Organization",
-      "name": "RobotVacuumLab",
-      "logo": { "@type": "ImageObject", "url": "https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2" }
-    }
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Privacy Policy (Canada)",
+    "description":"RobotVacuumLab privacy policy: what data we collect, how we use it, cookies, third-party links, affiliate links, and how to contact us.",
+    "url":"https://robotvacuumlab.github.io/privacy-policy/",
+    "inLanguage":"en-CA",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"RobotVacuumLab",
+      "url":"https://robotvacuumlab.github.io/"
+    },
+    "dateModified":"2026-02-22"
+  }
+  </script>
+
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      { "@type":"ListItem", "position":1, "name":"Home", "item":"https://robotvacuumlab.github.io/" },
+      { "@type":"ListItem", "position":2, "name":"Privacy Policy", "item":"https://robotvacuumlab.github.io/privacy-policy/" }
+    ]
   }
   </script>
 </head>
@@ -122,8 +138,8 @@
           <img
             src="/assets/images/brand/logo-mark-white.svg?v=2"
             alt=""
-            width="48"
-            height="48"
+            width="44"
+            height="44"
             decoding="async"
             loading="eager"
           />
@@ -138,6 +154,8 @@
         <a href="/best-robot-vacuums/">Best Robot Vacuums</a>
         <a href="/how-we-test/">How We Test</a>
         <a href="/how-to-choose-a-robot-vacuum/">How to Choose</a>
+        <a href="/reviews/">Reviews</a>
+        <a href="/about/">About</a>
         <a class="nav-cta btn btn-secondary" href="/best-robot-vacuums/">See our top picks</a>
       </nav>
 
@@ -146,17 +164,18 @@
       </button>
     </div>
 
-    <div class="container mobile-nav" id="mobileNav">
+    <div class="container mobile-nav" id="mobileNav" hidden>
       <a href="/best-robot-vacuums/">Best Robot Vacuums</a>
       <a href="/how-we-test/">How We Test</a>
       <a href="/how-to-choose-a-robot-vacuum/">How to Choose</a>
+      <a href="/reviews/">Reviews</a>
       <a href="/about/">About</a>
       <a href="/disclosure/">Disclosure</a>
       <a href="/privacy-policy/" aria-current="page">Privacy Policy</a>
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <div class="container">
         <ol>
@@ -179,9 +198,12 @@
                 /assets/images/hero/privacy-policy-hero-2400x1260.webp 2400w
               "
               sizes="(max-width: 768px) 100vw, 1200px"
+              width="1600"
+              height="840"
               alt="Calm, editorial home lab environment related to robot vacuum testing"
               loading="eager"
               decoding="async"
+              fetchpriority="high"
             />
           </div>
 
@@ -190,10 +212,10 @@
             <h1 class="h1">Privacy Policy</h1>
             <p class="lede">
               This policy explains what information we collect, how we use it, and what choices you have.
-              If something changes, we’ll update this page and the “Last updated” date.
+              If we change something material, we update this page and the “Last updated” date.
             </p>
 
-            <p class="last-updated">Last updated: <span class="mono">2026-02-03</span></p>
+            <p class="last-updated">Last updated: <span class="mono">2026-02-22</span></p>
           </div>
         </div>
       </div>
@@ -204,20 +226,21 @@
         <article class="article">
           <h2>Overview</h2>
           <p class="muted">
-            RobotVacuumLab is an editorial site. We aim to keep data collection minimal and only use information that helps
-            operate the site and improve content quality.
+            RobotVacuumLab is an editorial site. We aim to keep data collection minimal and use information only to operate
+            the site, measure aggregated usage (if you allow analytics), and improve content quality.
           </p>
 
           <h2>Information we collect</h2>
           <ul>
-            <li><strong>Basic usage data (server logs):</strong> IP address, browser type, pages visited, and timestamps. This is standard for hosting and security.</li>
-            <li><strong>Voluntary information:</strong> if you contact us, you may provide details like your name or email.</li>
+            <li><strong>Server/hosting logs:</strong> may include IP address, device/browser type, pages requested, and timestamps. Used for security and troubleshooting.</li>
+            <li><strong>Analytics (optional):</strong> if you accept cookies, we may collect aggregated usage signals (e.g., pages viewed, approximate location at a broad level, device type) to understand what content is helpful.</li>
+            <li><strong>Voluntary information:</strong> if you contact us, you may provide your name, email, and the message content.</li>
           </ul>
 
           <h2>Cookies and similar technologies</h2>
           <p>
-            We may use cookies or similar technologies to keep the site working properly and understand aggregated usage.
-            If we use affiliate links, the merchant may use cookies to track purchases for commission purposes.
+            We use a cookie preference choice (accept/reject) to remember your selection. If you accept, analytics cookies may be set.
+            You can also control cookies in your browser settings.
           </p>
 
           <h2>Affiliate links</h2>
@@ -229,26 +252,33 @@
 
           <h2>Third-party links</h2>
           <p class="muted">
-            We link to third-party websites (retailers, manufacturers, or sources). Their privacy practices may differ.
+            We link to third-party websites (retailers, manufacturers, and sources). Their privacy practices may differ.
             We encourage you to review their privacy policies.
           </p>
 
+          <h2>How we use information</h2>
+          <ul>
+            <li>Operate and secure the site (fraud prevention, abuse detection, debugging).</li>
+            <li>Measure content performance in aggregate (only if you accept analytics).</li>
+            <li>Respond to messages you send us.</li>
+          </ul>
+
           <h2>Data retention</h2>
-          <p>
-            We retain logs for a limited time for security and troubleshooting, then delete or anonymize where feasible.
-            If you contact us, we keep the correspondence as long as needed to respond and maintain records.
+          <p class="muted">
+            We keep server logs for a limited period for security and troubleshooting, then delete or anonymize where feasible.
+            Contact messages are retained as long as needed to respond and maintain records.
           </p>
 
           <h2>Your choices</h2>
           <ul>
-            <li>You can disable cookies in your browser settings.</li>
-            <li>You can avoid affiliate tracking by not clicking affiliate links.</li>
-            <li>If you contact us and want your message removed, you can request deletion where applicable.</li>
+            <li><strong>Analytics:</strong> use the cookie banner to accept or reject analytics cookies.</li>
+            <li><strong>Browser controls:</strong> disable or clear cookies via your browser settings.</li>
+            <li><strong>Affiliate tracking:</strong> you can avoid affiliate tracking by not clicking affiliate links.</li>
           </ul>
 
           <h2>Contact</h2>
           <p class="muted">
-            Questions about privacy? Use our contact details on the <a href="/about/">About</a> page.
+            Questions about privacy? Use the contact details on our <a href="/about/">About</a> page.
           </p>
 
           <div class="hr"></div>
@@ -256,7 +286,7 @@
           <section class="note warn">
             <h3>Informational only</h3>
             <p class="small muted">
-              This page is provided for general information and may not reflect every legal requirement in every jurisdiction.
+              This policy is provided for general information and may not reflect every legal requirement in every jurisdiction.
               If you need legal advice, consult a qualified professional.
             </p>
           </section>
@@ -290,21 +320,21 @@
       <nav class="footer-nav" aria-label="Footer">
         <a href="/about/">About</a>
         <a href="/how-we-test/">How We Test</a>
+        <a href="/reviews/">Reviews</a>
         <a href="/disclosure/">Disclosure</a>
         <a href="/privacy-policy/" aria-current="page">Privacy Policy</a>
       </nav>
     </div>
   </footer>
 
-  <!-- Cookie banner -->
+  <!-- Cookie banner (keeps your CSS hooks) -->
   <section class="cookie-banner" id="cookieBanner" hidden aria-label="Cookie notice">
     <div class="container">
       <div class="cookie-banner__inner">
         <div class="cookie-banner__text">
-          <strong>Cookies</strong>
+          <strong>Privacy choices</strong>
           <span class="muted">
-            We use analytics cookies to understand site usage. You can accept or reject.
-            Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
+            We use analytics only if you accept. Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
           </span>
         </div>
         <div class="cookie-banner__actions">
@@ -315,18 +345,7 @@
     </div>
   </section>
 
-  <!-- Minimal JS: mobile menu -->
-  <script>
-    (function () {
-      const btn = document.querySelector('.menu-btn');
-      const nav = document.getElementById('mobileNav');
-      if (!btn || !nav) return;
-
-      btn.addEventListener('click', function () {
-        const isOpen = nav.classList.toggle('open');
-        btn.setAttribute('aria-expanded', String(isOpen));
-      });
-    })();
-  </script>
+  <!-- Use the shared site JS (same menu behavior everywhere) -->
+  <script defer src="/assets/js/site.js"></script>
 </body>
 </html>
