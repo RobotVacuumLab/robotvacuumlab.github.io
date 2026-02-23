@@ -2,7 +2,7 @@
 <html lang="en-CA">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
   <!-- Primary SEO -->
   <title>Roborock Qrevo Curv S5X Review (Canada, 2026): Best Overall Robot Vacuum? | RobotVacuumLab</title>
@@ -12,6 +12,7 @@
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#ffffff" />
+  <meta name="format-detection" content="telephone=no" />
 
   <!-- Canonical -->
   <link rel="canonical" href="https://robotvacuumlab.github.io/reviews/roborock-qrevo-curv-s5x/" />
@@ -20,9 +21,6 @@
   <link rel="alternate" href="https://robotvacuumlab.github.io/reviews/roborock-qrevo-curv-s5x/" hreflang="en-CA" />
   <link rel="alternate" href="https://robotvacuumlab.github.io/reviews/roborock-qrevo-curv-s5x/" hreflang="x-default" />
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-
   <!-- Favicons (root) -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -30,7 +28,11 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+
   <!-- Perf hints -->
+  <link rel="dns-prefetch" href="//www.googletagmanager.com" />
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
 
   <!-- Preload LCP hero (prefer 1200 for mobile LCP; srcset still covers all) -->
@@ -44,6 +46,7 @@
       /assets/images/hero/roborock-qrevo-curv-s5x-review-canada-2026-hero-2400x1350.webp 2400w
     "
     imagesizes="(max-width: 768px) 100vw, 1200px"
+    fetchpriority="high"
   />
 
   <!-- Open Graph -->
@@ -62,12 +65,6 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Roborock Qrevo Curv S5X robot vacuum and dock in a modern home testing setup (RobotVacuumLab review)" />
 
-  <!-- Optional: Social video hint (nice-to-have) -->
-  <meta property="og:video" content="https://www.youtube-nocookie.com/embed/Z6HPE5hUdhU" />
-  <meta property="og:video:type" content="text/html" />
-  <meta property="og:video:width" content="560" />
-  <meta property="og:video:height" content="315" />
-
   <!-- Article metadata -->
   <meta property="article:published_time" content="2026-02-03" />
   <meta property="article:modified_time" content="2026-02-22" />
@@ -79,12 +76,11 @@
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/roborock-qrevo-curv-s5x-review-canada-2026-og-1200x630.webp" />
   <meta name="twitter:image:alt" content="Roborock Qrevo Curv S5X robot vacuum and dock in a modern home testing setup (RobotVacuumLab review)" />
 
-  <!-- GA4 + Consent Mode v2 -->
+  <!-- GA4 + Consent Mode v2 (default denied; site.js will update on accept/reject) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
 
-    // Default: privacy-first (deny analytics until user accepts)
     gtag('consent', 'default', {
       ad_storage: 'denied',
       ad_user_data: 'denied',
@@ -128,6 +124,19 @@
   }
   </script>
 
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      { "@type":"ListItem", "position":1, "name":"Home", "item":"https://robotvacuumlab.github.io/" },
+      { "@type":"ListItem", "position":2, "name":"Reviews", "item":"https://robotvacuumlab.github.io/reviews/" },
+      { "@type":"ListItem", "position":3, "name":"Roborock Qrevo Curv S5X", "item":"https://robotvacuumlab.github.io/reviews/roborock-qrevo-curv-s5x/" }
+    ]
+  }
+  </script>
+
   <!-- JSON-LD: Article -->
   <script type="application/ld+json">
   {
@@ -151,7 +160,7 @@
   }
   </script>
 
-  <!-- JSON-LD: Product + Review -->
+  <!-- JSON-LD: Product + Review (kept lightweight: no pricing claims) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -192,7 +201,7 @@
         "name":"Is it worth paying extra for the dock?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"If you run the robot frequently, the dock is the “friction reducer” that keeps your routine consistent. If you don’t mind emptying manually and doing quick upkeep yourself, value picks can be smarter."
+          "text":"If you run the robot frequently, the dock is the friction reducer that keeps your routine consistent. If you don’t mind emptying manually and doing quick upkeep yourself, value picks can be smarter."
         }
       },
       {
@@ -208,7 +217,7 @@
         "name":"Is it good for Canadian winter grit and salt dust?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"It helps a lot if you run it frequently. Winter grit behaves like sandpaper dust, so regular runs plus routine brush/filter checks make the biggest difference."
+          "text":"It helps a lot if you run it frequently. Winter grit behaves like sandpaper dust, so regular runs plus routine brush and filter checks make the biggest difference."
         }
       },
       {
@@ -216,27 +225,14 @@
         "name":"What’s the biggest trade-off to know before buying?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"The dock is both the benefit and the burden. It lowers daily hassle, but you still “own” tanks/pads/filters upkeep. If you hate that idea, choose a simpler robot."
+          "text":"The dock is both the benefit and the burden. It lowers daily hassle, but you still own tanks, pads, and filters upkeep. If you hate that idea, choose a simpler robot."
         }
       }
     ]
   }
   </script>
 
-  <!-- JSON-LD: BreadcrumbList -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"BreadcrumbList",
-    "itemListElement":[
-      { "@type":"ListItem", "position":1, "name":"Home", "item":"https://robotvacuumlab.github.io/" },
-      { "@type":"ListItem", "position":2, "name":"Reviews", "item":"https://robotvacuumlab.github.io/reviews/" },
-      { "@type":"ListItem", "position":3, "name":"Roborock Qrevo Curv S5X", "item":"https://robotvacuumlab.github.io/reviews/roborock-qrevo-curv-s5x/" }
-    ]
-  }
-  </script>
-
-  <!-- JSON-LD: VideoObject (optional but strong) -->
+  <!-- JSON-LD: VideoObject (strong; keep accurate) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -255,30 +251,6 @@
 
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-
-  <!-- Cookie Banner -->
-  <div id="cookieBanner" class="cookie-banner" hidden>
-    <div
-      class="cookie-banner__inner container"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="cookieTitle"
-      aria-describedby="cookieDesc"
-      tabindex="-1"
-    >
-      <div class="cookie-banner__text">
-        <strong id="cookieTitle">Privacy choices</strong>
-        <p id="cookieDesc" class="small muted">
-          We use analytics only if you accept. Affiliate partners may set cookies when you click outbound links.
-          Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
-        </p>
-      </div>
-      <div class="cookie-banner__actions">
-        <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
-        <button class="btn" type="button" data-consent-accept>Accept</button>
-      </div>
-    </div>
-  </div>
 
   <header class="site-header">
     <div class="container header-inner">
@@ -322,7 +294,7 @@
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <div class="container">
         <ol>
@@ -387,7 +359,7 @@
         <article class="article">
 
           <p class="muted">
-            This review focuses on the stuff that actually changes ownership: mapping reliability, daily pickup outcomes, mopping usefulness,
+            This review focuses on what changes ownership day-to-day: mapping reliability, pickup outcomes, mopping usefulness,
             noise, and how much upkeep the dock adds to your week.
           </p>
 
@@ -482,7 +454,7 @@
           <h2 id="performance">Performance breakdown</h2>
           <ul>
             <li><strong>Navigation (mapping):</strong> prioritizes repeatable maps and predictable room coverage. The win is consistency, not “wow” moments.</li>
-            <li><strong>Pickup:</strong> reliable daily debris removal on hard floors; carpet outcomes depend on pile density and your expectations.</li>
+            <li><strong>Pickup:</strong> reliable daily debris removal on hard floors; carpet outcomes depend on pile density and expectations.</li>
             <li><strong>Mopping:</strong> best for maintenance cleaning (dust + light film). Don’t expect deep scrubbing on sticky messes.</li>
             <li><strong>Noise:</strong> typical during cleaning; dock emptying is louder but short.</li>
             <li><strong>Maintenance:</strong> the robot is easy, the dock is the commitment.</li>
@@ -491,8 +463,8 @@
           <section class="note">
             <h2 class="h3">Maintenance reality check (what your week looks like)</h2>
             <ul class="small muted">
-              <li><strong>Weekly:</strong> quick brush check for hair, wipe sensors, quick dock wipe-down</li>
-              <li><strong>Every 1–2 weeks:</strong> handle dock tanks/pads depending on usage</li>
+              <li><strong>Weekly:</strong> brush check for hair, wipe sensors, quick dock wipe-down</li>
+              <li><strong>Every 1–2 weeks:</strong> dock tanks/pads depending on usage</li>
               <li><strong>Monthly-ish:</strong> deeper clean of filters/edges if you run daily</li>
             </ul>
             <p class="tiny muted" style="margin:.6rem 0 0;">
@@ -500,16 +472,16 @@
             </p>
           </section>
 
-          <!-- VIDEO (added) -->
+          <!-- VIDEO (UPDATED to match your new CSS: .yt-responsive only) -->
           <section class="section" aria-label="Video">
             <h2 id="video">Video: Qrevo Curv S5X in action</h2>
             <p class="small muted">
               Quick real-world look at mopping + cleaning behavior. (Loads lazily for performance.)
             </p>
 
-            <div class="video-embed" aria-label="Roborock Qrevo Curv S5X video review">
+            <div class="yt-responsive" aria-label="Roborock Qrevo Curv S5X video review">
               <iframe
-                src="https://www.youtube-nocookie.com/embed/Z6HPE5hUdhU?si=rKDwljOUTDclVH73"
+                src="https://www.youtube-nocookie.com/embed/Z6HPE5hUdhU?rel=0"
                 title="Roborock Qrevo Curv S5X video review"
                 loading="lazy"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -548,11 +520,11 @@
           <div class="hr"></div>
 
           <h2 id="faq">FAQ</h2>
-          <div class="faq">
+          <div class="faq" aria-label="Frequently asked questions">
             <details>
               <summary>Is it worth paying extra for the dock?</summary>
               <div class="answer">
-                If you run the robot frequently, the dock is the “friction reducer” that keeps your routine consistent.
+                If you run the robot frequently, the dock is the friction reducer that keeps your routine consistent.
                 If you don’t mind emptying manually and doing quick upkeep yourself, value picks can be smarter.
               </div>
             </details>
@@ -568,7 +540,7 @@
             <details>
               <summary>Is it good for Canadian winter grit and salt dust?</summary>
               <div class="answer">
-                It helps a lot if you run it frequently. Winter grit behaves like sandpaper dust, so regular runs plus routine brush/filter checks
+                It helps a lot if you run it frequently. Winter grit behaves like sandpaper dust, so regular runs plus routine brush and filter checks
                 make the biggest difference.
               </div>
             </details>
@@ -576,7 +548,7 @@
             <details>
               <summary>What’s the biggest trade-off to know before buying?</summary>
               <div class="answer">
-                The dock is both the benefit and the burden. It lowers daily hassle, but you still “own” tanks/pads/filters upkeep.
+                The dock is both the benefit and the burden. It lowers daily hassle, but you still own tanks, pads, and filters upkeep.
                 If you hate that idea, choose a simpler robot.
               </div>
             </details>
@@ -622,7 +594,24 @@
     </div>
   </footer>
 
-  <!-- One JS to rule them all -->
+  <!-- Cookie banner (single instance; controlled by /assets/js/site.js) -->
+  <div class="cookie-banner" id="cookieBanner" hidden>
+    <div class="cookie-banner__inner container" role="dialog" aria-modal="true" aria-labelledby="cookieTitle" aria-describedby="cookieDesc" tabindex="-1">
+      <div class="cookie-banner__text">
+        <strong id="cookieTitle">Privacy choices</strong>
+        <p id="cookieDesc" class="small muted" style="margin:.25rem 0 0;">
+          We use analytics only if you accept. Affiliate partners may set cookies when you click outbound links.
+          Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
+        </p>
+      </div>
+      <div class="cookie-banner__actions">
+        <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
+        <button class="btn" type="button" data-consent-accept>Accept</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Site JS -->
   <script defer src="/assets/js/site.js"></script>
 </body>
 </html>
