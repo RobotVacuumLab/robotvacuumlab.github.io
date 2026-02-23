@@ -1,27 +1,39 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-CA">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
+  <!-- Primary SEO -->
   <title>About RobotVacuumLab | Editorial Testing for Real Homes</title>
   <meta name="description" content="RobotVacuumLab is an independent editorial site focused on calm, test-driven robot vacuum buying guides, with transparent methodology and clear trade-offs." />
+  <meta name="author" content="RobotVacuumLab Editorial Team" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#ffffff" />
+  <meta name="format-detection" content="telephone=no" />
 
+  <!-- Canonical -->
   <link rel="canonical" href="https://robotvacuumlab.github.io/about/" />
+
+  <!-- Hreflang -->
+  <link rel="alternate" href="https://robotvacuumlab.github.io/about/" hreflang="en-CA" />
+  <link rel="alternate" href="https://robotvacuumlab.github.io/about/" hreflang="x-default" />
+
+  <!-- Favicons (safe defaults; keep if you have them) -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/assets/images/brand/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/images/brand/apple-touch-icon.png" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="/assets/css/styles.css" />
 
-  <!-- Favicons (root) -->
-  <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
+  <!-- Perf hints -->
+  <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
 
-  <!-- Preload hero (LCP) — 3 sizes -->
+  <!-- Preload LCP hero -->
   <link
     rel="preload"
     as="image"
@@ -32,41 +44,51 @@
       /assets/images/hero/about-hero-2400x1260.webp 2400w
     "
     imagesizes="(max-width: 768px) 100vw, 1200px"
+    fetchpriority="high"
   />
 
   <!-- Open Graph -->
-  <meta property="og:type" content="article" />
+  <meta property="og:type" content="website" />
   <meta property="og:site_name" content="RobotVacuumLab" />
-  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale" content="en_CA" />
   <meta property="og:title" content="About RobotVacuumLab | Editorial Testing for Real Homes" />
   <meta property="og:description" content="Independent editorial robot vacuum testing and buying guides with transparent methodology and clear trade-offs." />
   <meta property="og:url" content="https://robotvacuumlab.github.io/about/" />
   <meta property="og:image" content="https://robotvacuumlab.github.io/assets/images/og/about-og-1200x630.webp" />
+  <meta property="og:image:secure_url" content="https://robotvacuumlab.github.io/assets/images/og/about-og-1200x630.webp" />
+  <meta property="og:image:type" content="image/webp" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="About RobotVacuumLab: calm, test-driven editorial standards" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="About RobotVacuumLab | Editorial Testing for Real Homes" />
   <meta name="twitter:description" content="Independent editorial robot vacuum testing and buying guides with transparent methodology and clear trade-offs." />
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/about-og-1200x630.webp" />
+  <meta name="twitter:image:alt" content="About RobotVacuumLab: calm, test-driven editorial standards" />
 
-  <!-- GA4 (no consent banner, no consent mode) -->
-  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <!-- Article-ish timestamps (helpful for audits even on About pages) -->
+  <meta property="article:modified_time" content="2026-02-22" />
+
+  <!-- Google Analytics 4 (consent default denied; site.js updates on Accept/Reject) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
+    function gtag(){dataLayer.push(arguments);}
 
-    gtag('config', 'G-56CWM7N1S7', {
-      anonymize_ip: true,
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      analytics_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
     });
+
+    gtag('js', new Date());
+    gtag('config', 'G-56CWM7N1S7', { anonymize_ip: true });
   </script>
 
-  <!-- JSON-LD (Organization + AboutPage) -->
+  <!-- JSON-LD: Organization -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -77,12 +99,36 @@
   }
   </script>
 
+  <!-- JSON-LD: WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"RobotVacuumLab",
+    "url":"https://robotvacuumlab.github.io/"
+  }
+  </script>
+
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      { "@type":"ListItem", "position":1, "name":"Home", "item":"https://robotvacuumlab.github.io/" },
+      { "@type":"ListItem", "position":2, "name":"About", "item":"https://robotvacuumlab.github.io/about/" }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: AboutPage -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"AboutPage",
     "name":"About RobotVacuumLab",
-    "inLanguage":"en",
+    "description":"Independent editorial robot vacuum testing and buying guides with transparent methodology and clear trade-offs.",
+    "inLanguage":"en-CA",
     "url":"https://robotvacuumlab.github.io/about/",
     "mainEntityOfPage":{
       "@type":"WebPage",
@@ -132,17 +178,18 @@
       </button>
     </div>
 
-    <div class="container mobile-nav" id="mobileNav">
+    <div class="container mobile-nav" id="mobileNav" hidden>
       <a href="/best-robot-vacuums/">Best Robot Vacuums</a>
       <a href="/how-we-test/">How We Test</a>
       <a href="/how-to-choose-a-robot-vacuum/">How to Choose</a>
+      <a href="/reviews/">Reviews</a>
       <a href="/about/" aria-current="page">About</a>
       <a href="/disclosure/">Disclosure</a>
       <a href="/privacy-policy/">Privacy Policy</a>
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <div class="container">
         <ol>
@@ -165,14 +212,17 @@
                 /assets/images/hero/about-hero-2400x1260.webp 2400w
               "
               sizes="(max-width: 768px) 100vw, 1200px"
+              width="1600"
+              height="840"
               alt="Calm, modern home environment used for editorial robot vacuum evaluation"
               loading="eager"
               decoding="async"
+              fetchpriority="high"
             />
           </div>
 
           <div class="hero-body">
-            <div class="kicker">About • Editorial Standards</div>
+            <div class="kicker">About • Editorial standards</div>
             <h1 class="h1">About RobotVacuumLab</h1>
             <p class="lede">
               We publish calm, test-driven robot vacuum buying guides for real homes.
@@ -185,7 +235,13 @@
               <a class="btn btn-ghost" href="/how-to-choose-a-robot-vacuum/">How to choose</a>
             </div>
 
-            <p class="last-updated">Last updated: <span class="mono">2026-02-03</span></p>
+            <p class="last-updated">Last updated: <span class="mono">2026-02-22</span></p>
+
+            <div class="kpi" aria-label="Guide standards">
+              <span class="item">No hype, clear trade-offs</span>
+              <span class="item">Methodology-first</span>
+              <span class="item">Updated over time</span>
+            </div>
           </div>
         </div>
       </div>
@@ -201,6 +257,7 @@
               <p>No “best for everyone”. We explain who each model fits and what you’re giving up.</p>
             </div>
           </section>
+
           <section class="card">
             <div class="card-body">
               <span class="badge">Methodology</span>
@@ -208,6 +265,7 @@
               <p>Navigation, pickup, mopping, usability, and maintenance matter more than marketing claims.</p>
             </div>
           </section>
+
           <section class="card">
             <div class="card-body">
               <span class="badge">Updates</span>
@@ -240,6 +298,7 @@
                 See <a href="/how-we-test/">How We Test</a> for the categories we use and what earns a “top pick”.
               </p>
             </section>
+
             <section class="note warn">
               <h3>Affiliate disclosure</h3>
               <p class="small muted">
@@ -250,8 +309,8 @@
 
           <h2>Contact</h2>
           <p class="muted">
-            If you want to suggest a model to evaluate or flag an error, use the info on our
-            <a href="/disclosure/">Disclosure</a> page (or add a simple contact method there later).
+            Want to suggest a model to evaluate or flag an error? Use the info on our
+            <a href="/disclosure/">Disclosure</a> page (you can add a simple contact method there later).
           </p>
         </article>
       </div>
@@ -283,24 +342,30 @@
       <nav class="footer-nav" aria-label="Footer">
         <a href="/about/" aria-current="page">About</a>
         <a href="/how-we-test/">How We Test</a>
+        <a href="/reviews/">Reviews</a>
         <a href="/disclosure/">Disclosure</a>
         <a href="/privacy-policy/">Privacy Policy</a>
       </nav>
     </div>
   </footer>
 
-  <!-- Minimal JS: mobile menu -->
-  <script>
-    (function () {
-      const btn = document.querySelector('.menu-btn');
-      const nav = document.getElementById('mobileNav');
-      if (!btn || !nav) return;
+  <!-- Cookie banner (same system as other pages; site.js controls visibility) -->
+  <div class="cookie-banner" id="cookieBanner" hidden>
+    <div class="cookie-banner__inner container">
+      <div class="cookie-banner__text">
+        <strong>Privacy choices</strong>
+        <p class="small muted" style="margin:.25rem 0 0;">
+          We use analytics only if you accept. Affiliate partners may set cookies when you click outbound links.
+          Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
+        </p>
+      </div>
+      <div class="cookie-banner__actions">
+        <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
+        <button class="btn" type="button" data-consent-accept>Accept</button>
+      </div>
+    </div>
+  </div>
 
-      btn.addEventListener('click', function () {
-        const isOpen = nav.classList.toggle('open');
-        btn.setAttribute('aria-expanded', String(isOpen));
-      });
-    })();
-  </script>
+  <script defer src="/assets/js/site.js"></script>
 </body>
 </html>
