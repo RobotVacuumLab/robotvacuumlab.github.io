@@ -1,10 +1,13 @@
 /* =========================================================
    RobotVacuumLab — Editorial Tech Lab CSS (UPDATED / AUDIT-READY)
    Goals: clean, trustworthy, fast, accessible, mobile-first
+
    Updates in this version:
-   - FIX: video no longer cut on mobile (ratio moved to .yt-responsive only)
-   - IMPROVE: cookie banner opacity/contrast (premium glass, readable)
-   - ADD: overflow protection so text never spills outside cards/tags/buttons
+   - FIX: video is truly responsive + premium (uses .yt-responsive wrapper)
+   - FIX: removed conflicting .note.video-embed selector + aspect-ratio auto override
+   - IMPROVE: video card layout (desktop split, tight mobile)
+   - KEEP: cookie banner opacity/contrast (premium glass, readable)
+   - KEEP: overflow protection so text never spills outside cards/tags/buttons
    - KEEP: cookie banner uses [hidden], mobile-nav [hidden], CTA glow/shimmer,
            dark mode, reduced motion
    ========================================================= */
@@ -116,7 +119,7 @@
 
 html{ -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 
-/* NEW: global overflow safety */
+/* Global overflow safety */
 body{
   margin: 0;
   font-family: var(--font-sans);
@@ -127,7 +130,7 @@ body{
   overflow-x: hidden;
 }
 
-/* NEW: prevent long URLs/words from breaking layout */
+/* Prevent long URLs/words from breaking layout */
 p, h1, h2, h3, h4, li, a, span, strong{
   overflow-wrap: anywhere;
   word-break: normal;
@@ -186,7 +189,7 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
   .grid.cols-4{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
-/* NEW: helper to allow children to shrink in flex/grid without overflow */
+/* Helper to allow children to shrink in flex/grid without overflow */
 .min0{ min-width: 0; }
 
 .muted{ color: var(--muted); }
@@ -240,7 +243,7 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
   gap: 1rem;
 }
 
-/* NEW: prevent brand overflow on tight widths */
+/* Prevent brand overflow on tight widths */
 .brand{
   display: flex;
   align-items: center;
@@ -421,7 +424,7 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
 
 .hero-body{
   padding: clamp(1rem, 2.6vw, 1.5rem);
-  min-width: 0; /* NEW */
+  min-width: 0;
 }
 
 .kicker{
@@ -579,7 +582,6 @@ a:hover{ text-decoration: underline; text-decoration-thickness: 2px; text-underl
 
 /* ---------- Main content ---------- */
 main{ padding: 1.25rem 0 3rem; }
-
 .section{ margin-top: 2rem; }
 
 .section-title{
@@ -588,7 +590,7 @@ main{ padding: 1.25rem 0 3rem; }
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 0.9rem;
-  min-width: 0; /* NEW */
+  min-width: 0;
 }
 .section-title h2{
   margin: 0;
@@ -610,7 +612,7 @@ main{ padding: 1.25rem 0 3rem; }
   border-radius: var(--radius-md);
   overflow: hidden;
   transition: transform var(--t), background var(--t), border-color var(--t);
-  min-width: 0; /* NEW */
+  min-width: 0;
 }
 .card:hover{
   background: var(--bg);
@@ -619,10 +621,10 @@ main{ padding: 1.25rem 0 3rem; }
 }
 .card .card-body{
   padding: 1rem;
-  min-width: 0; /* NEW */
+  min-width: 0;
 }
 
-/* NEW: prevent long titles/links from breaking the card */
+/* Prevent long titles/links from breaking the card */
 .card h3{
   margin: 0 0 0.35rem;
   font-size: 1.1rem;
@@ -637,7 +639,7 @@ main{ padding: 1.25rem 0 3rem; }
   min-width: 0;
 }
 
-/* NEW: keep paragraphs inside */
+/* Keep paragraphs inside */
 .card p{
   margin: 0.25rem 0 0;
   color: var(--muted);
@@ -694,7 +696,7 @@ main{ padding: 1.25rem 0 3rem; }
   min-width: 0;
 }
 
-/* NEW: links inside tags should not expand forever */
+/* Links inside tags should not expand forever */
 .tag a{
   display: inline-block;
   max-width: 100%;
@@ -969,7 +971,7 @@ main{ padding: 1.25rem 0 3rem; }
 /* =========================================================
    Cookie Banner (premium + accessible)
    - Uses [hidden] attribute
-   - UPDATED: stronger opacity in both modes
+   - Strong opacity in both modes
    ========================================================= */
 .cookie-banner{
   position: fixed;
@@ -1049,15 +1051,24 @@ main{ padding: 1.25rem 0 3rem; }
 }
 
 /* =========================================================
-   Video embed (responsive + safe)
-   UPDATED: ratio ONLY on .yt-responsive
+   VIDEO — PRO RESPONSIVE (uses .yt-responsive)
+   Use with:
+   <section class="note video-card">
+     <div class="video-card__text">...</div>
+     <div class="yt-responsive"><iframe ...></iframe></div>
+   </section>
    ========================================================= */
-.note.video-embed{
-  overflow: visible;
+.video-title{
+  margin: 0 0 .35rem;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+.video-privacy{ margin-top: .6rem; }
+
+.note.video-card{
   box-shadow: var(--shadow-sm);
 }
 
-/* Ratio wrapper */
 .yt-responsive{
   position: relative;
   width: 100%;
@@ -1077,22 +1088,7 @@ main{ padding: 1.25rem 0 3rem; }
   display: block;
 }
 
-/* Keep .video-embed class compatible if used elsewhere */
-.video-embed{
-  border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  min-width: 0;
-}
-.video-embed{ aspect-ratio: auto; }
-
-/* =========================================================
-   OPTIONAL: Desktop split layout for video block
-   If you wrap your video note with .video-card and use
-   .video-card__text + .video-embed (recommended),
-   this makes it bigger on PC automatically.
-   ========================================================= */
+/* Desktop split layout */
 .video-card{
   display: grid;
   gap: 0.85rem;
