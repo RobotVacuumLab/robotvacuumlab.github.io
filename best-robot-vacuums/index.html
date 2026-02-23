@@ -266,7 +266,6 @@
       </button>
     </div>
 
-    <!-- IMPORTANT: [hidden] controlled by JS; default hidden to avoid double-nav on load -->
     <div class="container mobile-nav" id="mobileNav" hidden>
       <a href="/best-robot-vacuums/" aria-current="page">Best Robot Vacuums</a>
       <a href="/how-we-test/">How We Test</a>
@@ -318,7 +317,6 @@
               then explain the trade-offs so you can pick confidently.
             </p>
 
-            <!-- Above-the-fold conversion block -->
             <div class="note accent hero-top-pick" aria-label="Top pick now">
               <h2 class="nowrap" style="margin:0 0 .35rem;">Top pick now: Roborock Qrevo Curv S5X</h2>
               <p class="small muted">
@@ -340,7 +338,6 @@
               </p>
             </div>
 
-            <!-- Video (UPDATED to match your new CSS: .yt-responsive only) -->
             <section class="note video-card" aria-label="Video: best robot vacuums in Canada (2026)">
               <div class="video-card__text">
                 <h2 class="video-title">Watch: 60-second decision guide</h2>
@@ -580,7 +577,6 @@
       </div>
     </section>
 
-    <!-- How we tested (on-page snippet + link to full methodology) -->
     <section class="section" id="how-we-tested">
       <div class="container">
         <div class="section-title">
@@ -606,7 +602,12 @@
           <span class="hint">A fast way to narrow down</span>
         </div>
 
-        <div class="table-wrap">
+        <!-- Mobile hint: makes scroll obvious (safe + accessible) -->
+        <p class="table-hint tiny muted" role="note">
+          Tip: swipe left/right to compare. The “Pick” column stays pinned.
+        </p>
+
+        <div class="table-wrap" data-scroll-hint="true">
           <table class="table" aria-label="Robot vacuum comparison table">
             <thead>
               <tr>
@@ -779,7 +780,6 @@
       </div>
     </section>
 
-    <!-- Real FAQ (matches FAQ schema in head) -->
     <section class="section" id="faq">
       <div class="container">
         <div class="section-title">
@@ -873,7 +873,6 @@
     </div>
   </footer>
 
-  <!-- Cookie banner (single instance; controlled by /assets/js/site.js) -->
   <div class="cookie-banner" id="cookieBanner" hidden>
     <div class="cookie-banner__inner container">
       <div class="cookie-banner__text">
@@ -890,7 +889,6 @@
     </div>
   </div>
 
-  <!-- Site JS -->
   <script defer src="/assets/js/site.js"></script>
 </body>
 </html>
