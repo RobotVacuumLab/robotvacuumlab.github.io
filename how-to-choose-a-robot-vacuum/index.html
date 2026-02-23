@@ -1,27 +1,39 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-CA">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-  <title>How to Choose a Robot Vacuum | RobotVacuumLab</title>
-  <meta name="description" content="A simple, buyer-first framework to choose the right robot vacuum: what matters most, what to ignore, and how to match features to real homes." />
+  <!-- Primary SEO -->
+  <title>How to Choose a Robot Vacuum (Canada, 2026) | RobotVacuumLab</title>
+  <meta name="description" content="A buyer-first framework for Canadian homes: how to choose the right robot vacuum, what matters most, what to ignore, and how to match features to real floors, pets, and routines." />
+  <meta name="author" content="RobotVacuumLab Editorial Team" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#ffffff" />
+  <meta name="format-detection" content="telephone=no" />
 
+  <!-- Canonical -->
   <link rel="canonical" href="https://robotvacuumlab.github.io/how-to-choose-a-robot-vacuum/" />
+
+  <!-- Hreflang -->
+  <link rel="alternate" href="https://robotvacuumlab.github.io/how-to-choose-a-robot-vacuum/" hreflang="en-CA" />
+  <link rel="alternate" href="https://robotvacuumlab.github.io/how-to-choose-a-robot-vacuum/" hreflang="x-default" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="/assets/css/styles.css" />
 
-  <!-- Favicons (root) -->
+  <!-- Favicons (keep if you have them) -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="icon" href="/assets/images/brand/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/images/brand/apple-touch-icon.png" />
 
-  <!-- Preload hero (LCP) — 3 sizes -->
+  <!-- Perf hints -->
+  <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+
+  <!-- Preload hero (LCP) -->
   <link
     rel="preload"
     as="image"
@@ -32,58 +44,51 @@
       /assets/images/hero/how-to-choose-a-robot-vacuum-hero-2400x1260.webp 2400w
     "
     imagesizes="(max-width: 768px) 100vw, 1200px"
+    fetchpriority="high"
   />
 
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="RobotVacuumLab" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="How to Choose a Robot Vacuum | RobotVacuumLab" />
-  <meta property="og:description" content="A simple, buyer-first framework to choose the right robot vacuum: what matters most, what to ignore, and how to match features to real homes." />
+  <meta property="og:locale" content="en_CA" />
+  <meta property="og:title" content="How to Choose a Robot Vacuum (Canada, 2026) | RobotVacuumLab" />
+  <meta property="og:description" content="A buyer-first framework for Canadian homes: match features to your floors, pets, and routines. What matters, what to ignore, and common traps." />
   <meta property="og:url" content="https://robotvacuumlab.github.io/how-to-choose-a-robot-vacuum/" />
   <meta property="og:image" content="https://robotvacuumlab.github.io/assets/images/og/how-to-choose-a-robot-vacuum-og-1200x630.webp" />
+  <meta property="og:image:secure_url" content="https://robotvacuumlab.github.io/assets/images/og/how-to-choose-a-robot-vacuum-og-1200x630.webp" />
+  <meta property="og:image:type" content="image/webp" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="How to choose a robot vacuum: a practical decision guide for real homes" />
+
+  <meta property="article:published_time" content="2026-02-02" />
+  <meta property="article:modified_time" content="2026-02-22" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="How to Choose a Robot Vacuum | RobotVacuumLab" />
-  <meta name="twitter:description" content="A simple, buyer-first framework to choose the right robot vacuum: what matters most, what to ignore, and how to match features to real homes." />
+  <meta name="twitter:title" content="How to Choose a Robot Vacuum (Canada, 2026) | RobotVacuumLab" />
+  <meta name="twitter:description" content="A buyer-first framework: what matters most, what to ignore, and how to match features to real homes." />
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/how-to-choose-a-robot-vacuum-og-1200x630.webp" />
+  <meta name="twitter:image:alt" content="How to choose a robot vacuum: a practical decision guide for real homes" />
 
-  <!-- GA4 + Consent Mode v2 (correct order) -->
-  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <!-- GA4 (consent default denied; site.js updates on Accept/Reject) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
 
-    // Default denied until user choice
     gtag('consent', 'default', {
       ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
       analytics_storage: 'denied',
-      functionality_storage: 'denied',
-      personalization_storage: 'denied',
-      security_storage: 'granted',
-      wait_for_update: 800
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
     });
 
     gtag('js', new Date());
-  </script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
-  <script>
-    gtag('config', 'G-56CWM7N1S7', {
-      anonymize_ip: true,
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false
-    });
+    gtag('config', 'G-56CWM7N1S7', { anonymize_ip: true });
   </script>
 
-  <!-- Consent banner logic -->
-  <script defer src="/assets/js/consent.js"></script>
-
-  <!-- JSON-LD (Organization + Article) -->
+  <!-- JSON-LD: Organization -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -94,17 +99,41 @@
   }
   </script>
 
+  <!-- JSON-LD: WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"RobotVacuumLab",
+    "url":"https://robotvacuumlab.github.io/"
+  }
+  </script>
+
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      { "@type":"ListItem", "position":1, "name":"Home", "item":"https://robotvacuumlab.github.io/" },
+      { "@type":"ListItem", "position":2, "name":"How to Choose", "item":"https://robotvacuumlab.github.io/how-to-choose-a-robot-vacuum/" }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: Article -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"Article",
-    "headline":"How to Choose a Robot Vacuum (Without Regret)",
-    "description":"A simple, buyer-first framework to choose the right robot vacuum: what matters most, what to ignore, and how to match features to real homes.",
+    "headline":"How to Choose a Robot Vacuum (Without Regret) — Canada (2026)",
+    "description":"A buyer-first framework for Canadian homes: what matters most, what to ignore, and how to match robot vacuum features to real floors, pets, and routines.",
     "image":[
       "https://robotvacuumlab.github.io/assets/images/og/how-to-choose-a-robot-vacuum-og-1200x630.webp"
     ],
     "datePublished":"2026-02-02",
-    "dateModified":"2026-02-03",
+    "dateModified":"2026-02-22",
+    "inLanguage":"en-CA",
     "author":{
       "@type":"Organization",
       "name":"RobotVacuumLab Editorial Team"
@@ -123,6 +152,40 @@
     }
   }
   </script>
+
+  <!-- JSON-LD: FAQPage (matches the FAQ below) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Do I need a self-empty dock?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"If you have pets or run daily, a dock usually improves consistency because you’ll actually keep using the robot. If you run occasionally, you can save money and empty manually."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Is mopping worth it?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"For many homes, mopping helps with light daily film and small stains, but it won’t replace a deep manual mop. Think “maintenance cleaning,” not “restoration.”"
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"What matters more: suction or navigation?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Navigation reliability usually wins. A robot that covers the whole home consistently tends to beat a “strong” robot that misses rooms or gets stuck."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -135,8 +198,8 @@
           <img
             src="/assets/images/brand/logo-mark-white.svg?v=2"
             alt=""
-            width="48"
-            height="48"
+            width="44"
+            height="44"
             decoding="async"
             loading="eager"
           />
@@ -151,6 +214,8 @@
         <a href="/best-robot-vacuums/">Best Robot Vacuums</a>
         <a href="/how-we-test/">How We Test</a>
         <a href="/how-to-choose-a-robot-vacuum/" aria-current="page">How to Choose</a>
+        <a href="/reviews/">Reviews</a>
+        <a href="/about/">About</a>
         <a class="nav-cta btn btn-secondary" href="/best-robot-vacuums/">See our top picks</a>
       </nav>
 
@@ -159,17 +224,18 @@
       </button>
     </div>
 
-    <div class="container mobile-nav" id="mobileNav">
+    <div class="container mobile-nav" id="mobileNav" hidden>
       <a href="/best-robot-vacuums/">Best Robot Vacuums</a>
       <a href="/how-we-test/">How We Test</a>
       <a href="/how-to-choose-a-robot-vacuum/" aria-current="page">How to Choose</a>
+      <a href="/reviews/">Reviews</a>
       <a href="/about/">About</a>
       <a href="/disclosure/">Disclosure</a>
       <a href="/privacy-policy/">Privacy Policy</a>
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <div class="container">
         <ol>
@@ -192,9 +258,12 @@
                 /assets/images/hero/how-to-choose-a-robot-vacuum-hero-2400x1260.webp 2400w
               "
               sizes="(max-width: 768px) 100vw, 1200px"
+              width="1600"
+              height="840"
               alt="Robot vacuum navigating a real home setup with clear floor zones and typical obstacles"
               loading="eager"
               decoding="async"
+              fetchpriority="high"
             />
           </div>
 
@@ -209,9 +278,10 @@
             <div class="hero-actions">
               <a class="btn" href="/best-robot-vacuums/">See our top picks</a>
               <a class="btn btn-secondary" href="/how-we-test/">How we test</a>
+              <a class="btn btn-ghost" href="#home-profile">Start the framework</a>
             </div>
 
-            <p class="last-updated">Last updated: <span class="mono">2026-02-03</span></p>
+            <p class="last-updated">Last updated: <span class="mono">2026-02-22</span></p>
 
             <div class="kpi" aria-label="Key decision principles">
               <span class="item">Navigation first</span>
@@ -223,12 +293,13 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="home-profile">
       <div class="container">
         <article class="article">
           <h2>Step 1: Identify your “home profile”</h2>
           <p class="muted">
-            Two homes can buy the same robot and have totally different experiences. Start by choosing the closest match below.
+            Two homes can buy the same robot and have totally different experiences.
+            Pick the closest match, then prioritize the features that support it.
           </p>
 
           <div class="grid cols-3">
@@ -257,6 +328,13 @@
             </section>
           </div>
 
+          <section class="note accent" style="margin-top:1rem;">
+            <h3>Canada note</h3>
+            <p class="small muted">
+              If you deal with winter grit/salt dust, prioritize edge pickup + a maintenance routine you’ll actually keep.
+            </p>
+          </section>
+
           <div class="hr"></div>
 
           <h2>Step 2: Spend your budget where it counts</h2>
@@ -265,8 +343,12 @@
             than by chasing peak suction numbers.
           </p>
 
-          <div class="table-wrap">
-            <table class="table">
+          <p class="table-hint tiny muted" role="note">
+            Tip: swipe to compare. On mobile, the first column stays pinned.
+          </p>
+
+          <div class="table-wrap" data-scroll-hint="true">
+            <table class="table" aria-label="Feature value framework">
               <thead>
                 <tr>
                   <th>Feature</th>
@@ -282,7 +364,7 @@
                 </tr>
                 <tr>
                   <td><strong>Advanced obstacle avoidance</strong></td>
-                  <td>Your floor has clutter, cables, toys</td>
+                  <td>Your floor has clutter, cables, toys, or frequent “surprises”</td>
                   <td>Your home is tidy and predictable</td>
                 </tr>
                 <tr>
@@ -295,13 +377,18 @@
                   <td>You mop often and want low-effort upkeep</td>
                   <td>You’ll mop rarely (pads will still need care)</td>
                 </tr>
+                <tr>
+                  <td><strong>Replaceable parts</strong></td>
+                  <td>You want the robot to last years (brushes/filters/pads matter)</td>
+                  <td>Parts are hard to find or unusually expensive</td>
+                </tr>
               </tbody>
             </table>
           </div>
 
           <div class="hr"></div>
 
-          <h2>Step 3: Avoid the common “buyer traps”</h2>
+          <h2>Step 3: Avoid the common buyer traps</h2>
           <div class="pros-cons">
             <section class="pros">
               <h3>Signals of a good fit</h3>
@@ -327,7 +414,7 @@
           <div class="hr"></div>
 
           <section class="note">
-            <h3>Want our short list?</h3>
+            <h3>Want the short list?</h3>
             <p class="small muted">
               Jump to <a href="/best-robot-vacuums/">Best Robot Vacuums</a> for our current top picks and who each one is best for.
             </p>
@@ -344,14 +431,14 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="faq">
       <div class="container">
         <div class="section-title">
           <h2>Quick FAQ</h2>
           <span class="hint">Choosing questions</span>
         </div>
 
-        <div class="faq">
+        <div class="faq" aria-label="Choosing FAQ">
           <details>
             <summary>Do I need a self-empty dock?</summary>
             <div class="answer">
@@ -403,43 +490,29 @@
       <nav class="footer-nav" aria-label="Footer">
         <a href="/about/">About</a>
         <a href="/how-we-test/">How We Test</a>
+        <a href="/reviews/">Reviews</a>
         <a href="/disclosure/">Disclosure</a>
         <a href="/privacy-policy/">Privacy Policy</a>
       </nav>
     </div>
   </footer>
 
-  <!-- Cookie banner -->
-  <section class="cookie-banner" id="cookieBanner" hidden aria-label="Cookie notice">
-    <div class="container">
-      <div class="cookie-banner__inner">
-        <div class="cookie-banner__text">
-          <strong>Cookies</strong>
-          <span class="muted">
-            We use analytics cookies to understand site usage. You can accept or reject.
-            Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
-          </span>
-        </div>
-        <div class="cookie-banner__actions">
-          <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
-          <button class="btn" type="button" data-consent-accept>Accept</button>
-        </div>
+  <div class="cookie-banner" id="cookieBanner" hidden>
+    <div class="cookie-banner__inner container">
+      <div class="cookie-banner__text">
+        <strong>Privacy choices</strong>
+        <p class="small muted" style="margin:.25rem 0 0;">
+          We use analytics only if you accept. Affiliate partners may set cookies when you click outbound links.
+          Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
+        </p>
+      </div>
+      <div class="cookie-banner__actions">
+        <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
+        <button class="btn" type="button" data-consent-accept>Accept</button>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Minimal JS: mobile menu -->
-  <script>
-    (function () {
-      const btn = document.querySelector('.menu-btn');
-      const nav = document.getElementById('mobileNav');
-      if (!btn || !nav) return;
-
-      btn.addEventListener('click', function () {
-        const isOpen = nav.classList.toggle('open');
-        btn.setAttribute('aria-expanded', String(isOpen));
-      });
-    })();
-  </script>
+  <script defer src="/assets/js/site.js"></script>
 </body>
 </html>
