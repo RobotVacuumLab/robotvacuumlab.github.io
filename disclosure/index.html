@@ -1,25 +1,37 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-CA">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-  <title>Disclosure | RobotVacuumLab</title>
-  <meta name="description" content="Affiliate and editorial disclosure for RobotVacuumLab. How we make money, how recommendations are made, and our commitment to transparency." />
+  <!-- Primary SEO -->
+  <title>Disclosure (Canada) | RobotVacuumLab</title>
+  <meta name="description" content="Affiliate and editorial disclosure for RobotVacuumLab: how we make money, how recommendations are made, and our commitment to transparency." />
+  <meta name="author" content="RobotVacuumLab Editorial Team" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#ffffff" />
+  <meta name="format-detection" content="telephone=no" />
 
+  <!-- Canonical -->
   <link rel="canonical" href="https://robotvacuumlab.github.io/disclosure/" />
+
+  <!-- Hreflang -->
+  <link rel="alternate" href="https://robotvacuumlab.github.io/disclosure/" hreflang="en-CA" />
+  <link rel="alternate" href="https://robotvacuumlab.github.io/disclosure/" hreflang="x-default" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="/assets/css/styles.css" />
 
-  <!-- Favicons (root) -->
+  <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="icon" href="/assets/images/brand/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/images/brand/apple-touch-icon.png" />
+
+  <!-- Perf hints -->
+  <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
 
   <!-- Preload hero (LCP) — 3 sizes -->
   <link
@@ -32,59 +44,49 @@
       /assets/images/hero/disclosure-hero-2400x1260.webp 2400w
     "
     imagesizes="(max-width: 768px) 100vw, 1200px"
+    fetchpriority="high"
   />
 
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="RobotVacuumLab" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="Disclosure | RobotVacuumLab" />
+  <meta property="og:locale" content="en_CA" />
+  <meta property="og:title" content="Disclosure (Canada) | RobotVacuumLab" />
   <meta property="og:description" content="How RobotVacuumLab earns money, how affiliate links work, and how we keep recommendations independent." />
   <meta property="og:url" content="https://robotvacuumlab.github.io/disclosure/" />
   <meta property="og:image" content="https://robotvacuumlab.github.io/assets/images/og/disclosure-og-1200x630.webp" />
+  <meta property="og:image:secure_url" content="https://robotvacuumlab.github.io/assets/images/og/disclosure-og-1200x630.webp" />
+  <meta property="og:image:type" content="image/webp" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="RobotVacuumLab disclosure page" />
+  <meta property="article:modified_time" content="2026-02-22" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Disclosure | RobotVacuumLab" />
+  <meta name="twitter:title" content="Disclosure (Canada) | RobotVacuumLab" />
   <meta name="twitter:description" content="How RobotVacuumLab earns money and how we maintain editorial independence." />
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/disclosure-og-1200x630.webp" />
+  <meta name="twitter:image:alt" content="RobotVacuumLab disclosure page" />
 
-  <!-- GA4 + Consent Mode v2 (correct order) -->
-  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <!-- GA4 (consent default denied; site.js/consent updates on Accept/Reject) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
 
-    // Default denied until user choice (Consent Mode v2)
     gtag('consent', 'default', {
       ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
       analytics_storage: 'denied',
-      functionality_storage: 'denied',
-      personalization_storage: 'denied',
-      security_storage: 'granted',
-      wait_for_update: 800
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
     });
 
     gtag('js', new Date());
-  </script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
-  <script>
-    // GA4 config (respects consent)
-    gtag('config', 'G-56CWM7N1S7', {
-      anonymize_ip: true,
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false
-    });
+    gtag('config', 'G-56CWM7N1S7', { anonymize_ip: true });
   </script>
 
-  <!-- Consent banner logic -->
-  <script defer src="/assets/js/consent.js"></script>
-
-  <!-- JSON-LD (Organization + Article) -->
+  <!-- JSON-LD: Organization -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -95,33 +97,33 @@
   }
   </script>
 
+  <!-- JSON-LD: WebPage -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"Article",
-    "headline":"Disclosure",
-    "description":"Affiliate and editorial disclosure for RobotVacuumLab. How we make money, how recommendations are made, and our commitment to transparency.",
-    "image":[
-      "https://robotvacuumlab.github.io/assets/images/og/disclosure-og-1200x630.webp"
-    ],
-    "datePublished":"2026-02-03",
-    "dateModified":"2026-02-03",
-    "author":{
-      "@type":"Organization",
-      "name":"RobotVacuumLab Editorial Team"
-    },
-    "mainEntityOfPage":{
-      "@type":"WebPage",
-      "@id":"https://robotvacuumlab.github.io/disclosure/"
-    },
-    "publisher":{
-      "@type":"Organization",
+    "@type":"WebPage",
+    "name":"Disclosure (Canada)",
+    "description":"Affiliate and editorial disclosure for RobotVacuumLab: how we make money, how recommendations are made, and our commitment to transparency.",
+    "url":"https://robotvacuumlab.github.io/disclosure/",
+    "inLanguage":"en-CA",
+    "isPartOf":{
+      "@type":"WebSite",
       "name":"RobotVacuumLab",
-      "logo":{
-        "@type":"ImageObject",
-        "url":"https://robotvacuumlab.github.io/assets/images/brand/logo-mark-white.svg?v=2"
-      }
-    }
+      "url":"https://robotvacuumlab.github.io/"
+    },
+    "dateModified":"2026-02-22"
+  }
+  </script>
+
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      { "@type":"ListItem", "position":1, "name":"Home", "item":"https://robotvacuumlab.github.io/" },
+      { "@type":"ListItem", "position":2, "name":"Disclosure", "item":"https://robotvacuumlab.github.io/disclosure/" }
+    ]
   }
   </script>
 </head>
@@ -136,10 +138,10 @@
           <img
             src="/assets/images/brand/logo-mark-white.svg?v=2"
             alt=""
-            width="48"
-            height="48"
-            loading="eager"
+            width="44"
+            height="44"
             decoding="async"
+            loading="eager"
           />
         </span>
         <span>
@@ -152,6 +154,8 @@
         <a href="/best-robot-vacuums/">Best Robot Vacuums</a>
         <a href="/how-we-test/">How We Test</a>
         <a href="/how-to-choose-a-robot-vacuum/">How to Choose</a>
+        <a href="/reviews/">Reviews</a>
+        <a href="/about/">About</a>
         <a class="nav-cta btn btn-secondary" href="/best-robot-vacuums/">See our top picks</a>
       </nav>
 
@@ -160,17 +164,19 @@
       </button>
     </div>
 
-    <div class="container mobile-nav" id="mobileNav">
+    <!-- Mobile nav uses [hidden] to match your other pages + site.js -->
+    <div class="container mobile-nav" id="mobileNav" hidden>
       <a href="/best-robot-vacuums/">Best Robot Vacuums</a>
       <a href="/how-we-test/">How We Test</a>
       <a href="/how-to-choose-a-robot-vacuum/">How to Choose</a>
+      <a href="/reviews/">Reviews</a>
       <a href="/about/">About</a>
       <a href="/disclosure/" aria-current="page">Disclosure</a>
       <a href="/privacy-policy/">Privacy Policy</a>
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <div class="container">
         <ol>
@@ -193,9 +199,12 @@
                 /assets/images/hero/disclosure-hero-2400x1260.webp 2400w
               "
               sizes="(max-width: 768px) 100vw, 1200px"
+              width="1600"
+              height="840"
               alt="Clean editorial workspace representing transparency and testing"
               loading="eager"
               decoding="async"
+              fetchpriority="high"
             />
           </div>
 
@@ -206,7 +215,7 @@
               Transparency matters. This page explains how we make money and how we keep recommendations independent.
             </p>
 
-            <p class="last-updated">Last updated: <span class="mono">2026-02-03</span></p>
+            <p class="last-updated">Last updated: <span class="mono">2026-02-22</span></p>
           </div>
         </div>
       </div>
@@ -221,41 +230,42 @@
             we may earn a commission at no additional cost to you.
           </p>
 
-          <p>
-            These commissions help support the site, testing time, research, and ongoing updates.
-            They do <strong>not</strong> influence which products we recommend or how they are ranked.
+          <p class="muted">
+            Affiliate revenue helps support research time, product comparisons, and ongoing updates.
+            It does <strong>not</strong> influence which products we recommend or how they are ranked.
           </p>
 
           <h2>Editorial independence</h2>
           <ul>
             <li>We do not accept payment for positive reviews.</li>
-            <li>Manufacturers do not approve or edit our content.</li>
-            <li>Recommendations are based on research, specifications, user feedback patterns, and comparative analysis.</li>
+            <li>Manufacturers and retailers do not approve, edit, or control our content.</li>
+            <li>We aim to explain trade-offs clearly. If a pick is a close call, we say so.</li>
           </ul>
 
           <h2>How we choose products</h2>
           <p>
-            We aim to recommend products that perform well for most homes. When a product has meaningful downsides,
-            we clearly explain them. There is no “perfect” robot vacuum.
+            We recommend products that tend to work well for most homes in a category, then we explain who each pick is for
+            (and who should skip it). There is no “perfect” robot vacuum.
           </p>
 
-          <p>
-            You can learn more about our process on the <a href="/how-we-test/">How We Test</a> page.
+          <p class="muted">
+            For our full rubric and decision framework, see <a href="/how-we-test/">How We Test</a> and
+            <a href="/how-to-choose-a-robot-vacuum/">How to Choose</a>.
           </p>
 
           <h2>Pricing and availability</h2>
           <p class="muted">
             Prices and availability can change at any time. We do our best to keep information current,
-            but we encourage you to verify details on the retailer’s website before purchasing.
+            but always verify details on the retailer’s website before purchasing.
           </p>
 
           <div class="hr"></div>
 
           <section class="note warn">
-            <h3>Important note</h3>
+            <h3>Informational only</h3>
             <p class="small muted">
-              RobotVacuumLab is an informational site. Content is provided for general guidance only
-              and should not be considered professional advice.
+              RobotVacuumLab provides general informational content. Nothing on this site should be considered
+              professional advice.
             </p>
           </section>
         </article>
@@ -288,6 +298,7 @@
       <nav class="footer-nav" aria-label="Footer">
         <a href="/about/">About</a>
         <a href="/how-we-test/">How We Test</a>
+        <a href="/reviews/">Reviews</a>
         <a href="/disclosure/" aria-current="page">Disclosure</a>
         <a href="/privacy-policy/">Privacy Policy</a>
       </nav>
@@ -299,10 +310,9 @@
     <div class="container">
       <div class="cookie-banner__inner">
         <div class="cookie-banner__text">
-          <strong>Cookies</strong>
+          <strong>Privacy choices</strong>
           <span class="muted">
-            We use analytics cookies to understand site usage. You can accept or reject.
-            Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
+            We use analytics only if you accept. Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
           </span>
         </div>
         <div class="cookie-banner__actions">
@@ -313,18 +323,7 @@
     </div>
   </section>
 
-  <!-- Minimal JS: mobile menu -->
-  <script>
-    (function () {
-      const btn = document.querySelector('.menu-btn');
-      const nav = document.getElementById('mobileNav');
-      if (!btn || !nav) return;
-
-      btn.addEventListener('click', function () {
-        const isOpen = nav.classList.toggle('open');
-        btn.setAttribute('aria-expanded', String(isOpen));
-      });
-    })();
-  </script>
+  <!-- Shared JS (menu + consent) -->
+  <script defer src="/assets/js/site.js"></script>
 </body>
 </html>
