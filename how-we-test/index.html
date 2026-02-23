@@ -1,27 +1,39 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-CA">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-  <title>How We Test Robot Vacuums | RobotVacuumLab</title>
-  <meta name="description" content="Our robot vacuum testing methodology: how we evaluate navigation, pickup, mopping, noise, app usability, and maintenance for real homes." />
+  <!-- Primary SEO -->
+  <title>How We Test Robot Vacuums (Canada, 2026) | RobotVacuumLab</title>
+  <meta name="description" content="RobotVacuumLab testing methodology for Canadian homes: how we evaluate navigation, pickup, mopping, noise, app usability, and maintenance with clear trade-offs." />
+  <meta name="author" content="RobotVacuumLab Editorial Team" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#ffffff" />
+  <meta name="format-detection" content="telephone=no" />
 
+  <!-- Canonical -->
   <link rel="canonical" href="https://robotvacuumlab.github.io/how-we-test/" />
+
+  <!-- Hreflang -->
+  <link rel="alternate" href="https://robotvacuumlab.github.io/how-we-test/" hreflang="en-CA" />
+  <link rel="alternate" href="https://robotvacuumlab.github.io/how-we-test/" hreflang="x-default" />
+
+  <!-- Favicons (safe defaults; keep if you have them) -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/assets/images/brand/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/images/brand/apple-touch-icon.png" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="/assets/css/styles.css" />
 
-  <!-- Favicons (root) -->
-  <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
+  <!-- Perf hints -->
+  <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
 
-  <!-- Preload hero (LCP) — 3 sizes -->
+  <!-- Preload LCP hero -->
   <link
     rel="preload"
     as="image"
@@ -32,58 +44,53 @@
       /assets/images/hero/how-we-test-hero-2400x1260.webp 2400w
     "
     imagesizes="(max-width: 768px) 100vw, 1200px"
+    fetchpriority="high"
   />
 
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="RobotVacuumLab" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="How We Test Robot Vacuums | RobotVacuumLab" />
-  <meta property="og:description" content="Our robot vacuum testing methodology: navigation, pickup, mopping, noise, app usability, and maintenance for real homes." />
+  <meta property="og:locale" content="en_CA" />
+  <meta property="og:title" content="How We Test Robot Vacuums (Canada, 2026) | RobotVacuumLab" />
+  <meta property="og:description" content="Transparent robot vacuum testing methodology: navigation, pickup, mopping, noise, app usability, and maintenance trade-offs for Canadian homes." />
   <meta property="og:url" content="https://robotvacuumlab.github.io/how-we-test/" />
   <meta property="og:image" content="https://robotvacuumlab.github.io/assets/images/og/how-we-test-og-1200x630.webp" />
+  <meta property="og:image:secure_url" content="https://robotvacuumlab.github.io/assets/images/og/how-we-test-og-1200x630.webp" />
+  <meta property="og:image:type" content="image/webp" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="RobotVacuumLab methodology: how we test robot vacuums for real homes" />
+
+  <!-- Article metadata -->
+  <meta property="article:published_time" content="2026-02-02" />
+  <meta property="article:modified_time" content="2026-02-22" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="How We Test Robot Vacuums | RobotVacuumLab" />
-  <meta name="twitter:description" content="Our robot vacuum testing methodology: navigation, pickup, mopping, noise, app usability, and maintenance for real homes." />
+  <meta name="twitter:title" content="How We Test Robot Vacuums (Canada, 2026) | RobotVacuumLab" />
+  <meta name="twitter:description" content="Transparent robot vacuum testing methodology: navigation, pickup, mopping, noise, app usability, and maintenance." />
   <meta name="twitter:image" content="https://robotvacuumlab.github.io/assets/images/og/how-we-test-og-1200x630.webp" />
+  <meta name="twitter:image:alt" content="RobotVacuumLab methodology: how we test robot vacuums for real homes" />
 
-  <!-- GA4 + Consent Mode v2 (standard, correct order) -->
-  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <!-- Google Analytics 4 (consent default denied; site.js updates on Accept/Reject) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
 
-    // Default denied until user choice
+    // Default: deny storage until user accepts in the cookie banner
     gtag('consent', 'default', {
       ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
       analytics_storage: 'denied',
-      functionality_storage: 'denied',
-      personalization_storage: 'denied',
-      security_storage: 'granted',
-      wait_for_update: 800
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
     });
 
     gtag('js', new Date());
-  </script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56CWM7N1S7"></script>
-  <script>
-    gtag('config', 'G-56CWM7N1S7', {
-      anonymize_ip: true,
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false
-    });
+    gtag('config', 'G-56CWM7N1S7', { anonymize_ip: true });
   </script>
 
-  <!-- Consent banner logic -->
-  <script defer src="/assets/js/consent.js"></script>
-
-  <!-- JSON-LD (Organization + Article) -->
+  <!-- JSON-LD: Organization -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -94,17 +101,41 @@
   }
   </script>
 
+  <!-- JSON-LD: WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"RobotVacuumLab",
+    "url":"https://robotvacuumlab.github.io/"
+  }
+  </script>
+
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      { "@type":"ListItem", "position":1, "name":"Home", "item":"https://robotvacuumlab.github.io/" },
+      { "@type":"ListItem", "position":2, "name":"How We Test", "item":"https://robotvacuumlab.github.io/how-we-test/" }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: Article -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"Article",
-    "headline":"How We Test Robot Vacuums",
-    "description":"Our robot vacuum testing methodology: navigation, pickup, mopping, noise, app usability, and maintenance for real homes.",
+    "headline":"How We Test Robot Vacuums (Canada, 2026)",
+    "description":"RobotVacuumLab testing methodology for Canadian homes: how we evaluate navigation, pickup, mopping, noise, app usability, and maintenance with clear trade-offs.",
     "image":[
       "https://robotvacuumlab.github.io/assets/images/og/how-we-test-og-1200x630.webp"
     ],
     "datePublished":"2026-02-02",
-    "dateModified":"2026-02-03",
+    "dateModified":"2026-02-22",
+    "inLanguage":"en-CA",
     "author":{
       "@type":"Organization",
       "name":"RobotVacuumLab Editorial Team"
@@ -123,6 +154,40 @@
     }
   }
   </script>
+
+  <!-- JSON-LD: FAQPage (matches the on-page FAQ below) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Do you accept payment for reviews?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"We don’t accept payment for positive coverage. If we use affiliate links, that relationship is disclosed. Our goal is clear guidance for real buyers."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"Are your recommendations always the single “best” model?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"Not always. Often the best pick is the one that fits most homes best. We highlight who each pick is for, and where it falls short."
+        }
+      },
+      {
+        "@type":"Question",
+        "name":"How often do you update guides?",
+        "acceptedAnswer":{
+          "@type":"Answer",
+          "text":"We update when it matters: new major releases, important price shifts, or new information that changes the ranking. Each guide shows a Last updated date."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -135,8 +200,8 @@
           <img
             src="/assets/images/brand/logo-mark-white.svg?v=2"
             alt=""
-            width="48"
-            height="48"
+            width="44"
+            height="44"
             decoding="async"
             loading="eager"
           />
@@ -151,6 +216,8 @@
         <a href="/best-robot-vacuums/">Best Robot Vacuums</a>
         <a href="/how-we-test/" aria-current="page">How We Test</a>
         <a href="/how-to-choose-a-robot-vacuum/">How to Choose</a>
+        <a href="/reviews/">Reviews</a>
+        <a href="/about/">About</a>
         <a class="nav-cta btn btn-secondary" href="/best-robot-vacuums/">See our top picks</a>
       </nav>
 
@@ -159,17 +226,18 @@
       </button>
     </div>
 
-    <div class="container mobile-nav" id="mobileNav">
+    <div class="container mobile-nav" id="mobileNav" hidden>
       <a href="/best-robot-vacuums/">Best Robot Vacuums</a>
       <a href="/how-we-test/" aria-current="page">How We Test</a>
       <a href="/how-to-choose-a-robot-vacuum/">How to Choose</a>
+      <a href="/reviews/">Reviews</a>
       <a href="/about/">About</a>
       <a href="/disclosure/">Disclosure</a>
       <a href="/privacy-policy/">Privacy Policy</a>
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <div class="container">
         <ol>
@@ -192,9 +260,12 @@
                 /assets/images/hero/how-we-test-hero-2400x1260.webp 2400w
               "
               sizes="(max-width: 768px) 100vw, 1200px"
+              width="1600"
+              height="840"
               alt="Robot vacuum testing setup in a clean modern home environment"
               loading="eager"
               decoding="async"
+              fetchpriority="high"
             />
           </div>
 
@@ -202,29 +273,35 @@
             <div class="kicker">Methodology • Transparency</div>
             <h1 class="h1">How we test robot vacuums</h1>
             <p class="lede">
-              This page explains what we measure, why it matters, and how we keep our recommendations consistent.
-              When something is a close call, we say so.
+              What we measure, why it matters, and how we keep picks consistent. If something is a close call, we say so.
             </p>
 
             <div class="hero-actions">
               <a class="btn" href="/best-robot-vacuums/">See our top picks</a>
               <a class="btn btn-secondary" href="/how-to-choose-a-robot-vacuum/">How to Choose</a>
+              <a class="btn btn-ghost" href="#categories">Jump to categories</a>
             </div>
 
-            <p class="last-updated">Last updated: <span class="mono">2026-02-03</span></p>
+            <p class="last-updated">Last updated: <span class="mono">2026-02-22</span></p>
+
+            <div class="kpi" aria-label="Methodology standards">
+              <span class="item">Rubric-first</span>
+              <span class="item">Real-home outcomes</span>
+              <span class="item">Clear trade-offs</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="categories">
       <div class="container">
         <div class="grid cols-3">
           <section class="card">
             <div class="card-body">
               <span class="badge">Consistency</span>
               <h3>Same rubric, every time</h3>
-              <p>We use a stable set of criteria so comparisons stay fair across models and price tiers.</p>
+              <p>Stable criteria so comparisons stay fair across models and price tiers.</p>
             </div>
           </section>
 
@@ -232,7 +309,7 @@
             <div class="card-body">
               <span class="badge">Real homes</span>
               <h3>Practical outcomes</h3>
-              <p>We focus on outcomes that change daily life: coverage, pickup, mopping results, and maintenance.</p>
+              <p>Coverage, pickup, mopping usefulness, and maintenance are what you feel daily.</p>
             </div>
           </section>
 
@@ -250,12 +327,16 @@
         <article class="article">
           <h2>Our evaluation categories</h2>
           <p class="muted">
-            Robot vacuums can look similar on spec sheets. The differences that matter show up in mapping reliability,
-            pickup performance, edge behavior, and ongoing hassle.
+            Spec sheets rarely predict ownership. The differences that matter show up in mapping reliability, pickup consistency,
+            edge behavior, and ongoing hassle.
           </p>
 
-          <div class="table-wrap">
-            <table class="table">
+          <p class="table-hint tiny muted" role="note">
+            Tip: swipe left/right to compare. On mobile, the “Category” column stays pinned.
+          </p>
+
+          <div class="table-wrap" data-scroll-hint="true">
+            <table class="table" aria-label="Robot vacuum testing categories">
               <thead>
                 <tr>
                   <th>Category</th>
@@ -266,46 +347,48 @@
               <tbody>
                 <tr>
                   <td><strong>Navigation & mapping</strong></td>
-                  <td>Room coverage, obstacle avoidance, reliability over repeated runs</td>
-                  <td>Missed rooms, repeated bumps, frequent “lost” behavior</td>
+                  <td>Room coverage, obstacle handling, reliability over repeated runs, recovery from “problem areas”</td>
+                  <td>Missed rooms, repeated bumps, frequent “lost” behavior, map corruption</td>
                 </tr>
                 <tr>
                   <td><strong>Pickup (hard floor)</strong></td>
-                  <td>Fine dust, crumbs, edge pickup, consistency</td>
-                  <td>Scatter, streaky pickup, weak edge behavior</td>
+                  <td>Fine dust, crumbs, edge pickup, consistent results across runs</td>
+                  <td>Scatter, streaky pickup, weak edges, leaves debris lines</td>
                 </tr>
                 <tr>
                   <td><strong>Pickup (carpet)</strong></td>
-                  <td>Pet hair handling, deep pickup, brush design</td>
-                  <td>Hair tangles, poor agitation, clogged intake</td>
+                  <td>Pet hair handling, agitation, deep pickup, anti-tangle design</td>
+                  <td>Hair tangles, poor agitation, clogged intake, performance drop after a week</td>
                 </tr>
                 <tr>
                   <td><strong>Mopping</strong></td>
-                  <td>Stain reduction, edge reach, water control</td>
-                  <td>Over-wetting, poor pad contact, weak edge reach</td>
+                  <td>Stain reduction, pad contact, edge reach, water control, dock cleaning practicality</td>
+                  <td>Over-wetting, weak pressure, poor edges, messy upkeep</td>
                 </tr>
                 <tr>
                   <td><strong>Usability</strong></td>
-                  <td>App stability, schedules, room controls, no-go zones</td>
-                  <td>Buggy maps, confusing controls, unreliable schedules</td>
+                  <td>App stability, schedules, room controls, zones/no-go areas, multi-floor behavior</td>
+                  <td>Buggy maps, confusing controls, unreliable schedules, broken routines</td>
                 </tr>
                 <tr>
                   <td><strong>Maintenance</strong></td>
-                  <td>Brush tangles, bin emptying, filter access, parts</td>
-                  <td>Frequent clogs, messy emptying, hard-to-find consumables</td>
+                  <td>Brush tangles, bin/bag workflow, filter access, parts availability, dock upkeep</td>
+                  <td>Frequent clogs, messy emptying, hard-to-find consumables, leak-prone docks</td>
                 </tr>
                 <tr>
                   <td><strong>Noise</strong></td>
-                  <td>Perceived loudness, tone, “annoying” frequencies</td>
-                  <td>High-pitched whine, loud auto-empty station</td>
+                  <td>Perceived loudness, tone (whine vs. whoosh), station emptying volume</td>
+                  <td>High-pitched whine, harsh dock emptying, “can’t run it at night” loud</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
+          <div class="hr"></div>
+
           <h2>How we choose “top picks”</h2>
           <p>
-            Our “best overall” recommendation usually balances navigation reliability, strong pickup on typical floors,
+            “Best overall” is usually the model that stays dependable in the most homes: reliable navigation, consistent pickup,
             reasonable maintenance, and a stable app experience. Budget picks emphasize value and low ongoing hassle.
             Premium picks must meaningfully improve day-to-day outcomes, not just add features on paper.
           </p>
@@ -337,6 +420,13 @@
             Major updates are reflected on each guide’s “Last updated” line.
           </p>
 
+          <section class="note accent">
+            <h3 style="margin:0 0 .35rem;">Canada note</h3>
+            <p class="small muted">
+              We pay attention to Canadian realities like winter grit/salt dust, threshold transitions, mixed flooring, and parts availability.
+            </p>
+          </section>
+
           <div class="hr"></div>
 
           <section class="note warn">
@@ -350,14 +440,14 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="faq">
       <div class="container">
         <div class="section-title">
           <h2>Quick FAQ</h2>
           <span class="hint">Methodology questions</span>
         </div>
 
-        <div class="faq">
+        <div class="faq" aria-label="Methodology FAQ">
           <details>
             <summary>Do you accept payment for reviews?</summary>
             <div class="answer">
@@ -366,7 +456,7 @@
             </div>
           </details>
           <details>
-            <summary>Are your recommendations always the “best” model?</summary>
+            <summary>Are your recommendations always the single “best” model?</summary>
             <div class="answer">
               Not always. Often the best pick is the one that fits most homes best. We highlight who each pick is for,
               and where it falls short.
@@ -409,43 +499,29 @@
       <nav class="footer-nav" aria-label="Footer">
         <a href="/about/">About</a>
         <a href="/how-we-test/" aria-current="page">How We Test</a>
+        <a href="/reviews/">Reviews</a>
         <a href="/disclosure/">Disclosure</a>
         <a href="/privacy-policy/">Privacy Policy</a>
       </nav>
     </div>
   </footer>
 
-  <!-- Cookie banner -->
-  <section class="cookie-banner" id="cookieBanner" hidden aria-label="Cookie notice">
-    <div class="container">
-      <div class="cookie-banner__inner">
-        <div class="cookie-banner__text">
-          <strong>Cookies</strong>
-          <span class="muted">
-            We use analytics cookies to understand site usage. You can accept or reject.
-            Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
-          </span>
-        </div>
-        <div class="cookie-banner__actions">
-          <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
-          <button class="btn" type="button" data-consent-accept>Accept</button>
-        </div>
+  <div class="cookie-banner" id="cookieBanner" hidden>
+    <div class="cookie-banner__inner container">
+      <div class="cookie-banner__text">
+        <strong>Privacy choices</strong>
+        <p class="small muted" style="margin:.25rem 0 0;">
+          We use analytics only if you accept. Affiliate partners may set cookies when you click outbound links.
+          Learn more in our <a href="/privacy-policy/">Privacy Policy</a>.
+        </p>
+      </div>
+      <div class="cookie-banner__actions">
+        <button class="btn btn-secondary" type="button" data-consent-reject>Reject</button>
+        <button class="btn" type="button" data-consent-accept>Accept</button>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Minimal JS: mobile menu -->
-  <script>
-    (function () {
-      const btn = document.querySelector('.menu-btn');
-      const nav = document.getElementById('mobileNav');
-      if (!btn || !nav) return;
-
-      btn.addEventListener('click', function () {
-        const isOpen = nav.classList.toggle('open');
-        btn.setAttribute('aria-expanded', String(isOpen));
-      });
-    })();
-  </script>
+  <script defer src="/assets/js/site.js"></script>
 </body>
 </html>
