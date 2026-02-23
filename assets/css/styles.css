@@ -2,11 +2,10 @@
    RobotVacuumLab — Editorial Tech Lab CSS (UPDATED / AUDIT-READY)
    Goals: clean, trustworthy, fast, accessible, mobile-first
    Updates in this version:
-   - FIX: cookie banner is no longer forced hidden (removes display:none !important)
-   - ADD: cookie banner styling (premium, accessible, non-intrusive)
-   - FIX: mobile-nav uses [hidden] consistently (no “double hiding” bugs)
-   - ADD: .h3 helper class (you use class="h3" in HTML)
-   - KEEP: CTA glow + shimmer patch + dark mode + reduced motion
+   - FIX: video no longer cut on mobile (ratio moved to .yt-responsive only)
+   - IMPROVE: cookie banner opacity/contrast (premium glass, readable)
+   - KEEP: cookie banner uses [hidden], mobile-nav [hidden], CTA glow/shimmer,
+           dark mode, reduced motion
    ========================================================= */
 
 /* ---------- Design Tokens ---------- */
@@ -929,6 +928,7 @@ main{
    Cookie Banner (premium + accessible)
    - Uses [hidden] attribute: JS toggles banner.hidden
    - Fixed bottom, non-intrusive, max-width aligned to container
+   - UPDATED: stronger opacity in both modes (so it doesn't blend in)
    ========================================================= */
 .cookie-banner{
   position: fixed;
@@ -943,13 +943,26 @@ main{
 .cookie-banner__inner{
   pointer-events: auto;
   border: 1px solid var(--banner-border);
-  background: var(--banner-bg);
+  background: rgba(255,255,255,.92); /* UPDATED: real opacity (light) */
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 1.1rem;
-  box-shadow: var(--banner-shadow);
+  box-shadow:
+    var(--banner-shadow),
+    0 0 0 4px rgba(14,163,127,.08); /* subtle pop */
   padding: 0.9rem;
   display: grid;
   gap: 0.85rem;
+}
+
+@media (prefers-color-scheme: dark){
+  .cookie-banner__inner{
+    background: rgba(12,18,32,.88); /* UPDATED: real opacity (dark) */
+    border-color: rgba(255,255,255,.14);
+    box-shadow:
+      var(--banner-shadow),
+      0 0 0 4px rgba(33,214,166,.10);
+  }
 }
 
 @media (min-width: 48rem){
@@ -1003,22 +1016,45 @@ main{
 
 /* =========================================================
    Video embed (responsive + safe)
+   UPDATED: stop clipping on mobile by removing aspect-ratio
+            from the whole .video-embed note and applying it
+            ONLY to the iframe wrapper (.yt-responsive).
    ========================================================= */
-.video-embed{
-  border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: var(--radius-md);
-  overflow: hidden;
+.note.video-embed{
+  overflow: visible;   /* UPDATED: don't clip text */
   box-shadow: var(--shadow-sm);
-  aspect-ratio: 16 / 9;
 }
 
-.video-embed iframe{
+/* Ratio wrapper */
+.yt-responsive{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  margin-top: .6rem;
+}
+.yt-responsive iframe{
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   border: 0;
   display: block;
 }
+
+/* Keep .video-embed class compatible if used elsewhere */
+.video-embed{
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+/* If any old rule gave it aspect-ratio, neutralize it */
+.video-embed{ aspect-ratio: auto; }
 
 /* =========================================================
    RobotVacuumLab — CTA BOOST PATCH (kept)
