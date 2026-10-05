@@ -21,18 +21,8 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <!-- Preload hero (LCP) — 3 sizes -->
-  <link
-    rel="preload"
-    as="image"
-    href="/assets/images/hero/roborock-qv-35a-hero-1600x840.webp"
-    imagesrcset="
-      /assets/images/hero/roborock-qv-35a-hero-1200x675.webp 1200w,
-      /assets/images/hero/roborock-qv-35a-hero-1600x840.webp 1600w,
-      /assets/images/hero/roborock-qv-35a-hero-2400x1260.webp 2400w
-    "
-    imagesizes="(max-width: 768px) 100vw, 1200px"
-  />
+  <!-- Preload the existing QV 35A product image -->
+  <link rel="preload" as="image" href="/assets/images/products/cards/roborock-qv-35a-robot-vacuum-canada-2026-800x800.webp" fetchpriority="high" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
@@ -180,16 +170,14 @@
         <div class="hero-card">
           <div class="hero-media">
             <img
-              src="/assets/images/hero/roborock-qv-35a-hero-1600x840.webp"
-              srcset="
-                /assets/images/hero/roborock-qv-35a-hero-1200x675.webp 1200w,
-                /assets/images/hero/roborock-qv-35a-hero-1600x840.webp 1600w,
-                /assets/images/hero/roborock-qv-35a-hero-2400x1260.webp 2400w
-              "
-              sizes="(max-width: 768px) 100vw, 1200px"
-              alt="Robot vacuum in a clean, real-home testing setup with docking station"
+              src="/assets/images/products/cards/roborock-qv-35a-robot-vacuum-canada-2026-800x800.webp"
+              width="800"
+              height="800"
+              style="object-fit:contain;"
+              alt="Roborock QV 35A robot vacuum and dock"
               loading="eager"
               decoding="async"
+              fetchpriority="high"
             />
           </div>
 

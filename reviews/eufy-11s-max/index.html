@@ -84,7 +84,7 @@
   </script>
 
   <!-- Consent banner controller -->
-  <script defer src="/assets/js/consent.js"></script>
+  <script defer src="/assets/js/site.js"></script>
 
   <!-- JSON-LD (Organization + Article) -->
   <script type="application/ld+json">
@@ -125,7 +125,7 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Cookie Banner (hidden by default; shown by consent.js if no choice) -->
+  <!-- Cookie Banner (hidden by default; shown by site.js if no choice) -->
   <div id="cookieBanner" class="cookie-banner" hidden>
     <div class="cookie-banner__inner container" role="dialog" aria-modal="true" aria-labelledby="cookieTitle">
       <div class="cookie-banner__text">
@@ -370,17 +370,5 @@
     </div>
   </footer>
 
-  <script>
-    (function () {
-      const btn = document.querySelector('.menu-btn');
-      const nav = document.getElementById('mobileNav');
-      if (!btn || !nav) return;
-
-      btn.addEventListener('click', function () {
-        const isOpen = nav.classList.toggle('open');
-        btn.setAttribute('aria-expanded', String(isOpen));
-      });
-    })();
-  </script>
 </body>
 </html>
