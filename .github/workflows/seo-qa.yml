@@ -1,0 +1,32 @@
+name: SEO QA
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 -m unittest discover -s tools/seo-agent -p 'test_*.py'
+      - name: Compare against PR base
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          git worktree add --detach /tmp/seo-base "$BASE_SHA"
+          python3 tools/seo-agent/agent.py --root /tmp/seo-base --output /tmp/seo-baseline
+          python3 tools/seo-agent/agent.py --check --baseline /tmp/seo-baseline/audit.json
+      - name: Manual audit
+        if: github.event_name == 'workflow_dispatch'
+        run: python3 tools/seo-agent/agent.py
+      - name: Summary
+        if: always()
+        run: cat seo-agent-output/audit.md >> "$GITHUB_STEP_SUMMARY"
