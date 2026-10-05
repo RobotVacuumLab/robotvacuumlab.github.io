@@ -1,0 +1,50 @@
+name: SEO Agent
+on:
+  schedule:
+    - cron: '23 10 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: seo-agent
+  cancel-in-progress: false
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test agent
+        run: python3 -m unittest discover -s tools/seo-agent -p 'test_*.py'
+      - name: Audit and propose sitemap additions
+        run: |
+          python3 tools/seo-agent/agent.py --output /tmp/seo-before
+          python3 tools/seo-agent/agent.py --fix-sitemap --check --baseline /tmp/seo-before/audit.json
+          cat seo-agent-output/audit.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: seo-audit
+          path: seo-agent-output/
+          retention-days: 3
+      - name: Open or update sitemap PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          if git diff --quiet -- sitemap.xml; then exit 0; fi
+          branch=seo-agent/sitemap
+          git checkout -b "$branch"
+          git config user.name 'seo-agent[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sitemap.xml
+          git commit -m 'SEO: add existing indexable pages to sitemap'
+          git push --force-with-lease origin "HEAD:refs/heads/$branch"
+          if [ "$(gh pr list --head "$branch" --state open --json number --jq 'length')" = 0 ]; then
+            gh pr create --base "$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name')" --head "$branch" --title 'SEO: add existing pages to sitemap' --body-file tools/seo-agent/SITEMAP-PR.md
+          fi
