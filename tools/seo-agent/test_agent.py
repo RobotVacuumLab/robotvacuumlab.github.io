@@ -1,6 +1,7 @@
 import tempfile, unittest, subprocess, sys
 from pathlib import Path
 import agent
+import xml.etree.ElementTree as ET
 
 class AgentTests(unittest.TestCase):
     def setUp(self):
@@ -21,6 +22,34 @@ class AgentTests(unittest.TestCase):
         self.assertEqual(agent.fix_sitemap(self.root,self.origin),0)
         self.assertNotIn('/private/',(self.root/'sitemap.xml').read_text())
         self.assertEqual(agent.scan(self.root,self.origin)['pages'],2)
+    def test_sitemap_namespace_preserves_https_urls_and_dates(self):
+        namespace='http://www.sitemaps.org/schemas/sitemap/0.9'
+        target=self.root/'sitemap.xml'
+        for existing_namespace in (namespace, namespace.replace('http:', 'https:')):
+            for append_page in (False, True):
+                with self.subTest(namespace=existing_namespace, append_page=append_page):
+                    original=(f'<urlset xmlns="{existing_namespace}">\n'
+                              f'  <url><loc>{self.origin}/</loc><lastmod>2026-02-23</lastmod></url>\n'
+                              '</urlset>')
+                    target.write_text(original,encoding='utf-8')
+                    extra=self.root/'extra'
+                    extra.mkdir(exist_ok=True)
+                    (extra/'index.html').write_text(self.html.replace(self.origin+'/',self.origin+'/extra/').replace(
+                        '<head>', '<head><meta name="robots" content="index">' if append_page else
+                        '<head><meta name="robots" content="noindex">'),encoding='utf-8')
+                    self.assertEqual(agent.fix_sitemap(self.root,self.origin), int(append_page))
+                    result=target.read_text(encoding='utf-8')
+                    expected=original.replace(existing_namespace,namespace,1)
+                    if append_page:
+                        expected=expected.replace('</urlset>',f'  <url><loc>{self.origin}/extra/</loc></url>\n</urlset>')
+                    self.assertEqual(result,expected)
+                    root=ET.fromstring(result)
+                    self.assertEqual(root.tag,f'{{{namespace}}}urlset')
+                    self.assertTrue(all(n.tag.startswith('{'+namespace+'}') for n in root.iter()))
+                    self.assertTrue(all(n.text.startswith('https://') for n in root.iter(f'{{{namespace}}}loc')))
+                    self.assertEqual([n.text for n in root.iter(f'{{{namespace}}}lastmod')],['2026-02-23'])
+                    self.assertEqual(agent.fix_sitemap(self.root,self.origin),0)
+                    self.assertEqual(target.read_text(encoding='utf-8'),result)
     def test_encoded_asset_query_and_path_escape(self):
         (self.root/'my image.webp').write_bytes(b'img')
         (self.root/'index.html').write_text(self.html.replace('</body>','<img alt="" src="/my%20image.webp?v=2"><a href="/%2e%2e/secret">bad</a></body>'))
