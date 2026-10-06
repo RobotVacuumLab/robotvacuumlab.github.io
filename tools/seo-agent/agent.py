@@ -7,6 +7,8 @@ from pathlib import Path
 from urllib.parse import urljoin, urlsplit, unquote
 import xml.etree.ElementTree as ET
 
+SITEMAP_NAMESPACE = 'http://www.sitemaps.org/schemas/sitemap/0.9'
+
 class Page(HTMLParser):
     def __init__(self, text):
         super().__init__(convert_charrefs=True)
@@ -122,13 +124,18 @@ def opportunities(path):
     return sorted(rows,key=lambda r:-r['priority'])[:20]
 
 def fix_sitemap(root, origin):
-    """Only append canonically self-referencing indexable pages. Never invent lastmod."""
+    """Normalize the legacy namespace and append indexable canonical pages. Preserve lastmod."""
     root=Path(root); target=root/'sitemap.xml'
     if not target.exists(): return 0
-    text=target.read_text(encoding='utf-8'); ET.fromstring(text)
+    original=target.read_text(encoding='utf-8'); ET.fromstring(original)
+    # The XML namespace uses HTTP even when all page URLs use HTTPS.
+    text=re.sub(r'(<urlset\b[^>]*\sxmlns\s*=\s*)([\"\'])https://www\.sitemaps\.org/schemas/sitemap/0\.9\2',
+                lambda m: m[1]+m[2]+SITEMAP_NAMESPACE+m[2], original, count=1)
     report=scan(root,origin)
     urls=sorted({i['detail'] for i in report['issues'] if i['code']=='sitemap_omission'})
-    if not urls: return 0
+    if not urls:
+        if text!=original: target.write_text(text,encoding='utf-8')
+        return 0
     if '</urlset>' not in text: raise ValueError('Unsupported prefixed sitemap; manual review needed')
     from xml.sax.saxutils import escape
     additions=''.join(f'  <url><loc>{escape(url)}</loc></url>\n' for url in urls)
